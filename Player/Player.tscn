@@ -45,7 +45,6 @@ radius = 2.0
 height = 2.0
 
 [node name="Player" type="KinematicBody2D"]
-position = Vector2( 0, -6 )
 collision_layer = 2
 script = ExtResource( 2 )
 max_speed = 40.0
@@ -56,8 +55,9 @@ friction = 496.439
 frames = SubResource( 7 )
 animation = "Idle"
 playing = true
+offset = Vector2( 0, -6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -1, 6 )
+position = Vector2( -0.430416, -0.123028 )
 rotation = 1.5708
 shape = SubResource( 8 )
