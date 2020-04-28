@@ -1,64 +1,28 @@
 extends KinematicBody2D
 
-#var DeathEffect = preload("res://Effects/EnemyDeathEffect.tscn")
-
-export(float, 1, 500) var MAX_SPEED
-export(float, 1, 500) var ACCELERATION
-export(float, 1, 500) var FRICTION
-
-var knockback = Vector2.ZERO
 var velocity = Vector2.ZERO
+export(float, 1, 1000) var max_speed
+export(float, 1, 1000) var acceleration
+export(float, 1, 1000) var friction
 
-onready var stats = $Stats
-onready var playerDetectionZone = $PlayerDetectionZone
-onready var hurtBox = $HurtBox
-onready var sofCollision = $SoftCollision
-
-enum {
-	IDLE,
-	WANDER,
-	CHASE
-}
-
-var state = IDLE
-
+onready var animatedSprite = $AnimatedSprite
 
 func _physics_process(delta):
-	knockback = knockback.move_toward(Vector2.ZERO, 200 *delta)
-	knockback = move_and_slide(knockback)
-
-	match state:
-		IDLE:
-			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
-			seek_player()
-		WANDER:
-			pass
-		CHASE:
-			var player = playerDetectionZone.player
-			if player != null:
-				var direction = (player.global_position - global_position).normalized()
-				velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
-			else:
-				state = IDLE
-			$AnimatedSprite.flip_h = velocity.x < 0
-			
-	if sofCollision.is_colliding():
-		velocity += sofCollision.get_push_vector() * delta * 400
-	velocity = move_and_slide(velocity)
-
-func seek_player():
-	if playerDetectionZone.can_see_player():
-		state = CHASE
-
-func _on_HurtBox_area_entered(area):
-	stats.health -= area.damage
-	knockback = area.knockback_vector * 120
-	hurtBox.create_hiteffect()
-
-
-func _on_Stats_no_health():
-	queue_free()
-	var deathEffect = DeathEffect.instance()
-	get_parent().add_child(deathEffect)
-	deathEffect.global_position = global_position
+	var input_vec = Vector2.ZERO
 	
+	input_vec.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+	input_vec.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+	
+	input_vec = input_vec.normalized()
+	if input_vec != Vector2.ZERO:
+		if input_vec.x < 0:
+			animatedSprite.flip_h = true
+		elif input_vec.x > 0:
+			animatedSprite.flip_h = false
+		velocity = velocity.move_toward(input_vec * max_speed, acceleration * delta)
+		animatedSprite.play("Run")
+
+	else:
+		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
+		animatedSprite.play("Idle")
+	velocity = move_and_slide(velocity)

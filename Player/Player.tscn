@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Player/PlayerFrames.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
@@ -40,7 +40,13 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="CapsuleShape2D" id=8]
+radius = 2.0
+height = 2.0
+
 [node name="Player" type="KinematicBody2D"]
+position = Vector2( 0, -6 )
+collision_layer = 2
 script = ExtResource( 2 )
 max_speed = 40.0
 acceleration = 618.268
@@ -48,6 +54,11 @@ friction = 496.439
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 7 )
-animation = "Run"
+animation = "Idle"
 frame = 1
 playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -1, 6 )
+rotation = 1.5708
+shape = SubResource( 8 )

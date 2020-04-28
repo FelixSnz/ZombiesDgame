@@ -1,7 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://zombie.png" type="Texture" id=1]
-[ext_resource path="res://Player/Player.gd" type="Script" id=2]
+[ext_resource path="res://Zombie.gd" type="Script" id=2]
+[ext_resource path="res://Hurtboxes + Hitboxes/HurtBox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://PlayerDetectionZone.tscn" type="PackedScene" id=4]
+[ext_resource path="res://SoftCollision.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Stats.tscn" type="PackedScene" id=6]
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 1 )
@@ -36,18 +40,58 @@ animations = [ {
 "speed": 3.0
 } ]
 
-[node name="KinematicBody2D" type="KinematicBody2D"]
+[sub_resource type="CircleShape2D" id=9]
+radius = 3.0
+
+[sub_resource type="CapsuleShape2D" id=10]
+radius = 5.0
+height = 6.0
+
+[sub_resource type="CircleShape2D" id=11]
+radius = 44.0454
+
+[sub_resource type="CircleShape2D" id=12]
+radius = 3.0
+
+[node name="Zombie" type="KinematicBody2D"]
 position = Vector2( 0, -6 )
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_group_": true
-}
-max_speed = 41.61
-acceleration = 472.073
-friction = 212.171
+MAX_SPEED = 25.341
+ACCELERATION = 382.349
+FRICTION = 122.707
+
+[node name="Stats" parent="." instance=ExtResource( 6 )]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 6 )
 animation = "Idle"
-frame = 1
 playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( -1, 6 )
+shape = SubResource( 9 )
+
+[node name="HurtBox" parent="." instance=ExtResource( 3 )]
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+shape = SubResource( 10 )
+
+[node name="PlayerDetectionZone" parent="." instance=ExtResource( 4 )]
+
+[node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
+self_modulate = Color( 1, 1, 1, 0.278431 )
+shape = SubResource( 11 )
+
+[node name="SoftCollision" parent="." instance=ExtResource( 5 )]
+visible = false
+
+[node name="CollisionShape2D" parent="SoftCollision" index="0"]
+position = Vector2( -1, 6 )
+shape = SubResource( 12 )
+
+[editable path="HurtBox"]
+
+[editable path="PlayerDetectionZone"]
+
+[editable path="SoftCollision"]

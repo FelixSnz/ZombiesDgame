@@ -51,9 +51,19 @@ texture={
 "svg/scale": 1.0
 }
 
+[layer_names]
+
+2d_physics/layer_1="World"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="Enemy"
+2d_physics/layer_4="playerhurtbox"
+2d_physics/layer_5="hurtbox"
+2d_physics/layer_6="softcollision"
+
 [rendering]
 
 quality/driver/driver_name="GLES2"
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
+environment/default_clear_color=Color( 0.101961, 0.101961, 0.101961, 1 )
 environment/default_environment="res://default_env.tres"
