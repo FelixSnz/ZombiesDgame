@@ -8,3 +8,4 @@
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 53.2304, 37.7764 )
+friction = 504.561
