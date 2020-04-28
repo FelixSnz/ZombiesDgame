@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tile_zombies_games.png-443c86f0e967c6b7c139730890dcf333.stex"
+path="res://.import/down_walls.png-ca894f70de4f78e8575ff26b657b7a6a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile_zombies_games.png"
-dest_files=[ "res://.import/tile_zombies_games.png-443c86f0e967c6b7c139730890dcf333.stex" ]
+source_file="res://Tiles/down_walls.png"
+dest_files=[ "res://.import/down_walls.png-ca894f70de4f78e8575ff26b657b7a6a.stex" ]
 
 [params]
 
