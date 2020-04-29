@@ -38,8 +38,8 @@ animations = [ {
 } ]
 
 [sub_resource type="CapsuleShape2D" id=8]
-radius = 2.0
-height = 1.37001
+radius = 1.99999
+height = 2.00002
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
@@ -49,6 +49,7 @@ acceleration = 618.268
 friction = 496.439
 
 [node name="Sprite" type="Sprite" parent="."]
+visible = false
 texture = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
@@ -59,5 +60,6 @@ offset = Vector2( 0, -7 )
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 1 )
 rotation = 1.5708
 shape = SubResource( 8 )
