@@ -8,6 +8,7 @@ export(float, 1, 500) var FRICTION
 
 var knockback = Vector2.ZERO
 var velocity = Vector2.ZERO
+var mov_direction = Vector2.RIGHT
 
 onready var stats = $Stats
 onready var playerDetectionZone = $PlayerDetectionZone
@@ -21,7 +22,8 @@ export(Array, Texture) var styles
 enum {
 	IDLE,
 	WANDER,
-	CHASE
+	CHASE,
+	ATTACK
 }
 
 var state = IDLE
@@ -29,6 +31,13 @@ var state = IDLE
 func _ready():
 	var idx_style = int(round(rand_range(0, styles.size() -1)))
 	sprite.texture = styles[idx_style]
+
+func attack():
+	print(mov_direction)
+	velocity = mov_direction * 45
+	move()
+	
+
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, 200 *delta)
@@ -44,16 +53,26 @@ func _physics_process(delta):
 		CHASE:
 			var player = playerDetectionZone.player
 			if player != null:
-				var direction = (player.global_position - global_position).normalized()
-				velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
+				mov_direction = (player.global_position - global_position).normalized()
+				velocity = velocity.move_toward(mov_direction * MAX_SPEED, ACCELERATION * delta)
 				animationPlayer.play("Run")
+				if Input.is_action_just_pressed("ui_accept"):
+					
+					state = ATTACK
 			else:
 				state = IDLE
 			sprite.flip_h = velocity.x < 0
+		ATTACK:
+			attack()
+			animationPlayer.play("Jump")
+
+				
+	
+	
 			
 	if sofCollision.is_colliding():
 		velocity += sofCollision.get_push_vector() * delta * 400
-	velocity = move_and_slide(velocity)
+	move()
 
 func seek_player():
 	if playerDetectionZone.can_see_player():
@@ -63,6 +82,12 @@ func _on_HurtBox_area_entered(area):
 	stats.health -= area.damage
 	knockback = area.knockback_vector * 120
 #	hurtBox.create_hiteffect()
+
+func move():
+	velocity = move_and_slide(velocity)
+
+func jump_finished():
+	state = IDLE
 
 
 func _on_Stats_no_health():

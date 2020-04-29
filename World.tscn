@@ -297,7 +297,7 @@ tile_data = PoolIntArray( 131064, 2, 0, 131065, 2, 1, 131066, 2, 1, 131067, 2, 1
 tile_set = SubResource( 3 )
 cell_size = Vector2( 27, 27 )
 format = 1
-tile_data = PoolIntArray( 131064, 1, 0, 131065, 5, 0, 131066, 3, 0, 131069, 0, 0, 65537, 0, 0, 65540, 1, 0, 65541, 4, 0, 65542, 1, 0, 196602, 4, 0, 196603, 2, 0, 262136, 4, 0, 196609, 3, 0, 327672, 5, 0, 262146, 3, 0, 262147, 5, 0, 262149, 2, 0, 393208, 0, 0, 393209, 5, 0, 393212, 3, 0, 393213, 1, 0, 327682, 6, 0, 327684, 7, 0, 327686, 6, 0 )
+tile_data = PoolIntArray( 131064, 1, 0, 131065, 5, 0, 131066, 3, 0, 131069, 0, 0, 65537, 0, 0, 65540, 1, 0, 65541, 4, 0, 65542, 1, 0, 196602, 4, 0, 196603, 2, 0, 262136, 4, 0, 196609, 3, 0, 327672, 5, 0, 262146, 3, 0, 262147, 5, 0, 262149, 2, 0, 393208, 0, 0, 393209, 5, 0, 393212, 3, 0, 393213, 1, 0, 327682, 6, 0, 327684, 7, 0, 327686, 6, 0, 458744, 7, 0, 458746, 6, 0, 458749, 6, 0 )
 
 [node name="collision" type="TileMap" parent="."]
 visible = false
@@ -348,16 +348,4 @@ current = true
 smoothing_enabled = true
 
 [node name="Zombie" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( -151.849, 125.201 )
-
-[node name="Zombie2" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( -157.521, 95.5795 )
-
-[node name="Zombie3" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( -109.622, 142.218 )
-
-[node name="Zombie4" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( -137.984, 42.0083 )
-
-[node name="Zombie5" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( -150.589, 59.6553 )
+position = Vector2( -200.617, 127.639 )
