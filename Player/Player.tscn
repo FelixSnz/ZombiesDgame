@@ -4,56 +4,55 @@
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
 [ext_resource path="res://Shadows/SmallShadow.png" type="Texture" id=3]
 
-[sub_resource type="AtlasTexture" id=11]
+[sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
 region = Rect2( 40, 0, 20, 20 )
 
-[sub_resource type="AtlasTexture" id=9]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 20, 20 )
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 1 )
 region = Rect2( 20, 0, 20, 20 )
 
-[sub_resource type="AtlasTexture" id=12]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
 region = Rect2( 60, 0, 20, 20 )
 
-[sub_resource type="AtlasTexture" id=13]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 1 )
 region = Rect2( 80, 0, 20, 20 )
 
-[sub_resource type="SpriteFrames" id=7]
+[sub_resource type="SpriteFrames" id=6]
 animations = [ {
-"frames": [ SubResource( 11 ), SubResource( 9 ), SubResource( 10 ), SubResource( 9 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 2 ) ],
 "loop": true,
 "name": "Run",
 "speed": 6.0
 }, {
-"frames": [ SubResource( 12 ), SubResource( 13 ) ],
+"frames": [ SubResource( 4 ), SubResource( 5 ) ],
 "loop": true,
 "name": "Idle",
 "speed": 3.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=8]
+[sub_resource type="CapsuleShape2D" id=7]
 radius = 1.99999
 height = 2.00002
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 2 )
-max_speed = 40.0
+max_speed = 70.0
 acceleration = 618.268
 friction = 496.439
 
 [node name="Sprite" type="Sprite" parent="."]
-visible = false
 texture = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 7 )
+frames = SubResource( 6 )
 animation = "Idle"
 playing = true
 offset = Vector2( 0, -7 )
@@ -62,4 +61,4 @@ flip_h = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 1 )
 rotation = 1.5708
-shape = SubResource( 8 )
+shape = SubResource( 7 )
