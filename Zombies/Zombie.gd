@@ -13,8 +13,8 @@ onready var stats = $Stats
 onready var playerDetectionZone = $PlayerDetectionZone
 onready var hurtBox = $HurtBox
 onready var sofCollision = $SoftCollision
-onready var animatedSprite = $AnimatedSprite2
-onready var animations = $AnimationPlayer
+onready var animatedSprite = $AnimatedSprite
+onready var animationPlayer = $AnimationPlayer
 
 export(Array, Texture) var styles
 
@@ -33,7 +33,7 @@ func _physics_process(delta):
 	match state:
 		IDLE:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
-			animatedSprite.play("Idle")
+			animationPlayer.play("Idle")
 			seek_player()
 		WANDER:
 			pass
@@ -42,7 +42,7 @@ func _physics_process(delta):
 			if player != null:
 				var direction = (player.global_position - global_position).normalized()
 				velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
-				animatedSprite.play("Run")
+				animationPlayer.play("Run")
 			else:
 				state = IDLE
 			animatedSprite.flip_h = velocity.x < 0
