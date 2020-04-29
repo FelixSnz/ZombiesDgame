@@ -1,12 +1,56 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://World/toxic-barrels.png" type="Texture" id=1]
 [ext_resource path="res://World/ToxicBarrel.gd" type="Script" id=2]
 [ext_resource path="res://Shadows/SmallShadow.png" type="Texture" id=3]
+[ext_resource path="res://toxic-bubble.png" type="Texture" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 3.0
 height = 6.0
+
+[sub_resource type="CanvasItemMaterial" id=2]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id=6]
+max_value = 200.0
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.717391, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.811594, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 200 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=7]
+curve = SubResource( 6 )
+
+[sub_resource type="Gradient" id=8]
+offsets = PoolRealArray( 0, 0.83004, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=9]
+gradient = SubResource( 8 )
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 0.820455 ), 0.0, 0.0, 0, 0, Vector2( 0.25, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.492754, 0.875 ), 0.0, 0.0, 0, 0, Vector2( 0.746377, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.838636 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+emission_shape = 2
+emission_box_extents = Vector3( 4, 1, 1 )
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 10.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 10.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.5
+scale_random = 1.0
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 9 )
+anim_speed = 0.2
+anim_speed_curve = SubResource( 7 )
 
 [node name="ToxicBarrel" type="StaticBody2D"]
 script = ExtResource( 2 )
@@ -24,3 +68,11 @@ hframes = 4
 visible = false
 rotation = 1.5708
 shape = SubResource( 1 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+material = SubResource( 2 )
+position = Vector2( 0, -7.57281 )
+amount = 3
+randomness = 1.0
+process_material = SubResource( 5 )
+texture = ExtResource( 4 )

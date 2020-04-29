@@ -13,7 +13,7 @@ onready var stats = $Stats
 onready var playerDetectionZone = $PlayerDetectionZone
 onready var hurtBox = $HurtBox
 onready var sofCollision = $SoftCollision
-onready var animatedSprite = $AnimatedSprite
+onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
 
 export(Array, Texture) var styles
@@ -25,6 +25,10 @@ enum {
 }
 
 var state = IDLE
+
+func _ready():
+	var idx_style = int(round(rand_range(0, styles.size() -1)))
+	sprite.texture = styles[idx_style]
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, 200 *delta)
@@ -45,7 +49,7 @@ func _physics_process(delta):
 				animationPlayer.play("Run")
 			else:
 				state = IDLE
-			animatedSprite.flip_h = velocity.x < 0
+			sprite.flip_h = velocity.x < 0
 			
 	if sofCollision.is_colliding():
 		velocity += sofCollision.get_push_vector() * delta * 400

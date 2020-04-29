@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Zombies/Zombiee.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Zombies/Zombie.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Tiles/tile_zombies_games.png" type="Texture" id=3]
 [ext_resource path="res://Tiles/down_walls.png" type="Texture" id=4]
 [ext_resource path="res://Tiles/extra_tiles.png" type="Texture" id=5]
@@ -327,10 +327,10 @@ position = Vector2( -197.529, 46.0997 )
 position = Vector2( -208.718, 64.5503 )
 
 [node name="ToxicBarrel6" parent="YSort/ToxicBarrels" instance=ExtResource( 6 )]
-position = Vector2( -174.824, 64.8855 )
+position = Vector2( -191.503, 129.746 )
 
 [node name="ToxicBarrel7" parent="YSort/ToxicBarrels" instance=ExtResource( 6 )]
-position = Vector2( -194.171, 123.906 )
+position = Vector2( -180.272, 64.1413 )
 
 [node name="ToxicBarrel8" parent="YSort/ToxicBarrels" instance=ExtResource( 6 )]
 position = Vector2( -207.501, 143.607 )
@@ -348,10 +348,16 @@ current = true
 smoothing_enabled = true
 
 [node name="Zombie" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( -144.699, 106.963 )
+position = Vector2( -151.849, 125.201 )
 
 [node name="Zombie2" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( -127.233, 128.523 )
+position = Vector2( -157.521, 95.5795 )
 
 [node name="Zombie3" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( -123.658, 77.2825 )
+position = Vector2( -109.622, 142.218 )
+
+[node name="Zombie4" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( -137.984, 42.0083 )
+
+[node name="Zombie5" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( -150.589, 59.6553 )
