@@ -5,6 +5,7 @@ extends KinematicBody2D
 export(float, 1, 500) var MAX_SPEED
 export(float, 1, 500) var ACCELERATION
 export(float, 1, 500) var FRICTION
+export(float, 1, 500) var SPRINT
 
 var knockback = Vector2.ZERO
 var velocity = Vector2.ZERO
@@ -33,8 +34,7 @@ func _ready():
 	sprite.texture = styles[idx_style]
 
 func attack():
-	print(mov_direction)
-	velocity = mov_direction * 45
+	velocity = mov_direction * SPRINT
 	move()
 	
 
@@ -46,6 +46,7 @@ func _physics_process(delta):
 	match state:
 		IDLE:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+			#sprite.self_modulate = Color(10,10,10,10)
 			animationPlayer.play("Idle")
 			seek_player()
 		WANDER:
