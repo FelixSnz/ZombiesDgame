@@ -6,34 +6,34 @@
 [ext_resource path="res://Hurtboxes + Hitboxes/HurtBox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://hacks/SoftCollision.tscn" type="PackedScene" id=5]
 
-[sub_resource type="AtlasTexture" id=13]
+[sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 20, 20 )
 
-[sub_resource type="AtlasTexture" id=14]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
 region = Rect2( 20, 0, 20, 20 )
 
-[sub_resource type="AtlasTexture" id=15]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 1 )
 region = Rect2( 40, 0, 20, 20 )
 
-[sub_resource type="AtlasTexture" id=16]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
 region = Rect2( 60, 0, 20, 20 )
 
-[sub_resource type="AtlasTexture" id=17]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 1 )
 region = Rect2( 80, 0, 20, 20 )
 
-[sub_resource type="SpriteFrames" id=18]
+[sub_resource type="SpriteFrames" id=6]
 animations = [ {
-"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 13 ), SubResource( 15 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 1 ), SubResource( 3 ) ],
 "loop": true,
 "name": "Run",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 16 ), SubResource( 17 ) ],
+"frames": [ SubResource( 4 ), SubResource( 5 ) ],
 "loop": true,
 "name": "Idle",
 "speed": 3.0
@@ -81,7 +81,7 @@ tracks/0/keys = {
 "values": [ 2, 0, 1, 0 ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=11]
 resource_name = "inv"
 length = 0.5
 tracks/0/type = "value"
@@ -97,8 +97,7 @@ tracks/0/keys = {
 "values": [ Color( 100, 100, 100, 1 ), Color( 1, 1, 1, 1 ), Color( 100, 100, 100, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=11]
-resource_name = "invincible"
+[sub_resource type="Animation" id=12]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:modulate")
@@ -127,7 +126,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="CapsuleShape2D" id=19]
+[sub_resource type="CapsuleShape2D" id=13]
 radius = 2.0
 height = 4.0
 
@@ -142,9 +141,8 @@ friction = 496.439
 texture = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 18 )
+frames = SubResource( 6 )
 animation = "Idle"
-frame = 1
 playing = true
 offset = Vector2( 0, -7 )
 
@@ -155,8 +153,7 @@ offset = Vector2( 0, -7 )
 hframes = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2( 0, 1 )
+position = Vector2( 0, -1 )
 rotation = 1.5708
 shape = SubResource( 7 )
 
@@ -172,8 +169,8 @@ shape = SubResource( 8 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Idle = SubResource( 9 )
 anims/Run = SubResource( 10 )
-anims/inv = SubResource( 12 )
-anims/invincible = SubResource( 11 )
+anims/inv = SubResource( 11 )
+anims/invincible = SubResource( 12 )
 
 [node name="SoftCollision" parent="." instance=ExtResource( 5 )]
 collision_layer = 32
@@ -182,7 +179,7 @@ collision_mask = 32
 [node name="CollisionShape2D" parent="SoftCollision" index="0"]
 position = Vector2( 0, -1 )
 rotation = 1.5708
-shape = SubResource( 19 )
+shape = SubResource( 13 )
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 
 [editable path="HurtBox"]
