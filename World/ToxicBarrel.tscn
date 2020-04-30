@@ -15,27 +15,27 @@ particles_anim_h_frames = 3
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="Curve" id=6]
+[sub_resource type="Curve" id=3]
 max_value = 200.0
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.717391, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.811594, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 200 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=7]
-curve = SubResource( 6 )
-
-[sub_resource type="Gradient" id=8]
-offsets = PoolRealArray( 0, 0.83004, 1 )
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0 )
-
-[sub_resource type="GradientTexture" id=9]
-gradient = SubResource( 8 )
-
-[sub_resource type="Curve" id=3]
-_data = [ Vector2( 0, 0.820455 ), 0.0, 0.0, 0, 0, Vector2( 0.25, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.492754, 0.875 ), 0.0, 0.0, 0, 0, Vector2( 0.746377, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.838636 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=4]
 curve = SubResource( 3 )
 
-[sub_resource type="ParticlesMaterial" id=5]
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0, 0.83004, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=6]
+gradient = SubResource( 5 )
+
+[sub_resource type="Curve" id=7]
+_data = [ Vector2( 0, 0.820455 ), 0.0, 0.0, 0, 0, Vector2( 0.25, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.492754, 0.875 ), 0.0, 0.0, 0, 0, Vector2( 0.746377, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.838636 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=8]
+curve = SubResource( 7 )
+
+[sub_resource type="ParticlesMaterial" id=9]
 emission_shape = 2
 emission_box_extents = Vector3( 4, 1, 1 )
 flag_disable_z = true
@@ -47,10 +47,10 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.5
 scale_random = 1.0
-scale_curve = SubResource( 4 )
-color_ramp = SubResource( 9 )
+scale_curve = SubResource( 8 )
+color_ramp = SubResource( 6 )
 anim_speed = 0.2
-anim_speed_curve = SubResource( 7 )
+anim_speed_curve = SubResource( 4 )
 
 [node name="ToxicBarrel" type="StaticBody2D"]
 script = ExtResource( 2 )
@@ -74,5 +74,6 @@ material = SubResource( 2 )
 position = Vector2( 0, -7.57281 )
 amount = 3
 randomness = 1.0
-process_material = SubResource( 5 )
+visibility_rect = Rect2( 0, 0, 0, 0 )
+process_material = SubResource( 9 )
 texture = ExtResource( 4 )

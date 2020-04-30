@@ -25,7 +25,6 @@ func _physics_process(delta):
 			move_state(delta)
 			
 	if softCollision.is_colliding():
-		print("cacaaaaaa")
 		velocity += softCollision.get_push_vector() * delta * 600
 		move()
 

@@ -349,3 +349,12 @@ smoothing_enabled = true
 
 [node name="Zombie" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( -200.617, 127.639 )
+
+[node name="Zombie2" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( -179.204, 85.924 )
+
+[node name="Zombie3" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( -140.097, 147.378 )
+
+[node name="Zombie4" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( -154.064, 39.8337 )

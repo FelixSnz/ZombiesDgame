@@ -10,6 +10,7 @@ export(float, 1, 500) var SPRINT
 var knockback = Vector2.ZERO
 var velocity = Vector2.ZERO
 var mov_direction = Vector2.RIGHT
+var canjump = true
 
 onready var stats = $Stats
 onready var playerDetectionZone = $PlayerDetectionZone
@@ -46,19 +47,23 @@ func _physics_process(delta):
 	match state:
 		IDLE:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
-			#sprite.self_modulate = Color(10,10,10,10)
 			animationPlayer.play("Idle")
 			seek_player()
 		WANDER:
 			pass
 		CHASE:
 			var player = playerDetectionZone.player
+			
+			
 			if player != null:
+				var player_distance = self.global_position.distance_to(player.global_position)
 				mov_direction = (player.global_position - global_position).normalized()
 				velocity = velocity.move_toward(mov_direction * MAX_SPEED, ACCELERATION * delta)
 				animationPlayer.play("Run")
-				if Input.is_action_just_pressed("ui_accept"):
-					
+				if 40 <= player_distance and player_distance <= 50 and playerDetectionZone.can_attack:
+					playerDetectionZone.start_timer(4)
+					SPRINT = player_distance * 1.6
+					print(SPRINT)
 					state = ATTACK
 			else:
 				state = IDLE
@@ -88,6 +93,7 @@ func move():
 	velocity = move_and_slide(velocity)
 
 func jump_finished():
+	canjump = true
 	state = IDLE
 
 

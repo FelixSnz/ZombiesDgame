@@ -20,14 +20,17 @@ radius = 5.0
 height = 6.0
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 94.1329
+radius = 70.0
 
 [sub_resource type="CircleShape2D" id=4]
 radius = 3.0
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="CapsuleShape2D" id=5]
+radius = 5.0
+height = 4.0
+
+[sub_resource type="Animation" id=6]
 resource_local_to_scene = true
-resource_name = "Idle"
 length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -46,6 +49,7 @@ tracks/0/keys = {
 resource_local_to_scene = true
 resource_name = "Jump"
 length = 0.4
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
 tracks/0/interp = 1
@@ -72,10 +76,21 @@ tracks/1/keys = {
 "method": "jump_finished"
 } ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("SoftCollision/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.35, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, true, false ]
+}
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=8]
 resource_local_to_scene = true
-resource_name = "Run"
 length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -90,8 +105,7 @@ tracks/0/keys = {
 "values": [ 2, 3, 2, 4 ]
 }
 
-[sub_resource type="Animation" id=8]
-resource_name = "white_flash"
+[sub_resource type="Animation" id=9]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:self_modulate")
@@ -106,22 +120,19 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 100, 100, 100, 1 ), Color( 1, 1, 1, 1 ), Color( 100, 100, 100, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="CapsuleShape2D" id=9]
-radius = 5.0
-height = 4.0
-
 [node name="Zombie" type="KinematicBody2D"]
+collision_layer = 4
 script = ExtResource( 9 )
 MAX_SPEED = 40.0
 ACCELERATION = 382.349
 FRICTION = 122.707
-SPRINT = 83.309
+SPRINT = 1.0
 styles = [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ]
+
+[node name="Stats" parent="." instance=ExtResource( 3 )]
 
 [node name="Shadow" type="Sprite" parent="."]
 texture = ExtResource( 5 )
-
-[node name="Stats" parent="." instance=ExtResource( 3 )]
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 6 )
@@ -157,19 +168,20 @@ collision_mask = 32
 position = Vector2( 0, -1 )
 shape = SubResource( 4 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Idle = SubResource( 5 )
-anims/Jump = SubResource( 7 )
-anims/Run = SubResource( 6 )
-anims/white_flash = SubResource( 8 )
-
 [node name="HitBox" parent="." instance=ExtResource( 10 )]
+visible = false
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
 position = Vector2( 0, -7 )
-shape = SubResource( 9 )
+shape = SubResource( 5 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Idle = SubResource( 6 )
+anims/Jump = SubResource( 7 )
+anims/Run = SubResource( 8 )
+anims/white_flash = SubResource( 9 )
 
 [editable path="HurtBox"]
 

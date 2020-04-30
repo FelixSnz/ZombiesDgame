@@ -144,6 +144,7 @@ texture = ExtResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 18 )
 animation = "Idle"
+frame = 1
 playing = true
 offset = Vector2( 0, -7 )
 
