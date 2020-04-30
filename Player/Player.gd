@@ -5,7 +5,7 @@ export(float, 1, 1000) var max_speed
 export(float, 1, 1000) var acceleration
 export(float, 1, 1000) var friction
 
-onready var sprite = $AnimatedSprite
+onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
 onready var hurtBox = $HurtBox
 onready var softCollision = $SoftCollision
@@ -16,14 +16,16 @@ enum {
 	INV
 }
 var state = MOVE
+
 func _ready():
 	stats.connect("no_health", self, "queue_free")
+
 
 func _physics_process(delta):
 	match state:
 		MOVE:
 			move_state(delta)
-			
+	
 	if softCollision.is_colliding():
 		velocity += softCollision.get_push_vector() * delta * 600
 		move()
@@ -37,15 +39,15 @@ func move_state(delta):
 	input_vec = input_vec.normalized()
 	if input_vec != Vector2.ZERO:
 		if input_vec.x < 0:
-			sprite.flip_h = true
+			sprite.scale.x = -1
 		elif input_vec.x > 0:
-			sprite.flip_h = false
+			sprite.scale.x = 1
 		velocity = velocity.move_toward(input_vec * max_speed, acceleration * delta)
-		sprite.play("Run")
+		animationPlayer.play("Run")
 
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
-		sprite.play("Idle")
+		animationPlayer.play("Idle")
 	move()
 
 func move():
@@ -55,6 +57,6 @@ func move():
 
 func _on_HurtBox_area_entered(area):
 	hurtBox.start_invincivility(.5)
-	animationPlayer.play("inv")
+	$AnimationPlayer2.play("inv")
 	
 
