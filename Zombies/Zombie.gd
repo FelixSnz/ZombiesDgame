@@ -84,9 +84,11 @@ func seek_player():
 	if playerDetectionZone.can_see_player():
 		state = CHASE
 
-func _on_HurtBox_area_entered(area):
-	stats.health -= area.damage
-	knockback = area.knockback_vector * 120
+#func _on_HurtBox_area_entered(area):
+#	print("kk")
+#	stats.health -= area.damage
+#	knockback = area.knockback_vector * 120
+#	hurtBox.start_invincivility(.5)
 #	hurtBox.create_hiteffect()
 
 func move():
@@ -103,3 +105,12 @@ func _on_Stats_no_health():
 #	get_parent().add_child(deathEffect)
 #	deathEffect.global_position = global_position
 	
+
+
+func _on_HurtBox_body_entered(body):
+	if body.collision_layer == 64:
+		body.queue_free()
+	print("kks")
+	stats.health -= body.damage
+	knockback = body.knockback_vector * 120
+	pass # Replace with function body.

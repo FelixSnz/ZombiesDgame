@@ -16,12 +16,15 @@ enum {
 	INV
 }
 var state = MOVE
+var direction
 
 func _ready():
 	stats.connect("no_health", self, "queue_free")
 
 
 func _physics_process(delta):
+	direction = (get_global_mouse_position() - global_position).normalized()
+	
 	match state:
 		MOVE:
 			move_state(delta)
@@ -38,20 +41,24 @@ func move_state(delta):
 	
 	input_vec = input_vec.normalized()
 	if input_vec != Vector2.ZERO:
-		if input_vec.x < 0:
-			sprite.scale.x = -1
-		elif input_vec.x > 0:
-			sprite.scale.x = 1
+		update_facing()
 		velocity = velocity.move_toward(input_vec * max_speed, acceleration * delta)
 		animationPlayer.play("Run")
 
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
+		update_facing()
 		animationPlayer.play("Idle")
 	move()
 
 func move():
 	velocity = move_and_slide(velocity)
+
+func update_facing():
+	if direction.x < 0:
+		sprite.scale.x = -1
+	elif direction.x > 0:
+		sprite.scale.x = 1
 
 
 

@@ -88,6 +88,30 @@ tracks/2/keys = {
 "update": 1,
 "values": [ true, true, false ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("HurtBox/CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -7 ), Vector2( 0, -17 ), Vector2( 0, -7 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("HitBox/CollisionShape2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -7 ), Vector2( 0, -17 ), Vector2( 0, -7 ) ]
+}
 
 [sub_resource type="Animation" id=8]
 resource_local_to_scene = true
@@ -130,6 +154,7 @@ SPRINT = 1.0
 styles = [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ]
 
 [node name="Stats" parent="." instance=ExtResource( 3 )]
+max_health = 10
 
 [node name="Shadow" type="Sprite" parent="."]
 texture = ExtResource( 5 )
@@ -141,20 +166,17 @@ hframes = 5
 frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0, -1 )
 rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="HurtBox" parent="." instance=ExtResource( 1 )]
-visible = false
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 position = Vector2( 0, -7 )
 shape = SubResource( 2 )
 
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 4 )]
-visible = false
 
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
 self_modulate = Color( 1, 1, 1, 0.278431 )
@@ -169,7 +191,6 @@ position = Vector2( 0, -1 )
 shape = SubResource( 4 )
 
 [node name="HitBox" parent="." instance=ExtResource( 10 )]
-visible = false
 collision_layer = 0
 collision_mask = 8
 
@@ -182,6 +203,8 @@ anims/Idle = SubResource( 6 )
 anims/Jump = SubResource( 7 )
 anims/Run = SubResource( 8 )
 anims/white_flash = SubResource( 9 )
+[connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
+[connection signal="body_entered" from="HurtBox" to="." method="_on_HurtBox_body_entered"]
 
 [editable path="HurtBox"]
 

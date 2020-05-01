@@ -4,7 +4,10 @@
 [ext_resource path="res://Weapon.gd" type="Script" id=2]
 
 [node name="Weapon" type="Sprite"]
-position = Vector2( 18, 11 )
+position = Vector2( 34, 22 )
 texture = ExtResource( 1 )
 offset = Vector2( 2.5, -1 )
 script = ExtResource( 2 )
+
+[node name="Nuzzle" type="Position2D" parent="."]
+position = Vector2( 5, -2 )

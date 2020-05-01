@@ -48,12 +48,11 @@ height = 2.00002
 radius = 5.0
 height = 6.0
 
-[sub_resource type="CapsuleShape2D" id=13]
+[sub_resource type="CapsuleShape2D" id=9]
 radius = 2.0
 height = 4.0
 
-[sub_resource type="Animation" id=9]
-resource_name = "Idle"
+[sub_resource type="Animation" id=10]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -92,8 +91,7 @@ tracks/2/keys = {
 "values": [ Vector2( 5, -3 ), Vector2( 5, -3 ) ]
 }
 
-[sub_resource type="Animation" id=10]
-resource_name = "Run"
+[sub_resource type="Animation" id=11]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -133,7 +131,7 @@ tracks/2/keys = {
 "values": [ false, true, true ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=12]
 resource_name = "RunLeft"
 length = 0.4
 tracks/0/type = "value"
@@ -209,7 +207,7 @@ tracks/5/keys = {
 "values": [ Vector2( -5, -3 ), Vector2( -3, -2 ), Vector2( -2, -3 ), Vector2( -3, -2 ) ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=13]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:modulate")
@@ -265,6 +263,7 @@ friction = 496.439
 visible = false
 frames = SubResource( 6 )
 animation = "Idle"
+frame = 1
 playing = true
 offset = Vector2( 0, -7 )
 
@@ -289,7 +288,6 @@ shape = SubResource( 7 )
 [node name="HurtBox" parent="." instance=ExtResource( 4 )]
 visible = false
 collision_layer = 8
-collision_mask = 0
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 position = Vector2( 0, -7 )
@@ -303,13 +301,13 @@ collision_mask = 32
 [node name="CollisionShape2D" parent="SoftCollision" index="0"]
 position = Vector2( 0, -1 )
 rotation = 1.5708
-shape = SubResource( 13 )
+shape = SubResource( 9 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Idle = SubResource( 9 )
-anims/Run = SubResource( 10 )
-anims/RunLeft = SubResource( 15 )
-anims/invincible = SubResource( 12 )
+anims/Idle = SubResource( 10 )
+anims/Run = SubResource( 11 )
+anims/RunLeft = SubResource( 12 )
+anims/invincible = SubResource( 13 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
 anims/inv = SubResource( 14 )
