@@ -9,7 +9,7 @@ export(float, 1, 100) var knockback
 export(float, 0, 1) var speed = 0
 var velocity = Vector2.ZERO
 var knockback_vector = Vector2.ZERO
-var bullet_dir
+var direction
 
 
 
@@ -17,13 +17,10 @@ var bullet_dir
 func _ready():
 	show_behind_parent = true
 	$Timer.start(_range)
-	var wpn_dir = get_parent().get_parent().pointing_dir
-	knockback_vector = wpn_dir
-	velocity = wpn_dir * speed
+	knockback_vector = direction
+	velocity = direction * speed
 	#self.global_position.y += -2
 	add_force(self.global_position, velocity)
-	pass
-
 
 		
 

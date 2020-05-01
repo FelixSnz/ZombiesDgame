@@ -263,7 +263,6 @@ friction = 496.439
 visible = false
 frames = SubResource( 6 )
 animation = "Idle"
-frame = 1
 playing = true
 offset = Vector2( 0, -7 )
 
@@ -280,8 +279,7 @@ frame = 3
 position = Vector2( 5, -3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2( 0, -1 )
+position = Vector2( 0, 1 )
 rotation = 1.5708
 shape = SubResource( 7 )
 
@@ -311,10 +309,6 @@ anims/invincible = SubResource( 13 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
 anims/inv = SubResource( 14 )
-
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
-smoothing_enabled = true
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 
 [editable path="HurtBox"]

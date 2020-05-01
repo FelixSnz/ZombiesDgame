@@ -20,7 +20,7 @@ radius = 5.0
 height = 6.0
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 149.013
+radius = 71.007
 
 [sub_resource type="CircleShape2D" id=4]
 radius = 3.0
@@ -154,7 +154,7 @@ SPRINT = 1.0
 styles = [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ]
 
 [node name="Stats" parent="." instance=ExtResource( 3 )]
-max_health = 10
+max_health = 131
 
 [node name="Shadow" type="Sprite" parent="."]
 texture = ExtResource( 5 )
