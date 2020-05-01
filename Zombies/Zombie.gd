@@ -109,8 +109,8 @@ func _on_Stats_no_health():
 
 func _on_HurtBox_body_entered(body):
 	if body.collision_layer == 64:
+		body.create_impact()
 		body.queue_free()
-	print("kks")
 	stats.health -= body.damage
-	knockback = body.knockback_vector * 120
+	knockback = body.knockback_vector * body.knockback
 	pass # Replace with function body.

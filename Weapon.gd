@@ -1,6 +1,7 @@
 extends Sprite
 
 const Bullet = preload("res://Bullet.tscn")
+
 var pointing_dir
 var can_shot = true
 var dir = Vector2.ZERO
