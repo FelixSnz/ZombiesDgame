@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bullet1x1.png-1dd87ea17b6f689132e4f5a1c4813998.stex"
+path="res://.import/toxic-bubble.png-cf872b7e63f1f1a53c692e8c6952d19d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bullet1x1.png"
-dest_files=[ "res://.import/bullet1x1.png-1dd87ea17b6f689132e4f5a1c4813998.stex" ]
+source_file="res://World/toxic-bubble.png"
+dest_files=[ "res://.import/toxic-bubble.png-cf872b7e63f1f1a53c692e8c6952d19d.stex" ]
 
 [params]
 

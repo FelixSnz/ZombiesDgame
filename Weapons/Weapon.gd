@@ -1,10 +1,11 @@
 extends Sprite
 
-const Bullet = preload("res://Bullet.tscn")
+const Bullet = preload("res://Weapons/Bullet.tscn")
 
 var pointing_dir
 var can_shot = true
 var dir = Vector2.ZERO
+var angle
 
 
 func _process(delta):

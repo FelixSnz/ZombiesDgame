@@ -145,6 +145,7 @@ tracks/0/keys = {
 }
 
 [node name="Zombie" type="KinematicBody2D"]
+z_index = 2
 collision_layer = 4
 script = ExtResource( 9 )
 MAX_SPEED = 40.0

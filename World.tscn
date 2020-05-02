@@ -1019,6 +1019,7 @@ points = PoolVector2Array( 0, 24, 24, 24, 28, 24, 28, 28, 0, 28 )
 8/z_index = 0
 
 [node name="World" type="Node2D"]
+z_as_relative = false
 
 [node name="Walls" type="TileMap" parent="."]
 tile_set = SubResource( 95 )
@@ -1027,6 +1028,7 @@ format = 1
 tile_data = PoolIntArray( 196608, 0, 3, 196617, 0, 3, 262145, 0, 0, 262146, 0, 1, 262147, 0, 1, 262148, 0, 1, 262149, 0, 1, 262150, 0, 1, 262151, 0, 1, 262152, 0, 2, 262163, 0, 0, 262164, 0, 1, 262165, 0, 2, 327695, 0, 3, 327698, 0, 3, 393232, 0, 0, 393233, 0, 2, 786448, 0, 0, 786449, 0, 1, 786450, 0, 1, 786451, 0, 2, 851980, 0, 0, 851981, 0, 1, 851982, 0, 1, 851983, 0, 2 )
 
 [node name="floor&dwalls" type="TileMap" parent="."]
+z_as_relative = false
 tile_set = SubResource( 88 )
 cell_size = Vector2( 28, 28 )
 collision_mask = 0

@@ -5,7 +5,7 @@
 [ext_resource path="res://Shadows/SmallShadow.png" type="Texture" id=3]
 [ext_resource path="res://Hurtboxes + Hitboxes/HurtBox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://hacks/SoftCollision.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Weapon.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Weapons/Weapon.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Player/character2.png" type="Texture" id=7]
 
 [sub_resource type="AtlasTexture" id=1]
@@ -131,7 +131,7 @@ tracks/2/keys = {
 "values": [ true, true, false ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=12]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:modulate")
@@ -160,7 +160,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=13]
 resource_name = "inv"
 length = 0.5
 tracks/0/type = "value"
@@ -177,6 +177,7 @@ tracks/0/keys = {
 }
 
 [node name="Player" type="KinematicBody2D"]
+z_as_relative = false
 collision_layer = 2
 script = ExtResource( 2 )
 max_speed = 70.0
@@ -187,7 +188,6 @@ friction = 496.439
 visible = false
 frames = SubResource( 6 )
 animation = "Idle"
-frame = 1
 playing = true
 offset = Vector2( 0, -7 )
 
@@ -232,10 +232,10 @@ shape = SubResource( 9 )
 playback_speed = 0.8
 anims/Idle = SubResource( 10 )
 anims/Run = SubResource( 11 )
-anims/invincible = SubResource( 13 )
+anims/invincible = SubResource( 12 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
-anims/inv = SubResource( 14 )
+anims/inv = SubResource( 13 )
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 
 [editable path="HurtBox"]

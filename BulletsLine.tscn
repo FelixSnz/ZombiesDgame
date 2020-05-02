@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=2]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[node name="RigidBody2D" type="RigidBody2D"]
+mass = 0.00102041
+gravity_scale = 0.0
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2( -107.826, -86.2473 )
+scale = Vector2( 28.4436, 29.7192 )
+points = PoolVector2Array( 13.2813, 5.00983, 5.92902, 5.00312 )
+width = 2.0
+width_curve = SubResource( 1 )
+gradient = SubResource( 2 )
+sharp_limit = 0.0
+round_precision = 1
+antialiased = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]

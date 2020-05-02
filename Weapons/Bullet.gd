@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-const impact_particles = preload("res://Impact.tscn")
+const impact_particles = preload("res://Weapons/Impact.tscn")
 
 export(int) var damage
 export(float, 0.1, 2) var _range
@@ -15,6 +15,7 @@ var direction
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	rotation
 	show_behind_parent = true
 	$Timer.start(_range)
 	knockback_vector = direction
