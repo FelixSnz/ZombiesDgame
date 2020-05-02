@@ -42,7 +42,7 @@ animations = [ {
 
 [sub_resource type="CapsuleShape2D" id=7]
 radius = 1.99999
-height = 2.00002
+height = 6.00002
 
 [sub_resource type="CapsuleShape2D" id=8]
 radius = 5.0
@@ -263,6 +263,7 @@ friction = 496.439
 visible = false
 frames = SubResource( 6 )
 animation = "Idle"
+frame = 1
 playing = true
 offset = Vector2( 0, -7 )
 
@@ -279,7 +280,6 @@ frame = 3
 position = Vector2( 5, -3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 1 )
 rotation = 1.5708
 shape = SubResource( 7 )
 

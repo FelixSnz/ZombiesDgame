@@ -154,7 +154,7 @@ SPRINT = 1.0
 styles = [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ]
 
 [node name="Stats" parent="." instance=ExtResource( 3 )]
-max_health = 131
+max_health = 20
 
 [node name="Shadow" type="Sprite" parent="."]
 texture = ExtResource( 5 )
