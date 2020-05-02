@@ -5,7 +5,7 @@
 
 [node name="Weapon" type="Sprite"]
 position = Vector2( 34, 22 )
-z_index = 2
+z_as_relative = false
 texture = ExtResource( 1 )
 offset = Vector2( 2.5, -1 )
 script = ExtResource( 2 )

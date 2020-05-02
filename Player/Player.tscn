@@ -6,6 +6,7 @@
 [ext_resource path="res://Hurtboxes + Hitboxes/HurtBox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://hacks/SoftCollision.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Weapon.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Player/character2.png" type="Texture" id=7]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -42,7 +43,7 @@ animations = [ {
 
 [sub_resource type="CapsuleShape2D" id=7]
 radius = 1.99999
-height = 6.00002
+height = 2.00002
 
 [sub_resource type="CapsuleShape2D" id=8]
 radius = 5.0
@@ -64,7 +65,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 4, 3 ]
+"values": [ 1, 0 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite/Weapon:show_behind_parent")
@@ -85,15 +86,14 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.6 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 5, -3 ), Vector2( 5, -3 ) ]
+"times": PoolRealArray( 0, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 5.33333, -3.33333 ), Vector2( 5.33333, -3.33333 ), Vector2( 5.33333, -3.33333 ) ]
 }
 
 [sub_resource type="Animation" id=11]
 length = 0.4
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -104,7 +104,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 2, 0, 1, 0 ]
+"values": [ 2, 3, 2, 4 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite/Weapon:position")
@@ -116,7 +116,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( 5, -3 ), Vector2( 3, -2 ), Vector2( 2, -3 ), Vector2( 3, -2 ) ]
+"values": [ Vector2( 4, -3 ), Vector2( 2, -3 ), Vector2( 4, -3 ), Vector2( 6, -4 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Sprite/Weapon:show_behind_parent")
@@ -125,86 +125,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.4 ),
+"times": PoolRealArray( 0, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ false, true, true ]
-}
-
-[sub_resource type="Animation" id=12]
-resource_name = "RunLeft"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 2, 0, 1, 0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, true ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite/Weapon:flip_h")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0.0890501 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Sprite/Weapon:offset")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0.0677092 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( -2.5, -1 ) ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Sprite/Weapon:show_behind_parent")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0, 0.1, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, true ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("Sprite/Weapon:position")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ Vector2( -5, -3 ), Vector2( -3, -2 ), Vector2( -2, -3 ), Vector2( -3, -2 ) ]
+"values": [ true, true, false ]
 }
 
 [sub_resource type="Animation" id=13]
@@ -268,18 +192,21 @@ playing = true
 offset = Vector2( 0, -7 )
 
 [node name="Shadow" type="Sprite" parent="."]
+visible = false
 texture = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 1 )
+texture = ExtResource( 7 )
 offset = Vector2( 0, -7 )
 hframes = 5
-frame = 3
+frame = 2
 
 [node name="Weapon" parent="Sprite" instance=ExtResource( 6 )]
-position = Vector2( 5, -3 )
+show_behind_parent = true
+position = Vector2( 4, -3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 rotation = 1.5708
 shape = SubResource( 7 )
 
@@ -302,9 +229,9 @@ rotation = 1.5708
 shape = SubResource( 9 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 0.8
 anims/Idle = SubResource( 10 )
 anims/Run = SubResource( 11 )
-anims/RunLeft = SubResource( 12 )
 anims/invincible = SubResource( 13 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="."]

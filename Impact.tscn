@@ -17,6 +17,7 @@ orbit_velocity_random = 0.0
 color_ramp = SubResource( 2 )
 
 [node name="Impact" type="Particles2D"]
+visible = false
 emitting = false
 amount = 16
 lifetime = 0.3
