@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Weapons/crowbar.png" type="Texture" id=1]
+[ext_resource path="res://Hurtboxes + Hitboxes/HitBox.tscn" type="PackedScene" id=2]
+
+[sub_resource type="SegmentShape2D" id=1]
+a = Vector2( 1, 1 )
+b = Vector2( 1, -10 )
+
+[node name="Crowbar" type="Sprite"]
+texture = ExtResource( 1 )
+offset = Vector2( 1, -4 )
+
+[node name="HitBox" parent="." instance=ExtResource( 2 )]
+visible = false
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+shape = SubResource( 1 )
+
+[editable path="HitBox"]

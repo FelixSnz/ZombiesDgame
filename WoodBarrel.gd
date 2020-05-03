@@ -19,6 +19,8 @@ func _ready():
 
 
 func _on_HitBox_body_entered(body):
+	$Sprite.offset = Vector2.ZERO
+	position.y += -4
 	$CollisionShape2D.queue_free()
 	$Sprite.frame = 1
 	$HitBox.queue_free()
