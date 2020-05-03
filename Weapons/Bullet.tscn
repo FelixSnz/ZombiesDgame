@@ -13,15 +13,14 @@ collision_layer = 0
 collision_mask = 16
 mass = 0.00102041
 gravity_scale = 0.0
+can_sleep = false
 script = ExtResource( 1 )
 damage = 1
-_range = 0.726
+_range = 2.0
 knockback = 46.995
-speed = 0.726
+speed = 0.453
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 4.75, 0 )
-scale = Vector2( 10.5, 1 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

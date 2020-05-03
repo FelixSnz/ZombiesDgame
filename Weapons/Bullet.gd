@@ -9,13 +9,13 @@ export(float, 1, 100) var knockback
 export(float, 0, 1) var speed = 0
 var velocity = Vector2.ZERO
 var knockback_vector = Vector2.ZERO
-var direction
+var direction 
 
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	rotation
+	rotation += get_local_mouse_position().angle()
 	show_behind_parent = true
 	$Timer.start(_range)
 	knockback_vector = direction
@@ -31,11 +31,13 @@ func _ready():
 #	pass
 
 
-
+func _process(delta):
+	self.angular_velocity = 0
 
 
 func _on_Timer_timeout():
-	queue_free()
+	print("kk")
+	#queue_free()
 
 func create_impact():
 	var impact = impact_particles.instance()

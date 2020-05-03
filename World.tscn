@@ -1,4 +1,4 @@
-[gd_scene load_steps=100 format=2]
+[gd_scene load_steps=101 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Zombies/Zombie.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Tiles/down_walls.png" type="Texture" id=4]
 [ext_resource path="res://Tiles/extra_tiles.png" type="Texture" id=5]
 [ext_resource path="res://World/ToxicBarrel.tscn" type="PackedScene" id=6]
+[ext_resource path="res://WoodBarrel.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Tiles/tiles_full.png" type="Texture" id=10]
 [ext_resource path="res://Darness.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Tiles/big_slime_stain.png" type="Texture" id=14]
@@ -1094,3 +1095,18 @@ position = Vector2( 83.0763, 45.3122 )
 
 [node name="Zombie4" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 49.4531, 52.2097 )
+
+[node name="StaticBody2D" parent="YSort" instance=ExtResource( 7 )]
+position = Vector2( 469.229, 51.9382 )
+
+[node name="StaticBody2D2" parent="YSort" instance=ExtResource( 7 )]
+position = Vector2( 488.155, 42.2554 )
+
+[node name="StaticBody2D3" parent="YSort" instance=ExtResource( 7 )]
+position = Vector2( 454.705, 77.4656 )
+
+[node name="StaticBody2D4" parent="YSort" instance=ExtResource( 7 )]
+position = Vector2( 461.747, 102.993 )
+
+[node name="StaticBody2D5" parent="YSort" instance=ExtResource( 7 )]
+position = Vector2( 512.802, 40.4949 )
