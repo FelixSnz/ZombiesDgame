@@ -210,6 +210,7 @@ anims/Jump = SubResource( 7 )
 anims/Run = SubResource( 8 )
 anims/white_flash = SubResource( 9 )
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
+[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="body_entered" from="HurtBox" to="." method="_on_HurtBox_body_entered"]
 
 [editable path="HurtBox"]

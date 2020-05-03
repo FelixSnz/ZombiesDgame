@@ -114,3 +114,8 @@ func _on_HurtBox_body_entered(body):
 	stats.health -= body.damage
 	knockback = body.knockback_vector * body.knockback
 	pass # Replace with function body.
+
+
+func _on_HurtBox_area_entered(area):
+	stats.health -= area.damage
+	knockback = area.knockback_vector * area.knockback

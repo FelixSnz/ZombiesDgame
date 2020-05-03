@@ -32,3 +32,12 @@ func create_destroyed_effect():
 	var world = get_tree().current_scene
 	destroyedEffect.global_position = global_position
 	world.add_child(destroyedEffect)
+
+
+func _on_HurtBox_area_entered(area):
+	$Sprite.offset = Vector2.ZERO
+	position.y += -4
+	$CollisionShape2D.queue_free()
+	$Sprite.frame = 1
+	$HurtBox.queue_free()
+	create_destroyed_effect()
