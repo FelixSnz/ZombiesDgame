@@ -19,25 +19,17 @@ func _ready():
 
 
 func _on_HitBox_body_entered(body):
-	$Sprite.offset = Vector2.ZERO
-	position.y += -4
-	$CollisionShape2D.queue_free()
-	$Sprite.frame = 1
-	$HitBox.queue_free()
+	queue_free()
 	create_destroyed_effect()
 
 
 func create_destroyed_effect():
 	var destroyedEffect = DestroyedEffect.instance()
-	var world = get_tree().current_scene
+	var world = get_tree().current_scene.get_node("YSort")
 	destroyedEffect.global_position = global_position
 	world.add_child(destroyedEffect)
 
 
 func _on_HurtBox_area_entered(area):
-	$Sprite.offset = Vector2.ZERO
-	position.y += -4
-	$CollisionShape2D.queue_free()
-	$Sprite.frame = 1
-	$HurtBox.queue_free()
+	queue_free()
 	create_destroyed_effect()

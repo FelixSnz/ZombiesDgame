@@ -79,7 +79,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.3, 0.4 ),
+"times": PoolRealArray( 0, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ true, true, false ]
@@ -131,6 +131,7 @@ tracks/0/keys = {
 }
 
 [node name="Player" type="KinematicBody2D"]
+light_mask = 2
 z_as_relative = false
 collision_layer = 2
 script = ExtResource( 2 )
@@ -145,6 +146,7 @@ texture = ExtResource( 3 )
 texture = ExtResource( 7 )
 offset = Vector2( 0, -7 )
 hframes = 5
+frame = 1
 
 [node name="Position2D" type="Position2D" parent="Sprite"]
 position = Vector2( 5, -3 )
