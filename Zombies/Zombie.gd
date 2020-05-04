@@ -60,7 +60,7 @@ func _physics_process(delta):
 				mov_direction = (player.global_position - global_position).normalized()
 				velocity = velocity.move_toward(mov_direction * MAX_SPEED, ACCELERATION * delta)
 				animationPlayer.play("Run")
-				if 10 <= player_distance and player_distance <= 50 and playerDetectionZone.can_attack:
+				if 40 <= player_distance and player_distance <= 50 and playerDetectionZone.can_attack:
 					playerDetectionZone.start_timer(4)
 					SPRINT = player_distance * 1.5
 					print(SPRINT)
@@ -108,14 +108,16 @@ func _on_Stats_no_health():
 
 
 func _on_HurtBox_body_entered(body):
-	if body.collision_layer == 64:
-		body.create_impact()
-		body.queue_free()
+	hurtBox.start_invincivility(1)
+	$Blink.play("anim")
 	stats.health -= body.damage
-	knockback = body.knockback_vector * body.knockback
+	knockback = body.direction * body.knockback
 	pass # Replace with function body.
 
 
 func _on_HurtBox_area_entered(area):
+	hurtBox.start_invincivility(1)
+	$Blink.play("anim")
 	stats.health -= area.damage
-	knockback = area.knockback_vector * area.knockback
+	knockback = area.direction * area.knockback
+

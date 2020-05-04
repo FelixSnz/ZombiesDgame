@@ -3,10 +3,10 @@ extends RigidBody2D
 const impact_particles = preload("res://Weapons/Impact.tscn")
 
 export(int) var damage
-export(float, 0.1, 2) var _range
+export(float, 0.1, 3) var _range
 export(float, 1, 100) var knockback
 
-export(float, 0, 1) var speed = 0
+export(float, 0, 10) var speed = 0
 var velocity = Vector2.ZERO
 var knockback_vector = Vector2.ZERO
 var direction 

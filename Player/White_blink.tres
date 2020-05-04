@@ -1,0 +1,23 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+uniform bool active = true;
+
+void fragment() {
+	vec4 previus_color = texture(TEXTURE, UV);
+	vec4 white_color = vec4(1.0, 1.0, 1.0, previus_color.a);
+	
+	if (active == true) {
+		COLOR = white_color
+	}
+	else {
+		COLOR = previus_color
+	}
+}
+"
+
+[resource]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/active = false

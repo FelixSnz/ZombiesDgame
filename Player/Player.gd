@@ -63,7 +63,7 @@ func update_facing():
 
 
 func _on_HurtBox_area_entered(area):
-	hurtBox.start_invincivility(.5)
+	hurtBox.start_invincivility(1)
 	$AnimationPlayer2.play("inv")
 	
 
