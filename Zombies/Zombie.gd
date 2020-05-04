@@ -60,9 +60,9 @@ func _physics_process(delta):
 				mov_direction = (player.global_position - global_position).normalized()
 				velocity = velocity.move_toward(mov_direction * MAX_SPEED, ACCELERATION * delta)
 				animationPlayer.play("Run")
-				if 40 <= player_distance and player_distance <= 50 and playerDetectionZone.can_attack:
+				if 10 <= player_distance and player_distance <= 50 and playerDetectionZone.can_attack:
 					playerDetectionZone.start_timer(4)
-					SPRINT = player_distance * 1.6
+					SPRINT = player_distance * 1.5
 					print(SPRINT)
 					state = ATTACK
 			else:

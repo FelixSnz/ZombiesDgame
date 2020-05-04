@@ -146,12 +146,14 @@ texture = ExtResource( 3 )
 texture = ExtResource( 7 )
 offset = Vector2( 0, -7 )
 hframes = 5
-frame = 1
+frame = 3
 
 [node name="Position2D" type="Position2D" parent="Sprite"]
-position = Vector2( 5, -3 )
+show_behind_parent = true
+position = Vector2( 2, -3 )
 
 [node name="Crowbar" parent="Sprite/Position2D" instance=ExtResource( 1 )]
+position = Vector2( 0, 2.38419e-07 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

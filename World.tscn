@@ -1023,6 +1023,7 @@ points = PoolVector2Array( 0, 24, 24, 24, 28, 24, 28, 28, 0, 28 )
 z_as_relative = false
 
 [node name="Walls" type="TileMap" parent="."]
+z_index = -1
 tile_set = SubResource( 1 )
 cell_size = Vector2( 28, 28 )
 format = 1
