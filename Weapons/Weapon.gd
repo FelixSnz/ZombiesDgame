@@ -10,13 +10,20 @@ var angle
 
 func _process(delta):
 	dir = get_local_mouse_position()
-	
-	pointing_dir = (get_global_mouse_position() - global_position).normalized()
-	
+	dir.y += 2
 	var angle = dir.angle()
-	
 	rotation += angle
+	var global_dir = get_global_mouse_position()
+	global_dir.y += 2
+	var pointing_dirr = (global_dir - global_position).normalized()
+	print(pointing_dirr)
 	
+	pointing_dir = Vector2(cos(rotation), sin(rotation))
+	
+	
+	if pointing_dirr.x < 0:
+		pointing_dir.x = pointing_dir.x * -1
+
 	if Input.is_action_just_pressed("click") and can_shot:
 		can_shot = false
 		shot_bullet()

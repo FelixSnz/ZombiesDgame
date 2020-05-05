@@ -9,6 +9,5 @@ __meta__ = {
 }
 
 [node name="Weapon" parent="." instance=ExtResource( 1 )]
-offset = Vector2( 1.5, -1 )
 
 [editable path="Weapon"]

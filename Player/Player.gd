@@ -44,6 +44,7 @@ func move_state(delta):
 		update_facing()
 		velocity = velocity.move_toward(input_vec * max_speed, acceleration * delta)
 		animationPlayer.play("Run")
+		
 
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
