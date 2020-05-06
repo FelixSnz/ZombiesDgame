@@ -18,7 +18,7 @@ var state = POINTING
 
 
 func _process(delta):
-	$HitBox.knockback_vector = pointing_dir
+	$HitBox.direction = pointing_dir
 	match state:
 		POINTING:
 			pointing_state()
