@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Darkness.png-6cac770a3e5f69a77eb318c6a023242a.stex"
+path="res://.import/Darkness.png-4675785ac70483cd98c347b06884ca27.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Darkness.png"
-dest_files=[ "res://.import/Darkness.png-6cac770a3e5f69a77eb318c6a023242a.stex" ]
+source_file="res://World/Darkness.png"
+dest_files=[ "res://.import/Darkness.png-4675785ac70483cd98c347b06884ca27.stex" ]
 
 [params]
 
