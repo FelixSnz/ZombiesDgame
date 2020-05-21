@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://f&wtileset.tres" type="TileSet" id=2]
+[ext_resource path="res://Worl2d.gd" type="Script" id=3]
+
+[node name="World" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Roads" type="TileMap" parent="."]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 28, 28 )
+format = 1
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 113.226, 117.182 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+smoothing_enabled = true

@@ -16,7 +16,7 @@ func _process(delta):
 	var global_dir = get_global_mouse_position()
 	global_dir.y += 2
 	var pointing_dirr = (global_dir - global_position).normalized()
-	print(pointing_dirr)
+	#print(pointing_dirr)
 	
 	pointing_dir = Vector2(cos(rotation), sin(rotation))
 	
