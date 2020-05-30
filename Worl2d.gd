@@ -29,7 +29,7 @@ func rand_bridge(size):
 	for i in range(1, size + 1):
 		$Roads.set_cellv(init_pos + directions[val] * i, 2)
 	
-	$Roads.update_bitmask_region(Vector2(0.0, 0.0), Vector2(map_size.x, map_size.y))
+	$Roads.update_bitmask_region(Vector2(0.0, 0.0), Vector2(init_pos.x + map_size.x, init_pos.y + map_size.y))
 	
 	
 	

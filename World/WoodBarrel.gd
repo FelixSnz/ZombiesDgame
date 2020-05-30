@@ -19,6 +19,7 @@ func _ready():
 
 
 func _on_HitBox_body_entered(body):
+	print("kk")
 	queue_free()
 	create_destroyed_effect()
 
@@ -31,5 +32,6 @@ func create_destroyed_effect():
 
 
 func _on_HurtBox_area_entered(area):
+	print("kk")
 	queue_free()
 	create_destroyed_effect()
