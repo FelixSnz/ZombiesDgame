@@ -1,10 +1,9 @@
 extends Node2D
 
 var noise
-var map_size = Vector2(10, 10)
-var grass_cap = 0.5
-var road_caps = Vector2(0.2, 0.03)
-var enviroment_caps = Vector3(0.4, 0.3, 0.04)
+var map_size = Vector2(100, 100)
+var road_caps = Vector2(0.2, 0.02)
+
 
 func _ready():
 	randomize()
@@ -13,11 +12,9 @@ func _ready():
 	noise.octaves = 1.0
 	noise.period = 12
 	noise.persistence = 0.7
-	#make_grass_map()
 	#make_road_map()
-	#make_enviroment_map()
-	#make_background()
-	rand_bridge(10)
+	#rand_bridge(10)
+	test_noise(Vector2.ZERO)
 	
 func rand_bridge(size):
 	var init_pos = Vector2(rand_range(0, map_size.x), rand_range(0, map_size.y))
@@ -32,7 +29,18 @@ func rand_bridge(size):
 	$Roads.update_bitmask_region(Vector2(0.0, 0.0), Vector2(init_pos.x + map_size.x, init_pos.y + map_size.y))
 	
 	
+func test_noise(init_pos):
 	
+	var x_counter = init_pos.x
+	var y_pos
+	for i in range(0,20):
+		x_counter = x_counter + 1
+		y_pos = round(noise.get_noise_1d(i) * 10)
+		$Roads.set_cell(x_counter, y_pos, 2)
+		for i in range(0, y_pos):
+			$Roads.set_cell(x_counter, i, 2)
+			
+	$Roads.update_bitmask_region(Vector2(0.0, 0.0), Vector2(init_pos.x + map_size.x, init_pos.y + map_size.y))
 
 	
 	
