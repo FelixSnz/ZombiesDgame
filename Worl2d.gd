@@ -14,7 +14,8 @@ func _ready():
 	noise.persistence = 0.7
 	#make_road_map()
 	#rand_bridge(10)
-	test_noise(Vector2.ZERO)
+	test_noise(Vector2(round(rand_range(0, 4)), round(rand_range(0, 4))))
+	#test_noise(Vector2.ZERO)
 	
 func rand_bridge(size):
 	var init_pos = Vector2(rand_range(0, map_size.x), rand_range(0, map_size.y))
@@ -31,14 +32,22 @@ func rand_bridge(size):
 	
 func test_noise(init_pos):
 	
-	var x_counter = init_pos.x
+	var x_pos = init_pos.x
+	var init_y = init_pos.y
 	var y_pos
-	for i in range(0,20):
-		x_counter = x_counter + 1
-		y_pos = round(noise.get_noise_1d(i) * 10)
-		$Roads.set_cell(x_counter, y_pos, 2)
-		for i in range(0, y_pos):
-			$Roads.set_cell(x_counter, i, 2)
+	var stride = 0
+	$Roads.set_cell(x_pos, init_y, 2)
+	for i in range(0,15):
+		x_pos = x_pos + 1
+		y_pos = init_y + round(noise.get_noise_1d(i) * 5)
+		$Roads.set_cell(x_pos, y_pos, 2)
+		if y_pos >= 0:
+			stride = 1
+		else:
+			stride = -1
+		print(stride, ": ", y_pos)
+		for i in range(0, y_pos, stride):
+			$Roads.set_cell(x_pos, i, 2)
 			
 	$Roads.update_bitmask_region(Vector2(0.0, 0.0), Vector2(init_pos.x + map_size.x, init_pos.y + map_size.y))
 

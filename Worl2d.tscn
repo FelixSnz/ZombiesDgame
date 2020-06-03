@@ -13,7 +13,9 @@ cell_size = Vector2( 28, 28 )
 format = 1
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( -35.0476, -7.87341 )
+position = Vector2( 13.9446, 7.58533 )
+max_speed = 453.673
+acceleration = 1000.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
