@@ -23,21 +23,11 @@ func _ready():
 	#self.global_position.y += -2
 	add_force(self.global_position, velocity)
 
-		
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
 func _process(delta):
 	self.angular_velocity = 0
 
 
-func _on_Timer_timeout():
-	print("kk")
-	#queue_free()
+
 
 func create_impact():
 	var impact = impact_particles.instance()
@@ -46,3 +36,7 @@ func create_impact():
 	impact.emitting = true
 	impact.global_position = self.global_position
 	
+
+
+func _on_Bullet_body_entered(body):
+	print("pegue")

@@ -23,8 +23,9 @@ func _ready():
 		y_pos = init_y + round(noise.get_noise_1d(i) * 25)
 	
 	#print(line.points.size())
-	print(x_pos, " ",  y_pos)
-	print(line.points)
+#	print(x_pos, " ",  y_pos)
+#	print(line.points)
+	print(range(0,-11,-1))
 	
 
 

@@ -1,27 +1,37 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
-[sub_resource type="Gradient" id=1]
-colors = PoolColorArray( 1, 0, 0, 1, 0.321569, 0.321569, 0.321569, 0 )
+[ext_resource path="res://Weapons/Impact.gd" type="Script" id=1]
 
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 1 )
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 1 ), 0.0, -0.806534, 0, 0, Vector2( 0.334842, 0.6375 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
 
 [sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 1
+emission_sphere_radius = 8.0
 flag_disable_z = true
 direction = Vector3( 0, 0, 0 )
-spread = 180.0
+spread = 0.0
 gravity = Vector3( 0, 0, 0 )
-initial_velocity = 20.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-color_ramp = SubResource( 2 )
+radial_accel = 45.0
+scale = 3.0
+scale_random = 0.5
+scale_curve = SubResource( 2 )
+color = Color( 1, 0.894118, 0.321569, 1 )
+
+[sub_resource type="Gradient" id=4]
 
 [node name="Impact" type="Particles2D"]
-visible = false
 emitting = false
-amount = 16
+amount = 10
 lifetime = 0.3
 one_shot = true
-explosiveness = 0.68
+explosiveness = 0.7
 randomness = 1.0
 process_material = SubResource( 3 )
+script = ExtResource( 1 )
+color = SubResource( 4 )

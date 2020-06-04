@@ -31,23 +31,43 @@ func rand_bridge(size):
 	
 	
 func test_noise(init_pos):
-	
-	var x_pos = init_pos.x
-	var init_y = init_pos.y
-	var y_pos
+	var x_pos = 0
+	var y_pos = 0
 	var stride = 0
-	$Roads.set_cell(x_pos, init_y, 2)
-	for i in range(0,15):
+	$Roads.set_cellv(init_pos, 2)
+	while true:
 		x_pos = x_pos + 1
-		y_pos = init_y + round(noise.get_noise_1d(i) * 5)
+		y_pos = init_pos.y + round(noise.get_noise_1d(x_pos) * 6)
 		$Roads.set_cell(x_pos, y_pos, 2)
-		if y_pos >= 0:
-			stride = 1
+		
+
+		if y_pos > 0:
+			for i in range(0, y_pos):
+				$Roads.set_cell(x_pos, i, 2)
 		else:
-			stride = -1
-		print(stride, ": ", y_pos)
-		for i in range(0, y_pos, stride):
-			$Roads.set_cell(x_pos, i, 2)
+			for i in range(0,-(x_pos),-1):
+				print("kk")
+				x_pos = x_pos + 1
+				y_pos = init_pos.y + round(noise.get_noise_1d(x_pos) * 6)
+				$Roads.set_cell(i, y_pos, 2)
+				if y_pos > 0:
+					for i in range(0, y_pos):
+						$Roads.set_cell(x_pos, i, 2)
+			break
+	
+	
+		
+#	for i in range(0,15):
+#		x_pos = x_pos + 1
+#		y_pos = init_pos.y + round(noise.get_noise_1d(x_pos) * 6)
+#		$Roads.set_cell(x_pos, y_pos, 2)
+#		if y_pos >= 0:
+#			stride = 1
+#		else:
+#			stride = -1
+#		print(stride, ": ", y_pos)
+#		for i in range(0, y_pos, stride):
+#			$Roads.set_cell(x_pos, i, 2)
 			
 	$Roads.update_bitmask_region(Vector2(0.0, 0.0), Vector2(init_pos.x + map_size.x, init_pos.y + map_size.y))
 
