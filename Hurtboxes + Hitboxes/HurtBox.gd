@@ -1,13 +1,12 @@
 extends Area2D
 
-#const HitEffect = preload("res://Effects/HitEffect.tscn")
+
 var invincible = false setget set_invincibility
 
 signal invincibility_started
 signal invincibility_ended
 
 onready var timer = $Timer
-
 
 func set_invincibility(value):
 	invincible = value
@@ -19,15 +18,6 @@ func set_invincibility(value):
 func start_invincivility(duration):
 	timer.start(duration)
 	self.invincible = true
-	
-
-
-#func create_hiteffect():
-#	var hitEffect = HitEffect.instance()
-#	var world = get_tree().current_scene
-#	world.add_child(hitEffect)
-#	hitEffect.global_position = global_position
-
 
 func _on_HurtBox_invincibility_ended():
 	set_deferred("monitorable", false)

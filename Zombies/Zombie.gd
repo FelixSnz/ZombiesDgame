@@ -112,12 +112,11 @@ func _on_HurtBox_body_entered(body):
 #	$Blink.play("anim")
 #	stats.health -= body.damage
 #	knockback = body.direction * body.knockback
-#	body.create_impact()
-#	body.queue_free()
 	pass # Replace with function body.
 
 
 func _on_HurtBox_area_entered(area):
+	pass
 	hurtBox.start_invincivility(1)
 	$Blink.play("anim")
 	stats.health -= area.damage

@@ -1,6 +1,6 @@
 extends Sprite
 
-const Bullet = preload("res://Weapons/bullet2.tscn")
+const Bullet = preload("res://Weapons/Bullett.tscn")
 
 var pointing_dir
 var can_shot = true
@@ -29,6 +29,7 @@ func _process(delta):
 		shot_bullet()
 
 func shot_bullet():
+	
 	var bullet = Bullet.instance()
 	bullet.direction = pointing_dir
 	var world = get_tree().current_scene

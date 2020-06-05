@@ -1,31 +1,24 @@
 [gd_scene load_steps=4 format=2]
 
 [sub_resource type="Curve" id=1]
-resource_local_to_scene = true
-_data = [ Vector2( 0, 1 ), 0.0, -0.806534, 0, 0, Vector2( 0.334842, 0.6375 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0.823864 ), 0.0, 0.0, 0, 0, Vector2( 0.41629, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=2]
 curve = SubResource( 1 )
 
 [sub_resource type="ParticlesMaterial" id=3]
 emission_shape = 1
-emission_sphere_radius = 4.0
+emission_sphere_radius = 5.0
 flag_disable_z = true
 direction = Vector3( 0, 0, 0 )
 spread = 0.0
 gravity = Vector3( 0, 0, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-radial_accel = 45.0
-scale = 3.0
-scale_random = 0.5
+radial_accel = 5.0
+scale = 2.0
+scale_random = 1.0
 scale_curve = SubResource( 2 )
 
-[node name="Impact" type="Particles2D"]
-emitting = false
-amount = 10
-lifetime = 0.3
-one_shot = true
-explosiveness = 0.7
-randomness = 1.0
+[node name="WoodParticles" type="Particles2D"]
 process_material = SubResource( 3 )

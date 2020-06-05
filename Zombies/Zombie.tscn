@@ -191,7 +191,6 @@ rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="HurtBox" parent="." instance=ExtResource( 1 )]
-collision_layer = 20
 collision_mask = 193
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
@@ -232,6 +231,7 @@ anims/white_flash = SubResource( 9 )
 [node name="Blink" type="AnimationPlayer" parent="."]
 anims/anim = SubResource( 10 )
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
+[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="body_entered" from="HurtBox" to="." method="_on_HurtBox_body_entered"]
 
 [editable path="HurtBox"]

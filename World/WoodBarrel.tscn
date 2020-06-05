@@ -15,6 +15,7 @@ height = 4.0
 [node name="WoodBarrel" type="StaticBody2D"]
 collision_mask = 0
 script = ExtResource( 3 )
+colors = [ Color( 0.384314, 0.231373, 0.160784, 1 ), Color( 0.231373, 0.145098, 0.2, 1 ), Color( 0.32549, 0.188235, 0.152941, 1 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

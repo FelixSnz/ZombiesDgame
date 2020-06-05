@@ -1,7 +1,7 @@
 extends Sprite
 
 
-var pointing_dir
+var pointing_dir = Vector2.ZERO
 var dir = Vector2.ZERO
 var knockback_vector = Vector2.ZERO
 var angle
@@ -56,7 +56,6 @@ func attack_finished():
 	animationPlayer.remove_animation("anim")
 
 func create_attack(animName):
-	print("caaaacaaa")
 	var animashion = Animation.new()
 	var rot_track_index = animashion.add_track(Animation.TYPE_VALUE)
 	var dis_track_index = animashion.add_track(Animation.TYPE_VALUE)
