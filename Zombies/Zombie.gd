@@ -1,7 +1,5 @@
 extends KinematicBody2D
 
-#var DeathEffect = preload("res://Effects/EnemyDeathEffect.tscn")
-
 export(float, 1, 500) var MAX_SPEED
 export(float, 1, 500) var ACCELERATION
 export(float, 1, 500) var FRICTION
@@ -53,8 +51,6 @@ func _physics_process(delta):
 			pass
 		CHASE:
 			var player = playerDetectionZone.player
-			
-			
 			if player != null:
 				var player_distance = self.global_position.distance_to(player.global_position)
 				mov_direction = (player.global_position - global_position).normalized()
@@ -72,10 +68,6 @@ func _physics_process(delta):
 			attack()
 			animationPlayer.play("Jump")
 
-				
-	
-	
-			
 	if sofCollision.is_colliding():
 		velocity += sofCollision.get_push_vector() * delta * 400
 	move()
@@ -84,13 +76,6 @@ func seek_player():
 	if playerDetectionZone.can_see_player():
 		state = CHASE
 
-#func _on_HurtBox_area_entered(area):
-#	print("kk")
-#	stats.health -= area.damage
-#	knockback = area.knockback_vector * 120
-#	hurtBox.start_invincivility(.5)
-#	hurtBox.create_hiteffect()
-
 func move():
 	velocity = move_and_slide(velocity)
 
@@ -98,25 +83,12 @@ func jump_finished():
 	canjump = true
 	state = IDLE
 
-
 func _on_Stats_no_health():
 	queue_free()
-#	var deathEffect = DeathEffect.instance()
-#	get_parent().add_child(deathEffect)
-#	deathEffect.global_position = global_position
-	
-
-
-func _on_HurtBox_body_entered(body):
-#	hurtBox.start_invincivility(1)
-#	$Blink.play("anim")
-#	stats.health -= body.damage
-#	knockback = body.direction * body.knockback
-	pass # Replace with function body.
-
 
 func _on_HurtBox_area_entered(area):
-	area.create_impact()
+	if area is Bullet:
+		area.create_impact()
 	hurtBox.start_invincivility(1)
 	$Blink.play("anim")
 	stats.health -= area.damage

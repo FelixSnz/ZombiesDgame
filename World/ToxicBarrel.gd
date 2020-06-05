@@ -18,3 +18,8 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+
+func _on_HurtBox_area_entered(area):
+	if area is Bullet:
+		area.create_impact()

@@ -234,6 +234,7 @@ current = true
 smoothing_enabled = true
 
 [node name="sprite" parent="YSort/Player" instance=ExtResource( 13 )]
+visible = false
 
 [node name="Zombie" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 149.467, 24.9065 )

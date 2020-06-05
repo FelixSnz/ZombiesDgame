@@ -1,7 +1,9 @@
 extends Area2D
+class_name Bullet
 
 
 const impact_particles = preload("res://Weapons/Impact.tscn")
+const impact_anim = preload("res://Effects & Particles/Impact.tscn")
 
 var direction = Vector2.ZERO
 export(float, 1, 500) var speed = 500
@@ -16,8 +18,10 @@ func create_impact(color:Color = Color("#ffda4d")):
 	impact.process_material.color = color
 	impact.emitting = true
 	impact.global_position = self.global_position
+	var impact2 = impact_anim.instance()
+	world.add_child(impact2)
+	impact2.global_position = self.global_position
 	queue_free()
-
 
 func _process(delta):
 	position += direction * speed * delta
