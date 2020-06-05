@@ -45,7 +45,6 @@ tracks/2/keys = {
 }
 
 [node name="Sprite" type="Sprite"]
-self_modulate = Color( 1, 1, 1, 0 )
 z_index = -1
 z_as_relative = false
 texture = ExtResource( 1 )

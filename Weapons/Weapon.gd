@@ -1,6 +1,6 @@
 extends Sprite
 
-const Bullet = preload("res://Weapons/Bullett.tscn")
+const Bullet = preload("res://Weapons/Firearms/ammo/Bullet.tscn")
 
 var pointing_dir
 var can_shot = true

@@ -1,7 +1,7 @@
 extends StaticBody2D
 
-const DestroyedEffect = preload("res://DestroyedBarrelEffect.tscn")
-const impact_particles = preload("res://Weapons/Impact.tscn")
+const DestroyedEffect = preload("res://Effects & Particles/DestroyedBarrelEffect.tscn")
+const matchwood_particles = preload("res://Effects & Particles/WoodParticles.tscn")
 
 export(Array, Color) var colors
 
@@ -16,21 +16,24 @@ func create_destroyed_effect():
 	destroyedEffect.global_position = global_position
 	world.add_child(destroyedEffect)
 
-func create_impact(amount:int = 5, color:Color = Color.white, scale:float =3):
-	var impact = impact_particles.instance()
+func create_matchwood(amount:int = 5, color:Color = Color.white, scale:float =3):
+	var matchwood = matchwood_particles.instance()
 	var world = get_tree().current_scene
-	world.add_child(impact)
-	impact.process_material.color = color
-	impact.amount = amount
-	impact.process_material.scale = scale
-	impact.emitting = true
-	impact.global_position = self.global_position
+	world.add_child(matchwood)
+	matchwood.process_material.color = color
+	matchwood.amount = amount
+	matchwood.process_material.scale = scale
+	matchwood.emitting = true
+	matchwood.global_position = self.global_position + Vector2(0, -4)
 
 
 func _on_HurtBox_area_entered(area):
-	queue_free()
+	print("kk")
+	
 	create_destroyed_effect()
-	create_impact(3, Color(0.384314, 0.231373, 0.160784, 1), 3)
-	create_impact(3, Color("#533127"), 3)
-	create_impact(3, Color("#3b2533"), 3)
+	create_matchwood(3, Color(0.384314, 0.231373, 0.160784, 1), 5)
+	create_matchwood(3, Color("#533127"), 5)
+	create_matchwood(3, Color("#3b2533"), 5)
+	area.create_impact()
+	queue_free()
 
