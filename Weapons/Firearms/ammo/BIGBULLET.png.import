@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/BIGBULLET.png-c149ab23d15431e781fd68650a375882.stex"
+path="res://.import/BIGBULLET.png-f4a49068bc0fec986858fb0d2b247918.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Weapons/BIGBULLET.png"
-dest_files=[ "res://.import/BIGBULLET.png-c149ab23d15431e781fd68650a375882.stex" ]
+source_file="res://Weapons/Firearms/ammo/BIGBULLET.png"
+dest_files=[ "res://.import/BIGBULLET.png-f4a49068bc0fec986858fb0d2b247918.stex" ]
 
 [params]
 

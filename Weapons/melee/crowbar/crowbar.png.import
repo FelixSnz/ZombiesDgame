@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bullet.png-1bc2389f04f9b1ab1ca5b84b349fd28e.stex"
+path="res://.import/crowbar.png-90146b09b84273e79a2b41848da10f5f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Weapons/bullet.png"
-dest_files=[ "res://.import/bullet.png-1bc2389f04f9b1ab1ca5b84b349fd28e.stex" ]
+source_file="res://Weapons/melee/crowbar/crowbar.png"
+dest_files=[ "res://.import/crowbar.png-90146b09b84273e79a2b41848da10f5f.stex" ]
 
 [params]
 

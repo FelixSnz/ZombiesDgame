@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/crowbar.png-c8eec7abc748bf49f5b6c2fc860a83e7.stex"
+path="res://.import/bullet.png-5cb881acd6a54d7600ea23242cc4fe5b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Weapons/crowbar.png"
-dest_files=[ "res://.import/crowbar.png-c8eec7abc748bf49f5b6c2fc860a83e7.stex" ]
+source_file="res://Weapons/Firearms/ammo/bullet.png"
+dest_files=[ "res://.import/bullet.png-5cb881acd6a54d7600ea23242cc4fe5b.stex" ]
 
 [params]
 

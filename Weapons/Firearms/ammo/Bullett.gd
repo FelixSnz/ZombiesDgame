@@ -16,14 +16,9 @@ func create_impact(color:Color = Color.white):
 	impact.process_material.color = color
 	impact.emitting = true
 	impact.global_position = self.global_position
+	queue_free()
 
 
 func _process(delta):
 	position += direction * speed * delta
 	pass
-
-
-func _on_Bullett_area_entered(area):
-	create_impact(Color(1, 0.741176, 0.298039, 1))
-	queue_free()
-	pass # Replace with function body.

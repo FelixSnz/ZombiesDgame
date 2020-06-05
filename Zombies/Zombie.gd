@@ -116,7 +116,7 @@ func _on_HurtBox_body_entered(body):
 
 
 func _on_HurtBox_area_entered(area):
-	pass
+	area.create_impact()
 	hurtBox.start_invincivility(1)
 	$Blink.play("anim")
 	stats.health -= area.damage

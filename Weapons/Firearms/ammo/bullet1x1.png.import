@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/gun.png-c99a515a185c82f377ac4a9d8320cd39.stex"
+path="res://.import/bullet1x1.png-8ae4d221f0e05bc7d43b7c84851ee399.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Weapons/gun.png"
-dest_files=[ "res://.import/gun.png-c99a515a185c82f377ac4a9d8320cd39.stex" ]
+source_file="res://Weapons/Firearms/ammo/bullet1x1.png"
+dest_files=[ "res://.import/bullet1x1.png-8ae4d221f0e05bc7d43b7c84851ee399.stex" ]
 
 [params]
 
