@@ -20,7 +20,6 @@ colors = [ Color( 0.384314, 0.231373, 0.160784, 1 ), Color( 0.231373, 0.145098, 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 offset = Vector2( 0, -4 )
-hframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

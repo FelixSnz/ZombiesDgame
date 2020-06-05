@@ -5,10 +5,6 @@ const matchwood_particles = preload("res://Effects & Particles/WoodParticles.tsc
 
 export(Array, Color) var colors
 
-func _on_HitBox_body_entered(body):
-	queue_free()
-	create_destroyed_effect()
-
 
 func create_destroyed_effect():
 	var destroyedEffect = DestroyedEffect.instance()

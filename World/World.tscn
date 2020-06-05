@@ -1,18 +1,17 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Zombies/Zombie.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Tiles/f&wtileset.tres" type="TileSet" id=3]
-[ext_resource path="res://Tiles/down_walls.png" type="Texture" id=4]
-[ext_resource path="res://Tiles/extra_tiles.png" type="Texture" id=5]
-[ext_resource path="res://World/ToxicBarrel.tscn" type="PackedScene" id=6]
-[ext_resource path="res://World/WoodBarrel.tscn" type="PackedScene" id=7]
-[ext_resource path="res://World/Darness.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Tiles/big_slime_stain.png" type="Texture" id=14]
+[ext_resource path="res://Tiles/f&wtileset.tres" type="TileSet" id=1]
+[ext_resource path="res://Tiles/down_walls.png" type="Texture" id=2]
+[ext_resource path="res://Tiles/extra_tiles.png" type="Texture" id=3]
+[ext_resource path="res://Tiles/big_slime_stain.png" type="Texture" id=4]
+[ext_resource path="res://World/WoodBarrel.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Zombies/Zombie.tscn" type="PackedScene" id=6]
+[ext_resource path="res://World/ToxicBarrel.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=8]
 
 [sub_resource type="TileSet" id=1]
 0/name = "down_walls.png 0"
-0/texture = ExtResource( 4 )
+0/texture = ExtResource( 2 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 112, 28 )
@@ -37,7 +36,7 @@
 
 [sub_resource type="TileSet" id=2]
 0/name = "extra_tiles.png 0"
-0/texture = ExtResource( 5 )
+0/texture = ExtResource( 3 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 28, 28 )
@@ -51,7 +50,7 @@
 0/shapes = [  ]
 0/z_index = 0
 1/name = "extra_tiles.png 1"
-1/texture = ExtResource( 5 )
+1/texture = ExtResource( 3 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
 1/region = Rect2( 28, 0, 28, 28 )
@@ -65,7 +64,7 @@
 1/shapes = [  ]
 1/z_index = 0
 2/name = "extra_tiles.png 2"
-2/texture = ExtResource( 5 )
+2/texture = ExtResource( 3 )
 2/tex_offset = Vector2( 0, 0 )
 2/modulate = Color( 1, 1, 1, 1 )
 2/region = Rect2( 56, 0, 28, 28 )
@@ -79,7 +78,7 @@
 2/shapes = [  ]
 2/z_index = 0
 3/name = "extra_tiles.png 3"
-3/texture = ExtResource( 5 )
+3/texture = ExtResource( 3 )
 3/tex_offset = Vector2( 0, 0 )
 3/modulate = Color( 1, 1, 1, 1 )
 3/region = Rect2( 84, 0, 28, 28 )
@@ -93,7 +92,7 @@
 3/shapes = [  ]
 3/z_index = 0
 4/name = "extra_tiles.png 4"
-4/texture = ExtResource( 5 )
+4/texture = ExtResource( 3 )
 4/tex_offset = Vector2( 0, 0 )
 4/modulate = Color( 1, 1, 1, 1 )
 4/region = Rect2( 112, 0, 28, 28 )
@@ -107,7 +106,7 @@
 4/shapes = [  ]
 4/z_index = 0
 5/name = "extra_tiles.png 5"
-5/texture = ExtResource( 5 )
+5/texture = ExtResource( 3 )
 5/tex_offset = Vector2( 0, 0 )
 5/modulate = Color( 1, 1, 1, 1 )
 5/region = Rect2( 140, 0, 28, 28 )
@@ -121,7 +120,7 @@
 5/shapes = [  ]
 5/z_index = 0
 6/name = "extra_tiles.png 6"
-6/texture = ExtResource( 5 )
+6/texture = ExtResource( 3 )
 6/tex_offset = Vector2( 0, 0 )
 6/modulate = Color( 1, 1, 1, 1 )
 6/region = Rect2( 168, 0, 28, 28 )
@@ -135,7 +134,7 @@
 6/shapes = [  ]
 6/z_index = 0
 7/name = "extra_tiles.png 7"
-7/texture = ExtResource( 5 )
+7/texture = ExtResource( 3 )
 7/tex_offset = Vector2( 0, 0 )
 7/modulate = Color( 1, 1, 1, 1 )
 7/region = Rect2( 196, 0, 28, 28 )
@@ -149,7 +148,7 @@
 7/shapes = [  ]
 7/z_index = 0
 8/name = "big_slime_stain.png 8"
-8/texture = ExtResource( 14 )
+8/texture = ExtResource( 4 )
 8/tex_offset = Vector2( 0, 0 )
 8/modulate = Color( 1, 1, 1, 1 )
 8/region = Rect2( 0, 0, 38, 17 )
@@ -178,7 +177,7 @@ tile_data = PoolIntArray( 196608, 0, 3, 196617, 0, 3, 262145, 0, 0, 262146, 0, 1
 [node name="floor&dwalls" type="TileMap" parent="."]
 z_index = -1
 z_as_relative = false
-tile_set = ExtResource( 3 )
+tile_set = ExtResource( 1 )
 cell_size = Vector2( 28, 28 )
 collision_layer = 0
 collision_mask = 0
@@ -197,34 +196,34 @@ tile_data = PoolIntArray( 4, 6, 0, 7, 3, 0, 65537, 7, 0, 65545, 2, 0, 65553, 2, 
 
 [node name="ToxicBarrels" type="YSort" parent="YSort"]
 
-[node name="ToxicBarrel" parent="YSort/ToxicBarrels" instance=ExtResource( 6 )]
+[node name="ToxicBarrel" parent="YSort/ToxicBarrels" instance=ExtResource( 7 )]
 position = Vector2( 104.203, 20.4473 )
 
-[node name="ToxicBarrel2" parent="YSort/ToxicBarrels" instance=ExtResource( 6 )]
+[node name="ToxicBarrel2" parent="YSort/ToxicBarrels" instance=ExtResource( 7 )]
 position = Vector2( 167.939, 95.2057 )
 
-[node name="ToxicBarrel3" parent="YSort/ToxicBarrels" instance=ExtResource( 6 )]
+[node name="ToxicBarrel3" parent="YSort/ToxicBarrels" instance=ExtResource( 7 )]
 position = Vector2( 56.4039, 93.6846 )
 
-[node name="ToxicBarrel4" parent="YSort/ToxicBarrels" instance=ExtResource( 6 )]
+[node name="ToxicBarrel4" parent="YSort/ToxicBarrels" instance=ExtResource( 7 )]
 position = Vector2( 20.4048, 47.7788 )
 
-[node name="ToxicBarrel5" parent="YSort/ToxicBarrels" instance=ExtResource( 6 )]
+[node name="ToxicBarrel5" parent="YSort/ToxicBarrels" instance=ExtResource( 7 )]
 position = Vector2( 46.2729, 67.6589 )
 
-[node name="ToxicBarrel6" parent="YSort/ToxicBarrels" instance=ExtResource( 6 )]
+[node name="ToxicBarrel6" parent="YSort/ToxicBarrels" instance=ExtResource( 7 )]
 position = Vector2( 19.3861, 68.3873 )
 
-[node name="ToxicBarrel7" parent="YSort/ToxicBarrels" instance=ExtResource( 6 )]
+[node name="ToxicBarrel7" parent="YSort/ToxicBarrels" instance=ExtResource( 7 )]
 position = Vector2( 237.245, 95.4694 )
 
-[node name="ToxicBarrel8" parent="YSort/ToxicBarrels" instance=ExtResource( 6 )]
+[node name="ToxicBarrel8" parent="YSort/ToxicBarrels" instance=ExtResource( 7 )]
 position = Vector2( 121.544, 26.5044 )
 
-[node name="ToxicBarrel9" parent="YSort/ToxicBarrels" instance=ExtResource( 6 )]
+[node name="ToxicBarrel9" parent="YSort/ToxicBarrels" instance=ExtResource( 7 )]
 position = Vector2( 199.372, 28.4181 )
 
-[node name="Player" parent="YSort" instance=ExtResource( 1 )]
+[node name="Player" parent="YSort" instance=ExtResource( 8 )]
 position = Vector2( 232.856, 62.9993 )
 max_speed = 55.0
 friction = 504.561
@@ -233,44 +232,41 @@ friction = 504.561
 current = true
 smoothing_enabled = true
 
-[node name="sprite" parent="YSort/Player" instance=ExtResource( 13 )]
-visible = false
-
-[node name="Zombie" parent="YSort" instance=ExtResource( 2 )]
+[node name="Zombie" parent="YSort" instance=ExtResource( 6 )]
 position = Vector2( 149.467, 24.9065 )
 
-[node name="Zombie2" parent="YSort" instance=ExtResource( 2 )]
+[node name="Zombie2" parent="YSort" instance=ExtResource( 6 )]
 position = Vector2( 97.512, 89.3179 )
 
-[node name="Zombie3" parent="YSort" instance=ExtResource( 2 )]
+[node name="Zombie3" parent="YSort" instance=ExtResource( 6 )]
 position = Vector2( 83.0763, 45.3122 )
 
-[node name="Zombie4" parent="YSort" instance=ExtResource( 2 )]
+[node name="Zombie4" parent="YSort" instance=ExtResource( 6 )]
 position = Vector2( 49.4531, 52.2097 )
 
-[node name="StaticBody2D" parent="YSort" instance=ExtResource( 7 )]
+[node name="StaticBody2D" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( 466.527, 55.7207 )
 
-[node name="StaticBody2D2" parent="YSort" instance=ExtResource( 7 )]
+[node name="StaticBody2D2" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( 529.763, 60.6277 )
 
-[node name="StaticBody2D6" parent="YSort" instance=ExtResource( 7 )]
+[node name="StaticBody2D6" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( 483.832, 94.13 )
 
-[node name="StaticBody2D7" parent="YSort" instance=ExtResource( 7 )]
+[node name="StaticBody2D7" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( 576.155, 83.7706 )
 
-[node name="StaticBody2D8" parent="YSort" instance=ExtResource( 7 )]
+[node name="StaticBody2D8" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( 489.776, 50.3608 )
 
-[node name="StaticBody2D9" parent="YSort" instance=ExtResource( 7 )]
+[node name="StaticBody2D9" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( 508.841, 81.4267 )
 
-[node name="StaticBody2D3" parent="YSort" instance=ExtResource( 7 )]
+[node name="StaticBody2D3" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( 454.705, 77.4656 )
 
-[node name="StaticBody2D4" parent="YSort" instance=ExtResource( 7 )]
+[node name="StaticBody2D4" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( 461.747, 102.993 )
 
-[node name="StaticBody2D5" parent="YSort" instance=ExtResource( 7 )]
+[node name="StaticBody2D5" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( 512.802, 52.9232 )
