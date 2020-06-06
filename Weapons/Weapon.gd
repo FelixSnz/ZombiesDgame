@@ -1,6 +1,7 @@
 extends Sprite
 
-const Bullet = preload("res://Weapons/Firearms/ammo/Bullet.tscn")
+const bullet_ = preload("res://Weapons/Firearms/ammo/Bullet.tscn")
+const fire_shot = preload("res://Effects & Particles/FireShot_Effect.tscn")
 
 var pointing_dir
 var can_shot = true
@@ -30,11 +31,17 @@ func _process(delta):
 
 func shot_bullet():
 	
-	var bullet = Bullet.instance()
+	
+	var bullet = bullet_.instance()
+	var fire = fire_shot.instance()
 	bullet.direction = pointing_dir
+	bullet.rotation = pointing_dir.angle()
 	var world = get_tree().current_scene
 	world.add_child(bullet)
+	self.add_child(fire)
+	fire.rotation = get_local_mouse_position().angle()
 	bullet.global_position = $Nuzzle.global_position
+	fire.global_position = $Nuzzle.global_position 
 	$AnimationPlayer.play("knockback")
 	yield($AnimationPlayer, "animation_finished")
 	can_shot = true

@@ -20,6 +20,7 @@ func create_impact(color:Color = Color("#ffda4d")):
 	impact.global_position = self.global_position
 	var impact2 = impact_anim.instance()
 	world.add_child(impact2)
+	impact2.modulate = color + Color(.4,.4,.4,0)
 	impact2.global_position = self.global_position
 	queue_free()
 
