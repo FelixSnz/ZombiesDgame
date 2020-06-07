@@ -2,7 +2,7 @@ extends Area2D
 class_name Bullet
 
 
-const impact_particles = preload("res://Weapons/ImpactParticles.tscn")
+const impact_particles = preload("res://Effects & Particles/ImpactParticles.tscn")
 const impact_anim = preload("res://Effects & Particles/ImpactAnimation.tscn")
 
 var direction = Vector2.ZERO

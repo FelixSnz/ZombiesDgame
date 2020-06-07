@@ -1,0 +1,14 @@
+[gd_resource type="Environment" format=2]
+
+[resource]
+resource_local_to_scene = true
+background_mode = 4
+dof_blur_near_distance = 1.02
+dof_blur_near_transition = 0.09
+dof_blur_near_amount = 0.16
+glow_enabled = true
+glow_intensity = 8.0
+glow_strength = 0.48
+glow_blend_mode = 0
+glow_hdr_threshold = 2.9
+glow_bicubic_upscale = true
