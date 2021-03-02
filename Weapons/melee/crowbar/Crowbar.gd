@@ -1,10 +1,8 @@
 extends Sprite
 
-
 var pointing_dir = Vector2.ZERO
 var dir = Vector2.ZERO
 var knockback_vector = Vector2.ZERO
-var angle
 var init_degrees
 
 onready var animationPlayer = $AnimationPlayer
@@ -16,17 +14,13 @@ enum {
 
 var state = POINTING
 
-
-func _process(delta):
+func _process(_delta):
 	$HitBox.direction = pointing_dir
 	match state:
 		POINTING:
 			pointing_state()
 		ATTACK:
 			attack_state()
-	
-
-
 
 func pointing_state():
 	dir = get_local_mouse_position()
@@ -36,20 +30,20 @@ func pointing_state():
 	#print(rotation_degrees)
 	
 	if Input.is_action_just_pressed("click") or Input.is_action_just_pressed("ui_accept"):
-		state = ATTACK
 		create_attack("anim")
+		state = ATTACK
 	if Input.is_action_just_released("click"):
 		pass
 
 func attack_state():
 	animationPlayer.play("anim")
 
-func update_rotation(angul):
-	var rot_to_add = rotation + angul
-	if rot_to_add > 6.28 or rot_to_add < - 6.28:
+func update_rotation(angle_to_add):
+	var new_rotation = rotation + angle_to_add
+	if new_rotation > 2*PI or new_rotation < (2*PI)*-1:
 		rotation = 0
 	else:
-		rotation = rot_to_add
+		rotation = new_rotation
 
 func attack_finished():
 	state = POINTING

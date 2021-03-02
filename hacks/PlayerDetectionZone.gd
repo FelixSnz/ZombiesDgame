@@ -15,17 +15,16 @@ func _on_PlayerDetectionZone_body_entered(body):
 	player = body
 
 
-func _on_PlayerDetectionZone_body_exited(body):
+func _on_PlayerDetectionZone_body_exited(_body):
 	player = null
 
 
 func _on_Timer_timeout():
 	can_attack = true
 
-func _process(delta):
+func _process(_delta):
 	if can_see_player():
 		distance = self.global_position.distance_to(player.global_position)
-		
 		prev_distance = distance
 		
 		

@@ -193,6 +193,20 @@ tile_data = PoolIntArray( 4, 6, 0, 7, 3, 0, 65537, 7, 0, 65545, 2, 0, 65553, 2, 
 
 [node name="YSort" type="YSort" parent="."]
 
+[node name="WoodenBarrels" type="YSort" parent="YSort"]
+
+[node name="WoodBarrel" parent="YSort/WoodenBarrels" instance=ExtResource( 5 )]
+position = Vector2( 259.081, 52.1674 )
+
+[node name="WoodBarrel2" parent="YSort/WoodenBarrels" instance=ExtResource( 5 )]
+position = Vector2( 484.695, 46.5551 )
+
+[node name="WoodBarrel3" parent="YSort/WoodenBarrels" instance=ExtResource( 5 )]
+position = Vector2( 488.624, 90.8923 )
+
+[node name="WoodBarrel4" parent="YSort/WoodenBarrels" instance=ExtResource( 5 )]
+position = Vector2( 463.93, 103.239 )
+
 [node name="ToxicBarrels" type="YSort" parent="YSort"]
 
 [node name="ToxicBarrel" parent="YSort/ToxicBarrels" instance=ExtResource( 7 )]
@@ -222,50 +236,19 @@ position = Vector2( 121.544, 26.5044 )
 [node name="ToxicBarrel9" parent="YSort/ToxicBarrels" instance=ExtResource( 7 )]
 position = Vector2( 199.372, 28.4181 )
 
-[node name="Player" parent="YSort" instance=ExtResource( 8 )]
-position = Vector2( -128.287, 836.64 )
-max_speed = 55.0
-friction = 504.561
+[node name="Zombies" type="YSort" parent="YSort"]
 
-[node name="Camera2D" type="Camera2D" parent="YSort/Player"]
-current = true
-smoothing_enabled = true
-
-[node name="Zombie" parent="YSort" instance=ExtResource( 6 )]
+[node name="Zombie" parent="YSort/Zombies" instance=ExtResource( 6 )]
 position = Vector2( 149.467, 24.9065 )
 
-[node name="Zombie2" parent="YSort" instance=ExtResource( 6 )]
+[node name="Zombie2" parent="YSort/Zombies" instance=ExtResource( 6 )]
 position = Vector2( 97.512, 89.3179 )
 
-[node name="Zombie3" parent="YSort" instance=ExtResource( 6 )]
+[node name="Zombie3" parent="YSort/Zombies" instance=ExtResource( 6 )]
 position = Vector2( 83.0763, 45.3122 )
 
-[node name="Zombie4" parent="YSort" instance=ExtResource( 6 )]
+[node name="Zombie4" parent="YSort/Zombies" instance=ExtResource( 6 )]
 position = Vector2( 49.4531, 52.2097 )
 
-[node name="StaticBody2D" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( 466.527, 55.7207 )
-
-[node name="StaticBody2D2" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( 529.763, 60.6277 )
-
-[node name="StaticBody2D6" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( 483.832, 94.13 )
-
-[node name="StaticBody2D7" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( 576.155, 83.7706 )
-
-[node name="StaticBody2D8" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( 489.776, 50.3608 )
-
-[node name="StaticBody2D9" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( 508.841, 81.4267 )
-
-[node name="StaticBody2D3" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( 454.705, 77.4656 )
-
-[node name="StaticBody2D4" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( 461.747, 102.993 )
-
-[node name="StaticBody2D5" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( 512.802, 52.9232 )
+[node name="Player" parent="YSort" instance=ExtResource( 8 )]
+position = Vector2( 375.789, 71.947 )

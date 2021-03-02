@@ -87,6 +87,7 @@ func _on_Stats_no_health():
 	queue_free()
 
 func _on_HurtBox_area_entered(area):
+	print("been called")
 	if area is Bullet:
 		area.create_impact()
 	hurtBox.start_invincivility(1)
@@ -94,3 +95,5 @@ func _on_HurtBox_area_entered(area):
 	stats.health -= area.damage
 	knockback = area.direction * area.knockback
 
+func _on_HurtBox_body_entered(_body):
+	print("body entered")

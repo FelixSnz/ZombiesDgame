@@ -6,10 +6,9 @@ const fire_shot = preload("res://Effects & Particles/FireShot_Effect.tscn")
 var pointing_dir
 var can_shot = true
 var dir = Vector2.ZERO
-var angle
 
 
-func _process(delta):
+func _process(_delta):
 	dir = get_local_mouse_position()
 	dir.y += 2
 	var angle = dir.angle()
@@ -30,8 +29,6 @@ func _process(delta):
 		shot_bullet()
 
 func shot_bullet():
-	
-	
 	var bullet = bullet_.instance()
 	var fire = fire_shot.instance()
 	bullet.direction = pointing_dir
