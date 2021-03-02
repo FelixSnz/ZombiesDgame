@@ -51,8 +51,8 @@ func test_noise(init_pos):
 				y_pos = init_pos.y + round(noise.get_noise_1d(x_pos) * 6)
 				$Roads.set_cell(i, y_pos, 2)
 				if y_pos > 0:
-					for i in range(0, y_pos):
-						$Roads.set_cell(x_pos, i, 2)
+					for j in range(0, y_pos):
+						$Roads.set_cell(x_pos, j, 2)
 			break
 	
 	

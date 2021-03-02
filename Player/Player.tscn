@@ -3,8 +3,8 @@
 [ext_resource path="res://Weapons/Weapon.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
 [ext_resource path="res://Shadows/SmallShadow.png" type="Texture" id=3]
-[ext_resource path="res://Hurtboxes + Hitboxes/HurtBox.tscn" type="PackedScene" id=4]
-[ext_resource path="res://hacks/SoftCollision.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Hacks/HurtBox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Hacks/SoftCollision.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Shaders/White_blink.tres" type="Material" id=6]
 [ext_resource path="res://Player/character2.png" type="Texture" id=7]
 

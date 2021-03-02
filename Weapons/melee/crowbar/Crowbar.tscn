@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Weapons/melee/crowbar/Crowbar.gd" type="Script" id=1]
-[ext_resource path="res://Hurtboxes + Hitboxes/HitBox.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Hacks/HitBox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Weapons/melee/crowbar/crowbar.png" type="Texture" id=3]
 
 [sub_resource type="SegmentShape2D" id=1]
