@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Tiles/f&wtileset.tres" type="TileSet" id=1]
+[ext_resource path="res://GenWorld.gd" type="Script" id=2]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=3]
+
+[node name="world" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 28, 28 )
+format = 1
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+max_speed = 342.529

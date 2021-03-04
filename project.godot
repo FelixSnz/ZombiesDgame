@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "Bullet",
 "language": "GDScript",
 "path": "res://Weapons/Firearms/ammo/Bullet.gd"
+}, {
+"base": "Node",
+"class": "Walker",
+"language": "GDScript",
+"path": "res://walker.gd"
 } ]
 _global_script_class_icons={
-"Bullet": ""
+"Bullet": "",
+"Walker": ""
 }
 
 [application]
@@ -109,6 +115,7 @@ click={
 2d_physics/layer_6="softcollision"
 2d_physics/layer_7="Bullet"
 2d_physics/layer_8="edge_floor"
+2d_physics/layer_9="item"
 
 [rendering]
 
