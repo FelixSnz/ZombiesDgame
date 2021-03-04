@@ -1,5 +1,5 @@
-class_name Walker
 extends Node
+class_name Walker
 
 
 const DIRECTIONS = [Vector2.RIGHT, Vector2.UP, Vector2.LEFT, Vector2.DOWN]

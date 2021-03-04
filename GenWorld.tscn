@@ -13,4 +13,4 @@ cell_size = Vector2( 28, 28 )
 format = 1
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-max_speed = 342.529
+max_speed = 206.411

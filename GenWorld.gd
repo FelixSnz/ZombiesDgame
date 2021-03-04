@@ -1,6 +1,6 @@
 extends Node
 
-var borders = Rect2(1, 1, 200, 260)
+var borders = Rect2(1, 1, 260, 210)
 var map = []
 
 var Exit = preload("res://ExitDoor.tscn")
@@ -12,21 +12,25 @@ func _ready():
 	
 
 func generate_level():
-	var walker = Walker.new(Vector2(1, 1), borders)
+	var walker = Walker.new(Vector2(26, 21), borders)
 	map = walker.walk(100)
 	
 	var player = $Player
-	player.position = walker.get_end_room().position * 28
+	player.position = map.front() * 28.6
 
 	var exit = Exit.instance()
-	#add_child(exit)
-	#exit.position = walker.get_end_room().position * 28
+	add_child(exit)
+	exit.position = walker.get_end_room().position * 28
 	exit.connect("leaving_level", self, "reload_level")
 	
 	walker.queue_free()
 	
 	for location in map:
 		tilemap.set_cellv(location, 2)
+		var under_cell = location + Vector2.DOWN
+		var upper_cell = location + Vector2.UP
+		if tilemap.get_cellv(under_cell) == -1 and tilemap.get_cellv(upper_cell) != -1:
+			tilemap.set_cellv(under_cell, 5)
 	tilemap.update_bitmask_region(borders.position, borders.end)
 
 func reload_level():
@@ -35,24 +39,3 @@ func reload_level():
 func _input(event):
 	if event.is_action_pressed("ui_accept"):
 		reload_level()
-	
-func rand_position():
-	var x_range = Vector2(1, 200)
-	var y_range = Vector2(1, 260)
-	var random_x = randi() % int(x_range[1]- x_range[0]) + 1 + x_range[0] 
-	var random_y =  randi() % int(y_range[1]-y_range[0]) + 1 + y_range[0]
-	var random_pos = Vector2(random_x, random_y)
-	return random_pos
-
-func spawn_player():
-	var rand_pos = rand_position()
-	while not rand_pos in map:
-		rand_pos = rand_position()
-	print(rand_pos)
-	var player = $Player
-	rand_pos = rand_pos * 28
-	rand_pos.x = rand_pos.x - 14
-	rand_pos.y = rand_pos.y - 14
-	player.global_position = rand_pos
-
-
