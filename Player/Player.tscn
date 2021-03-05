@@ -172,10 +172,9 @@ tracks/0/keys = {
 "Player",
 ]]
 light_mask = 2
-position = Vector2( 14, 14 )
 z_as_relative = false
-collision_layer = 2
-collision_mask = 385
+collision_layer = 64
+collision_mask = 2147484033
 script = ExtResource( 2 )
 max_speed = 169.209
 acceleration = 618.268
@@ -227,6 +226,7 @@ anims/inv = SubResource( 7 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+zoom = Vector2( 0.3, 0.3 )
 smoothing_enabled = true
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 

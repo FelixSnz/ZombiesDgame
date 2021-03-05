@@ -21,7 +21,6 @@ var direction
 func _ready():
 	stats.connect("no_health", self, "queue_free")
 
-
 func _physics_process(delta):
 	direction = (get_global_mouse_position() - global_position).normalized()
 	

@@ -17,11 +17,10 @@ func _init(starting_position, new_borders):
 	step_history.append(position)
 	borders = new_borders
 
-
-
-
 func walk(steps):
 	place_room(position)
+	var room_map = []
+	var hall_map = []
 	for step in steps:
 		if steps_since_turn >= 7:
 			changue_direction()
@@ -29,7 +28,16 @@ func walk(steps):
 			step_history.append(position)
 		else:
 			changue_direction()
-	return step_history
+	for location in step_history:
+		var up = location + Vector2.UP
+		var down = location + Vector2.DOWN
+		var right = location + Vector2.RIGHT
+		var left = location + Vector2.LEFT
+		if (up in step_history or down in step_history) and (right in step_history or left in step_history):
+			room_map.append(location)
+		else:
+			hall_map.append(location)
+	return [room_map, hall_map, step_history]
 
 func step():
 	var target_position = position + direction
@@ -54,7 +62,7 @@ func create_room(position, size):
 	return {position = position, size = size}
 
 func place_room(pos):
-	var size = Vector2(randi() % 2 + 4, randi() % 2 + 4)
+	var size = Vector2(randi() % 3 + 3, randi() % 3 + 3)
 	var top_left_corner = (pos - size/2).ceil()
 	rooms.append(create_room(position, size))
 	for y in size.y:
@@ -63,11 +71,10 @@ func place_room(pos):
 			if borders.has_point(new_step):
 				step_history.append(new_step)
 
-func get_end_room():
+func get_end_room(starting_pos):
 	var end_room = rooms.pop_front()
-	var starting_position = step_history.front()
 	for room in rooms:
-		if starting_position.distance_to(room.position) > starting_position.distance_to(end_room.position):
+		if starting_pos.distance_to(room.position) > starting_pos.distance_to(end_room.position):
 			end_room = room
 	return end_room
 
