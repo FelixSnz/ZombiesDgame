@@ -23,7 +23,6 @@ script/source = "extends Particles2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
-	print(process_material.get(\"color\"))
 	var rand_r = rand_range(0, 10)
 	var rand_g = rand_range(0, 10)
 	var rand_b = rand_range(0, 10)
@@ -32,7 +31,7 @@ func _ready():
 
 
 func reload_level():
-	get_tree().reload_current_scene()
+	var _err = get_tree().reload_current_scene()
 
 func _input(event):
 	if event.is_action_pressed(\"ui_accept\"):
@@ -42,7 +41,6 @@ func _input(event):
 "
 
 [node name="debugParticles" type="Particles2D"]
-position = Vector2( 100.331, 94.6349 )
 amount = 24
 lifetime = 0.8
 explosiveness = 0.24

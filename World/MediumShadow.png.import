@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/MediumShadow.png-a006169ce9c485f0f94bc7dc3bc8473f.stex"
+path="res://.import/MediumShadow.png-ad7e1652904305ab41da598f323b9389.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Shadows/MediumShadow.png"
-dest_files=[ "res://.import/MediumShadow.png-a006169ce9c485f0f94bc7dc3bc8473f.stex" ]
+source_file="res://World/MediumShadow.png"
+dest_files=[ "res://.import/MediumShadow.png-ad7e1652904305ab41da598f323b9389.stex" ]
 
 [params]
 
