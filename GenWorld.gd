@@ -9,51 +9,78 @@ var Player = preload("res://Player/Player.tscn")
 
 onready var tilemap = $TileMap
 onready var overtile = $TileMap2
+var maps
 
 func _ready():
 	randomize()
 	generate_level()
 	
 func generate_level():
-	var walker = Walker.new(Vector2(RECT_WIDTH/2, RECT_WIDTH/2), borders)
-	var maps = walker.walk(200)
+	var walker_pos = Vector2(RECT_WIDTH/2, RECT_WIDTH/2).ceil()
+	var walker = Walker.new(walker_pos, borders)
+	maps = walker.walk(150)
 	var rooms_map = maps.rooms
 	var bridges_map = maps.bridges
 	
+	var count = 0
+	for room in walker.rooms:
+		count += 1
+		var debug_part = create_instance(Debug_part, room.position * 28)
+	print(count)
 	var player_initial_pos = walker.get_random_room().position
-	create_instance(Player, player_initial_pos * 28)
+	create_instance(Player, player_initial_pos * 28.5)
 	
 	var exit_position = walker.get_end_room(player_initial_pos).position
 	var exit = create_instance(Exit, exit_position * 27.2)
 	exit.connect("leaving_level", self, "reload_level")
-	
+
 	walker.queue_free()
 	
-	generate_map(rooms_map)
-	generate_map(bridges_map)
-	#print((bridges_map.size() + rooms_map.size())/4)
+	place_tilemap(tilemap, maps.rooms, 2, "room")
+	var walls_map = walls_afer_rooms(maps.rooms)
+	place_tilemap(overtile, walls_map, 0, "first wall")
+	
+	place_tilemap(tilemap, maps.bridges, 2, "bridge")
+	walls_map = walls_after_bridges(maps.all)
+	place_tilemap(overtile, walls_map, 0, "second wall")
+	
+	
 
-func generate_map(map):
+func walls_afer_rooms(map):
+	var walls_map = []
 	var walls_counter = 0
 	for location in map:
-		tilemap.set_cellv(location, 2)
-	tilemap.update_bitmask_region(borders.position, borders.end)
-	for location in map:
-		var up = location + Vector2.UP
 		var down = location + Vector2.DOWN
-		var right = location + Vector2.RIGHT
-		var left = location + Vector2.LEFT
-		if tilemap.get_cellv(down) == -1 and tilemap.get_cellv(up) != -1 and tilemap.get_cellv(up) != 5:
-			overtile.set_cellv(down, 0)
+		if (not down in map):
 			walls_counter += 1
-			#create_instance(Debug_part, down*28.5)
-		if (tilemap.get_cellv(left) == -1 or tilemap.get_cellv(right) == -1) and tilemap.get_cellv(down) == -1:
-			overtile.set_cellv(down, 0)
-			walls_counter += 1
-			#create_instance(Debug_part, down*28.5)
-		
-		overtile.update_bitmask_region(borders.position, borders.end)
-	print(walls_counter)
+			walls_map.append(down)
+	return walls_map
+
+func walls_after_bridges(map):
+	var walls_map = []
+	var counter = 0
+	for cell in map:
+		var surround = [
+			cell + Vector2.DOWN, 
+			cell + Vector2.UP, 
+			cell + Vector2.LEFT, 
+			cell + Vector2.RIGHT
+		]
+		for dir in surround:
+			if map.has(dir):
+				counter += 1
+		if counter <= 1:
+			walls_map.append(surround[0])
+		counter = 0
+	return walls_map
+	
+func place_tilemap(tiles, map, t_index, name):
+	#var counter = 0
+	for location in map:
+		tiles.set_cellv(location, t_index)
+		#counter += 1
+	#print(counter," ", name, " tiles placed and the map size is: ", map.size())
+	tiles.update_bitmask_region(borders.position, borders.end)
 
 func create_instance(Obj, pos):
 	var obj = Obj.instance()
@@ -68,3 +95,18 @@ func reload_level():
 func _input(event):
 	if event.is_action_pressed("ui_accept"):
 		reload_level()
+	if event is InputEventKey and event.pressed:
+		if event.scancode == KEY_1:
+			place_tilemap(tilemap, maps.rooms, 2, "room")
+		if event.scancode == KEY_2:
+			var walls_map = walls_afer_rooms(maps.rooms)
+			place_tilemap(overtile, walls_map, 0, "first wall")
+		if event.scancode == KEY_3:
+			place_tilemap(tilemap, maps.bridges, 2, "bridge")
+		if event.scancode == KEY_4:
+			var walls_map = walls_after_bridges(maps.all)
+			place_tilemap(overtile, walls_map, 0, "second wall")
+		if event.scancode == KEY_5:
+			tilemap.hide()
+		if event.scancode == KEY_6:
+			tilemap.show()

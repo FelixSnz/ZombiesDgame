@@ -59,6 +59,7 @@ func update_facing():
 	elif direction.x > 0:
 		sprite.scale.x = 1
 
+
 func _on_HurtBox_area_entered(_area):
 	hurtBox.start_invincivility(1)
 	$AnimationPlayer2.play("inv")

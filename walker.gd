@@ -17,6 +17,13 @@ func _init(starting_position, new_borders):
 	step_history.append(position)
 	borders = new_borders
 
+func remove_duplicates(arr):
+	var new_arr = []
+	for i in arr:
+		if not i in new_arr:
+			new_arr.append(i)
+	return new_arr
+
 func walk(steps):
 	place_room(position)
 	var rooms_map = []
@@ -24,7 +31,7 @@ func walk(steps):
 	for step in steps:
 		if steps_since_turn >= 7:
 			changue_direction()
-		if step():
+		if can_step():
 			step_history.append(position)
 		else:
 			changue_direction()
@@ -38,12 +45,12 @@ func walk(steps):
 		else:
 			bridges_map.append(location)
 	return {
-		rooms = rooms_map,
-		bridges = bridges_map,
-		all = step_history
+		rooms = remove_duplicates(rooms_map),
+		bridges = remove_duplicates(bridges_map),
+		all = remove_duplicates(step_history)
 	}
 
-func step():
+func can_step():
 	var target_position = position + direction
 	if borders.has_point(target_position):
 		steps_since_turn += 1
@@ -66,13 +73,13 @@ func create_room(pos, size):
 	return {position = pos, size = size}
 
 func place_room(pos):
-	var size = Vector2(randi() % 3 + 3, randi() % 3 + 3)
+	var size = Vector2(randi() % 4 + 3, randi() % 4 + 3)
 	var top_left_corner = (pos - size/2).ceil()
 	rooms.append(create_room(position, size))
 	for y in size.y:
 		for x in size.x:
 			var new_step = top_left_corner + Vector2(x, y)
-			if borders.has_point(new_step):
+			if borders.grow(1).has_point(new_step):
 				step_history.append(new_step)
 
 func get_random_room():
@@ -83,5 +90,6 @@ func get_end_room(starting_pos):
 	for room in rooms:
 		if starting_pos.distance_to(room.position) > starting_pos.distance_to(end_room.position):
 			end_room = room
+	print("end room distance: ", starting_pos.distance_to(end_room.position))
 	return end_room
 
