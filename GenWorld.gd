@@ -19,6 +19,7 @@ onready var overtile = $TileMap3
 var glob_counter = 0
 var rooms
 var maps
+var player_initial_pos
 
 func _ready():
 	randomize()
@@ -30,11 +31,13 @@ func generate_level():
 	var walker = Walker.new(walker_pos, borders)
 	maps = walker.walk(150)
 
-	var player_initial_pos = walker.get_random_room().position
-	create_instance(Player, player_initial_pos * cell_size + Vector2(cell_size/2, cell_size/2))
+	player_initial_pos = walker.get_random_room().position
+	create_instance(Player, player_initial_pos * cell_size \
+	+ Vector2(cell_size/2.0, cell_size/2.0), $YSort)
 	
 	var exit_position = walker.get_end_room(player_initial_pos).position
-	var exit = create_instance(Exit, exit_position * cell_size + Vector2(cell_size/2, cell_size/2))
+	var exit = create_instance(Exit, exit_position * cell_size \
+	+ Vector2(cell_size/2.0, cell_size/2.0))
 	exit.connect("leaving_level", self, "reload_level")
 
 	walker.queue_free()
@@ -58,6 +61,8 @@ func generate_level():
 
 	rooms = extract_rooms(maps.rooms) #extracting individual rooms 
 	
+	generate_zombies(rooms, .15)
+	generate_entities(ToxicBarrel, rooms, .08)
 	#loop for placing decoration tiles
 	for room in rooms:
 		var outer_bricks = sub_map(room, [2,3]) 
@@ -84,9 +89,28 @@ func generate_level():
 			if not location in maps.bridges:
 				overtile.set_cellv(location, randi() % 2+ 4)
 
+func generate_zombies(ind_rooms, porcentage):
+	for room in ind_rooms:
+		if player_initial_pos in room:
+			continue
+		var n_zombies = round(room.size() * porcentage)
+		room.shuffle()
+		var positions = random_items(room, n_zombies)
+		for position in positions:
+			create_instance(Zombie, position * cell_size \
+			+ Vector2(cell_size/2.0, cell_size/2.0), $YSort/Zombies)
 
-		
-	
+func generate_entities(entity, ind_rooms, porcentage):
+	for room in ind_rooms:
+		var n_barrels = round(room.size() * porcentage)
+		room.shuffle()
+		var positions = random_items(room, n_barrels)
+		for position in positions:
+			var instance = entity.instance()
+			var parent = get_node("YSort/%s" %instance.name + "s")
+			parent.add_child(instance)
+			instance.position = position * cell_size \
+			+ Vector2(cell_size/2.0, cell_size/2.0)
 
 #given an array of positions "all_rooms" returns an array of arrays
 #where every array contains the positions of one individual room
@@ -174,10 +198,13 @@ func place_tilemap(tiles, map, t_index):
 		tiles.set_cellv(location, t_index)
 	tiles.update_bitmask_region(borders.position, borders.end)
 
-func create_instance(Obj, pos):
+func create_instance(Obj, pos, parent = null):
 	var obj = Obj.instance()
-	var world = get_tree().current_scene
-	world.add_child(obj)
+	
+	if parent == null:
+		parent = get_tree().current_scene
+
+	parent.add_child(obj)
 	obj.position = pos
 	return obj
 
