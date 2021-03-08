@@ -59,6 +59,8 @@ func update_facing():
 	elif direction.x > 0:
 		sprite.scale.x = 1
 
+func _process(delta):
+	$Label.text = str(position /28)
 
 func _on_HurtBox_area_entered(_area):
 	hurtBox.start_invincivility(1)
