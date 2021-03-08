@@ -2,8 +2,14 @@
 
 [ext_resource path="res://World/worldenv.tres" type="Environment" id=1]
 [ext_resource path="res://Shaders/Glow.shader" type="Shader" id=2]
-[ext_resource path="res://Weapons/Firearms/ammo/rect_bullet_emission.png" type="Texture" id=3]
-[ext_resource path="res://Weapons/Firearms/ammo/rect_bullet.png" type="Texture" id=4]
+[ext_resource path="res://assets/shader textures/rect_bullet_emission.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/bullets/rect_bullet.png" type="Texture" id=4]
+
+
+
+
+
+
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )

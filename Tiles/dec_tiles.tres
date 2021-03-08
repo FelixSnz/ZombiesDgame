@@ -1,7 +1,9 @@
 [gd_resource type="TileSet" load_steps=3 format=2]
 
-[ext_resource path="res://Tiles/big_slime_stain.png" type="Texture" id=1]
-[ext_resource path="res://Tiles/extra_tiles.png" type="Texture" id=2]
+[ext_resource path="res://assets/tilemaps/big_slime_stain.png" type="Texture" id=1]
+[ext_resource path="res://assets/tilemaps/extra_tiles.png" type="Texture" id=2]
+
+
 
 [resource]
 0/name = "extra_tiles.png 0"

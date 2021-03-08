@@ -1,10 +1,14 @@
 [gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://World/toxic-barrels.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/world/toxic-barrels.png" type="Texture" id=1]
 [ext_resource path="res://World/ToxicBarrel.gd" type="Script" id=2]
-[ext_resource path="res://World/SmallShadow.png" type="Texture" id=3]
-[ext_resource path="res://World/toxic-bubble.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/shadows/SmallShadow.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/effects/toxic-bubble.png" type="Texture" id=4]
 [ext_resource path="res://Hacks/HurtBox.tscn" type="PackedScene" id=5]
+
+
+
+
 
 
 

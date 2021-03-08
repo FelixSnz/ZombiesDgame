@@ -4,13 +4,16 @@
 [ext_resource path="res://Hacks/SoftCollision.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Zombies/Stats.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Hacks/PlayerDetectionZone.tscn" type="PackedScene" id=4]
-[ext_resource path="res://World/SmallShadow.png" type="Texture" id=5]
-[ext_resource path="res://Zombies/zombie0.png" type="Texture" id=6]
-[ext_resource path="res://Zombies/zombie2.png" type="Texture" id=7]
-[ext_resource path="res://Zombies/zombie3.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/shadows/SmallShadow.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/enemies/zombie0.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/enemies/zombie2.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/enemies/zombie3.png" type="Texture" id=8]
 [ext_resource path="res://Zombies/Zombie.gd" type="Script" id=9]
 [ext_resource path="res://Hacks/HitBox.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Shaders/White_blink.tres" type="Material" id=11]
+
+
+
 
 
 [sub_resource type="CapsuleShape2D" id=1]
