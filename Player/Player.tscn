@@ -226,7 +226,7 @@ anims/inv = SubResource( 7 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
-zoom = Vector2( 0.6, 0.6 )
+zoom = Vector2( 0.3, 0.3 )
 smoothing_enabled = true
 
 [node name="Label" type="Label" parent="."]

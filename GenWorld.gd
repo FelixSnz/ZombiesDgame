@@ -7,6 +7,9 @@ var borders = Rect2(1, 1, RECT_WIDTH, RECT_HEIGHT )
 var Debug_part = preload("res://Effects & Particles/debugParticles.tscn")
 var Exit = preload("res://ExitDoor.tscn")
 var Player = preload("res://Player/Player.tscn")
+var Zombie = preload("res://Zombies/Zombie.tscn")
+var ToxicBarrel = preload("res://World/ToxicBarrel.tscn")
+var WoodBarrel = preload("res://World/WoodBarrel.tscn")
 
 onready var tilemap = $TileMap
 onready var undertile = $TileMap2
@@ -57,15 +60,33 @@ func generate_level():
 	
 	#loop for placing decoration tiles
 	for room in rooms:
-		var outer_bricks = sub_map(room, 3) + sub_map(room, 2)
+		var outer_bricks = sub_map(room, [2,3]) 
 		var inner_bricks = sub_map(room, 4)
+		var down_bricks = sub_map(maps.rooms, range(4), Vector2.DOWN)
 		outer_bricks.shuffle()
 		inner_bricks.shuffle()
+		down_bricks.shuffle()
 		outer_bricks = random_items(outer_bricks, round(outer_bricks.size() * 0.25))
 		inner_bricks = random_items(inner_bricks, round(inner_bricks.size() * .2))
-		place_tilemap(overtile, outer_bricks, randi()%2 + 2)
-		place_tilemap(overtile, inner_bricks, [randi()%2, randi() %2 +6])
+		down_bricks = random_items(down_bricks, round(down_bricks.size() * .2))
+		
+		for location in outer_bricks:
+			overtile.set_cellv(location, randi()%2 + 2)
+		overtile.update_bitmask_region(borders.position, borders.end)
 
+		for location in inner_bricks:
+			var shuf_arr = [randi()%2, randi() %3 +6]
+			shuf_arr.shuffle()
+			overtile.set_cellv(location, shuf_arr.front())
+		overtile.update_bitmask_region(borders.position, borders.end)
+		
+		for location in down_bricks:
+			if not location in maps.bridges:
+				overtile.set_cellv(location, randi() % 2+ 4)
+
+
+		
+	
 
 #given an array of positions "all_rooms" returns an array of arrays
 #where every array contains the positions of one individual room
@@ -186,4 +207,4 @@ func _input(event):
 				place_tilemap(tilemap, rooms["room_%d" % glob_counter], 2)
 				glob_counter += 1
 			
-			
+
