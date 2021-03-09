@@ -2,7 +2,7 @@ extends Node
 class_name Walker
 
 const DIRECTIONS = [Vector2.RIGHT, Vector2.UP, Vector2.LEFT, Vector2.DOWN]
-
+var maptools = MapTools.new()
 var position = Vector2.ZERO
 var direction = Vector2.RIGHT
 var borders = Rect2()
@@ -20,28 +20,57 @@ func walk(steps):
 	place_room(position)
 	var rooms_map = []
 	var bridges_map = []
-	for step in steps:
+	for _i in steps:
 		if steps_since_turn >= 7:
 			changue_direction()
 		if can_step():
 			step_history.append(position)
 		else:
 			changue_direction()
-	for location in step_history:
-		var up = location + Vector2.UP
-		var down = location + Vector2.DOWN
-		var right = location + Vector2.RIGHT
-		var left = location + Vector2.LEFT
-		if (up in step_history or down in step_history) and (right in step_history or left in step_history):
-			rooms_map.append(location)
+	for step in step_history:
+		var neighbors = maptools.get_neighbors(step)
+		if (neighbors.top in step_history or neighbors.down in step_history) \
+		and (neighbors.right in step_history or neighbors.left in step_history):
+			rooms_map.append(step)
 		else:
-			bridges_map.append(location)
+			bridges_map.append(step)
 	rooms = clean_rooms()
 	return {
 		rooms = remove_duplicates(rooms_map),
 		bridges = remove_duplicates(bridges_map),
 		all = remove_duplicates(step_history)
 	}
+	
+#given an array of positions "all_rooms" returns an array of arrays
+#where every array contains the positions of one individual room
+func extract_rooms(all_rooms):
+	var rooms_copy = all_rooms.duplicate()
+	var individual_rooms = []
+	var new_room = []
+	var new_room_complete = false
+	while not rooms_copy.empty():
+		new_room = [rooms_copy.pop_front()]
+		new_room_complete = false
+		while not new_room_complete:
+			for cell in all_rooms:
+				if has_around(new_room, cell):
+					if not new_room.has(cell):
+						new_room_complete = false
+						new_room.append(cell)
+						rooms_copy.erase(cell)
+						break
+					else:
+						new_room_complete = true
+		individual_rooms.append(new_room)
+	return individual_rooms
+
+#given a map "cells" and an individul cell "test_cell" 
+#checks if "test_cell" is around of any of the elements in "cells"
+func has_around(map, location):
+	var neighbors = maptools.get_neighbors(location)
+	for neighbor in neighbors.values():
+		if map.has(neighbor):
+			return true
 
 func can_step():
 	var target_position = position + direction
@@ -80,7 +109,6 @@ func clean_rooms():
 		positions.append(room.position)
 		sizes.append(room.size)
 	new_rooms = doble_remove(positions, sizes)
-	var new_pos = remove_duplicates(positions)
 	return new_rooms
 
 func doble_remove(arr1, arr2):
@@ -102,14 +130,49 @@ func remove_duplicates(arr):
 func create_room(pos, size):
 	return {position = pos, size = size}
 
-func get_end_room(starting_pos):
-	var end_room = rooms.front()
-	for room in rooms:
-		if starting_pos.distance_to(room.position) > starting_pos.distance_to(end_room.position):
-			end_room = room
-	#print("end room distance: ", starting_pos.distance_to(end_room.position))
+func get_room_center(room):
+	var x_min = room.front().x
+	var x_max = room.front().x
+	var y_min = room.front().y
+	var y_max = room.front().y
+	for vector in room:
+		if vector.x < x_min:
+			x_min = vector.x
+		if vector.x > x_max:
+			x_max = vector.x
+		if vector.y < y_min:
+			y_min = vector.y
+		if vector.y > y_max:
+			y_max = vector.y
+	var center = Vector2(round((x_max - x_min)/2) + x_min, \
+	round((y_max - y_min)/2) + y_min)
+	
+	var neighbors = maptools.get_neighbors(center)
+	for neighbor in neighbors.values():
+		if not neighbor in room or not center in room:
+			print("not neighbors")
+			var sub_map = maptools.neighbors_map(room, 4)
+			center = sub_map[randi() % sub_map.size()]
+	return center
+
+func get_end_room(starting_pos, ind_rooms):
+	var end_room = ind_rooms.front()
+	var end_room_position = get_room_center(end_room)
+	for room in ind_rooms:
+		var room_position = get_room_center(room)
+		if starting_pos.distance_to(room_position) \
+		> starting_pos.distance_to(end_room_position):
+			if room_position in room:
+				end_room = room
 	return end_room
 
+func get_start_room(ind_rooms):
+	var min_room = ind_rooms.front()
+	for room in ind_rooms:
+		if room.size() < min_room.size():
+			min_room = room
+	return min_room
+	
 func get_random_room():
 	return rooms[randi() % rooms.size()]
 

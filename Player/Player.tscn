@@ -8,9 +8,6 @@
 [ext_resource path="res://Shaders/White_blink.tres" type="Material" id=6]
 [ext_resource path="res://assets/sprites/player/character2.png" type="Texture" id=7]
 
-
-
-
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 1.99999
 height = 2.00002
@@ -229,7 +226,6 @@ anims/inv = SubResource( 7 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
-zoom = Vector2( 0.3, 0.3 )
 smoothing_enabled = true
 
 [node name="Label" type="Label" parent="."]

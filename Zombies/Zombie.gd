@@ -59,7 +59,7 @@ func _physics_process(delta):
 				if 40 <= player_distance and player_distance <= 50 and playerDetectionZone.can_attack:
 					playerDetectionZone.start_timer(4)
 					SPRINT = player_distance * 1.5
-					print(SPRINT)
+
 					state = ATTACK
 			else:
 				state = IDLE
@@ -87,7 +87,6 @@ func _on_Stats_no_health():
 	queue_free()
 
 func _on_HurtBox_area_entered(area):
-	print("been called")
 	if area is Bullet:
 		area.create_impact()
 	hurtBox.start_invincivility(1)
@@ -96,4 +95,4 @@ func _on_HurtBox_area_entered(area):
 	knockback = area.direction * area.knockback
 
 func _on_HurtBox_body_entered(_body):
-	print("body entered")
+	pass

@@ -15,12 +15,18 @@ _global_script_classes=[ {
 "path": "res://Weapons/Firearms/ammo/Bullet.gd"
 }, {
 "base": "Node",
+"class": "MapTools",
+"language": "GDScript",
+"path": "res://Hacks/MapTools.gd"
+}, {
+"base": "Node",
 "class": "Walker",
 "language": "GDScript",
 "path": "res://walker.gd"
 } ]
 _global_script_class_icons={
 "Bullet": "",
+"MapTools": "",
 "Walker": ""
 }
 
