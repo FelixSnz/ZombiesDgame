@@ -16,7 +16,7 @@ onready var hurtBox = $HurtBox
 onready var sofCollision = $SoftCollision
 onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
-
+onready var wandercontroller = $WanderController
 export(Array, Texture) var styles
 
 enum {
@@ -47,13 +47,26 @@ func _physics_process(delta):
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 			animationPlayer.play("Idle")
 			seek_player()
+			if wandercontroller.get_time_left() == 0:
+				state = pick_new_state([IDLE, WANDER])
+				wandercontroller.set_wander_timer(rand_range(1,3))
 		WANDER:
-			pass
+			seek_player()
+			if wandercontroller.get_time_left() == 0:
+				state = pick_new_state([IDLE, WANDER])
+				wandercontroller.set_wander_timer(rand_range(1,3))
+			
+			var mov_direction = global_position.direction_to(wandercontroller.target_position)
+			velocity = velocity.move_toward(mov_direction * MAX_SPEED, ACCELERATION * delta)
+			
+			if global_position.distance_to(wandercontroller.target_position) <= 1:
+				state = pick_new_state([IDLE, WANDER])
+				wandercontroller.set_wander_timer(rand_range(1,3))
 		CHASE:
 			var player = playerDetectionZone.player
 			if player != null:
 				var player_distance = self.global_position.distance_to(player.global_position)
-				mov_direction = (player.global_position - global_position).normalized()
+				mov_direction = global_position.direction_to(player.global_position)
 				velocity = velocity.move_toward(mov_direction * MAX_SPEED, ACCELERATION * delta)
 				animationPlayer.play("Run")
 				if 40 <= player_distance and player_distance <= 50 and playerDetectionZone.can_attack:
@@ -75,7 +88,11 @@ func _physics_process(delta):
 func seek_player():
 	if playerDetectionZone.can_see_player():
 		state = CHASE
-
+		
+func pick_new_state(state_list):
+	state_list.shuffle()
+	return state_list.pop_front()
+	
 func move():
 	velocity = move_and_slide(velocity)
 

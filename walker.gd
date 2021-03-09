@@ -150,7 +150,6 @@ func get_room_center(room):
 	var neighbors = maptools.get_neighbors(center)
 	for neighbor in neighbors.values():
 		if not neighbor in room or not center in room:
-			print("not neighbors")
 			var sub_map = maptools.neighbors_map(room, 4)
 			center = sub_map[randi() % sub_map.size()]
 	return center
@@ -162,8 +161,9 @@ func get_end_room(starting_pos, ind_rooms):
 		var room_position = get_room_center(room)
 		if starting_pos.distance_to(room_position) \
 		> starting_pos.distance_to(end_room_position):
-			if room_position in room:
+			if room_position in room and room.size():
 				end_room = room
+				end_room_position = get_room_center(end_room)
 	return end_room
 
 func get_start_room(ind_rooms):
