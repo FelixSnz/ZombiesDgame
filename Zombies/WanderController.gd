@@ -13,7 +13,7 @@ func update_target_position():
 func get_time_left():
 	return timer.time_left
 
-func set_wander_timer(duration):
+func start_wander_timer(duration):
 	timer.start(duration)
 	
 func _on_Timer_timeout():
