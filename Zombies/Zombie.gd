@@ -32,10 +32,7 @@ func _ready():
 	var idx_style = int(round(rand_range(0, styles.size() -1)))
 	sprite.texture = styles[idx_style]
 
-func attack():
-	velocity = mov_direction * SPRINT
-	move()
-	
+
 
 
 func _physics_process(delta):
@@ -51,6 +48,7 @@ func _physics_process(delta):
 				state = pick_new_state([IDLE, WANDER])
 				wandercontroller.set_wander_timer(rand_range(1,3))
 		WANDER:
+			
 			seek_player()
 			if wandercontroller.get_time_left() == 0:
 				state = pick_new_state([IDLE, WANDER])
@@ -62,6 +60,8 @@ func _physics_process(delta):
 			if global_position.distance_to(wandercontroller.target_position) <= 1:
 				state = pick_new_state([IDLE, WANDER])
 				wandercontroller.set_wander_timer(rand_range(1,3))
+			animationPlayer.play("Run")
+			sprite.flip_h = velocity.x < 0
 		CHASE:
 			var player = playerDetectionZone.player
 			if player != null:
@@ -83,6 +83,10 @@ func _physics_process(delta):
 
 	if sofCollision.is_colliding():
 		velocity += sofCollision.get_push_vector() * delta * 400
+	move()
+
+func attack():
+	velocity = mov_direction * SPRINT
 	move()
 
 func seek_player():
