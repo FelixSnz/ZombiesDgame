@@ -4,11 +4,11 @@ export(float, 1, 500) var MAX_SPEED
 export(float, 1, 500) var ACCELERATION
 export(float, 1, 500) var FRICTION
 export(float, 1, 500) var SPRINT
+export(Array, Texture) var styles
 
 var knockback = Vector2.ZERO
 var velocity = Vector2.ZERO
-var mov_direction = Vector2.RIGHT
-var canjump = true
+var direction = Vector2.RIGHT
 
 onready var stats = $Stats
 onready var playerDetectionZone = $PlayerDetectionZone
@@ -17,7 +17,7 @@ onready var sofCollision = $SoftCollision
 onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
 onready var wanderController = $WanderController
-export(Array, Texture) var styles
+onready var attackRangeZone = $AttackRangeZone
 
 enum {
 	IDLE,
@@ -29,11 +29,11 @@ enum {
 var state = IDLE
 
 func _ready():
-	var idx_style = int(round(rand_range(0, styles.size() -1)))
-	sprite.texture = styles[idx_style]
+	var style_index = int(round(rand_range(0, styles.size() -1)))
+	sprite.texture = styles[style_index]
 
 func _physics_process(delta):
-	knockback = knockback.move_toward(Vector2.ZERO, 200 *delta)
+	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
 	knockback = move_and_slide(knockback)
 
 	match state:
@@ -54,32 +54,33 @@ func _physics_process(delta):
 		CHASE:
 			var player = playerDetectionZone.player
 			if player != null:
-				var player_distance = self.global_position.distance_to(player.global_position)
-				mov_direction = global_position.direction_to(player.global_position)
-				velocity = velocity.move_toward(mov_direction * MAX_SPEED, ACCELERATION * delta)
+				accelerate_towards_point(player.global_position, delta)
 				animationPlayer.play("Run")
-				if 40 <= player_distance and player_distance <= 50 and playerDetectionZone.can_attack:
-					playerDetectionZone.start_timer(4)
-					SPRINT = player_distance * 1.5
+				if attackRangeZone.has_player() and attackRangeZone.get_cooldown_left() == 0:
+					attackRangeZone.start_cooldown(3)
 					state = ATTACK
 			else:
 				state = IDLE
 		ATTACK:
-			attack()
-			animationPlayer.play("Jump")
-
+			var player = attackRangeZone.player
+			if player != null:
+				jump_attack()
+				
 	if sofCollision.is_colliding():
 		velocity += sofCollision.get_push_vector() * delta * 400
-	move()
+	velocity = move_and_slide(velocity)
 
 func accelerate_towards_point(point, delta):
-	var direction = global_position.direction_to(point)
+	direction = global_position.direction_to(point)
 	velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
 	sprite.flip_h = velocity.x < 0
 
-func attack():
-	velocity = mov_direction * SPRINT
-	move()
+func jump_attack():
+	animationPlayer.play("Jump")
+	velocity = move_and_slide(direction * SPRINT)
+
+func jump_finished():
+	state = IDLE
 
 func seek_player():
 	if playerDetectionZone.can_see_player():
@@ -92,13 +93,6 @@ func update_wander():
 func pick_random_state(state_list):
 	state_list.shuffle()
 	return state_list.pop_front()
-	
-func move():
-	velocity = move_and_slide(velocity)
-
-func jump_finished():
-	canjump = true
-	state = IDLE
 
 func _on_Stats_no_health():
 	queue_free()

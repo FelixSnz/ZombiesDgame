@@ -34,12 +34,17 @@ _global_script_class_icons={
 
 config/name="RobotGame"
 run/main_scene="res://World/World.tscn"
+run/low_processor_mode=true
 config/icon="res://icon.png"
 
 [autoload]
 
 PlayerStats="*res://Player/PlayerStats.tscn"
 worldenviroment="*res://World/worldenv.tscn"
+
+[debug]
+
+settings/fps/force_fps=60
 
 [display]
 

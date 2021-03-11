@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Hacks/HurtBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Hacks/SoftCollision.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Hacks/HitBox.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Shaders/White_blink.tres" type="Material" id=11]
 [ext_resource path="res://Zombies/WanderController.tscn" type="PackedScene" id=12]
+[ext_resource path="res://AttackRangeZone.tscn" type="PackedScene" id=13]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 2.0
@@ -162,6 +163,12 @@ tracks/0/keys = {
 "values": [ true, false, true, false ]
 }
 
+[sub_resource type="CircleShape2D" id=11]
+radius = 64.387
+
+[sub_resource type="CircleShape2D" id=12]
+radius = 36.6621
+
 [node name="Zombie" type="KinematicBody2D" groups=[
 "Enemies",
 "Zombies",
@@ -172,7 +179,7 @@ script = ExtResource( 9 )
 MAX_SPEED = 40.0
 ACCELERATION = 382.349
 FRICTION = 122.707
-SPRINT = 1.0
+SPRINT = 150.295
 styles = [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ]
 
 [node name="Stats" parent="." instance=ExtResource( 3 )]
@@ -192,6 +199,8 @@ frame = 1
 position = Vector2( 0, -1 )
 rotation = 1.5708
 shape = SubResource( 1 )
+
+[node name="WanderController" parent="." instance=ExtResource( 12 )]
 
 [node name="HurtBox" parent="." instance=ExtResource( 1 )]
 collision_mask = 193
@@ -231,7 +240,13 @@ anims/white_flash = SubResource( 9 )
 [node name="Blink" type="AnimationPlayer" parent="."]
 anims/anim = SubResource( 10 )
 
-[node name="WanderController" parent="." instance=ExtResource( 12 )]
+[node name="AttackRangeZone" parent="." instance=ExtResource( 13 )]
+
+[node name="CollisionShape2D" parent="AttackRangeZone/EnabledZone" index="0"]
+shape = SubResource( 11 )
+
+[node name="CollisionShape2D" parent="AttackRangeZone/DisabledZone" index="0"]
+shape = SubResource( 12 )
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="body_entered" from="HurtBox" to="." method="_on_HurtBox_body_entered"]
@@ -243,3 +258,5 @@ anims/anim = SubResource( 10 )
 [editable path="SoftCollision"]
 
 [editable path="HitBox"]
+
+[editable path="AttackRangeZone"]
