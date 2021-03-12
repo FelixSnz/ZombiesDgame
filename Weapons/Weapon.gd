@@ -1,45 +1,36 @@
 extends Sprite
 
-const bullet_ = preload("res://Weapons/Firearms/ammo/Bullet.tscn")
-const fire_shot = preload("res://Effects & Particles/FireShot_Effect.tscn")
+const bullet = preload("res://Weapons/Firearms/ammo/Bullet.tscn")
+const fireShot = preload("res://Effects & Particles/FireShot_Effect.tscn")
 
-var pointing_dir
 var can_shot = true
-var dir = Vector2.ZERO
-
+var glob_mouse_position = Vector2.ZERO
 
 func _process(_delta):
-	dir = get_local_mouse_position()
-	dir.y += 2
-	var angle = dir.angle()
-	rotation += angle
-	var global_dir = get_global_mouse_position()
-	global_dir.y += 2
-	var pointing_dirr = (global_dir - global_position).normalized()
-	#print(pointing_dirr)
-	
-	pointing_dir = Vector2(cos(rotation), sin(rotation))
-	
-	
-	if pointing_dirr.x < 0:
-		pointing_dir.x = pointing_dir.x * -1
-
+	glob_mouse_position = get_global_mouse_position() + Vector2(0, 2)
+	var mouse_direction = (glob_mouse_position - global_position).normalized()
+	var mouse_angle = mouse_direction.angle()
+	rotation = mouse_angle
+	if get_parent().get_parent().scale.x == -1:
+		var pointing_dir = Vector2(sin(mouse_angle), cos(mouse_angle))
+		rotation = pointing_dir.angle() + deg2rad(90)
 	if Input.is_action_just_pressed("click") and can_shot:
 		can_shot = false
 		shot_bullet()
 
 func shot_bullet():
-	var bullet = bullet_.instance()
-	var fire = fire_shot.instance()
-	bullet.direction = pointing_dir
-	bullet.rotation = pointing_dir.angle()
-	var world = get_tree().current_scene
-	world.add_child(bullet)
-	self.add_child(fire)
-	fire.rotation = get_local_mouse_position().angle()
-	bullet.global_position = $Nuzzle.global_position
-	fire.global_position = $Nuzzle.global_position 
+	create_instance(bullet)
+	create_instance(fireShot)
 	$AnimationPlayer.play("knockback")
 	yield($AnimationPlayer, "animation_finished")
 	can_shot = true
-	
+
+func create_instance(Obj):
+	var instance = Obj.instance()
+	var world = get_tree().current_scene
+	world.add_child(instance)
+	instance.rotation = get_mouse_direction().angle()
+	instance.global_position = $Nuzzle.global_position
+
+func get_mouse_direction():
+	return (glob_mouse_position - global_position).normalized()

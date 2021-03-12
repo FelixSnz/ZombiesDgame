@@ -123,3 +123,4 @@ position = Vector2( 49.4531, 52.2097 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 8 )]
 position = Vector2( 375.789, 71.947 )
+ACCELERATION = 275.679

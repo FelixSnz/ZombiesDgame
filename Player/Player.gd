@@ -1,9 +1,9 @@
 extends KinematicBody2D
 
 var velocity = Vector2.ZERO
-export(float, 1, 1000) var max_speed
-export(float, 1, 1000) var acceleration
-export(float, 1, 1000) var friction
+export(float, 1, 500) var MAX_SPEED
+export(float, 1, 500) var ACCELERATION
+export(float, 1, 500) var FRICTION
 
 onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
@@ -41,11 +41,11 @@ func move_state(delta):
 	input_vec = input_vec.normalized()
 	if input_vec != Vector2.ZERO:
 		update_facing()
-		velocity = velocity.move_toward(input_vec * max_speed, acceleration * delta)
+		velocity = velocity.move_toward(input_vec * MAX_SPEED, ACCELERATION * delta)
 		animationPlayer.play("Run")
 
 	else:
-		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
+		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 		update_facing()
 		animationPlayer.play("Idle")
 	move()
@@ -54,6 +54,7 @@ func move():
 	velocity = move_and_slide(velocity)
 
 func update_facing():
+	
 	if direction.x < 0:
 		sprite.scale.x = -1
 	elif direction.x > 0:
