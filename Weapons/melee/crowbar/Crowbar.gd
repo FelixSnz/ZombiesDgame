@@ -5,6 +5,8 @@ var dir = Vector2.ZERO
 var knockback_vector = Vector2.ZERO
 var init_degrees
 
+export(float) var test_var
+
 onready var animationPlayer = $AnimationPlayer
 
 enum {
@@ -27,7 +29,6 @@ func pointing_state():
 	pointing_dir = (get_global_mouse_position() - global_position).normalized()
 	var angle = dir.angle() + (PI/4)
 	update_rotation(angle)
-	#print(rotation_degrees)
 	
 	if Input.is_action_just_pressed("click") or Input.is_action_just_pressed("ui_accept"):
 		create_attack("anim")
@@ -77,8 +78,8 @@ func create_attack(animName):
 
 	#position track
 	animashion.track_insert_key(rot_track_index, 0.0, init_degrees)
-	animashion.track_insert_key(rot_track_index, 0.1, init_degrees - 45)
-	animashion.track_insert_key(rot_track_index, .20, rotation_degrees + 150)
+	animashion.track_insert_key(rot_track_index, 0.1, init_degrees - 100)
+	animashion.track_insert_key(rot_track_index, .20, rotation_degrees + 180)
 	animashion.track_insert_key(rot_track_index, .40, init_degrees)
 
 	animashion.track_insert_key(mtd_track_index, 0.4,

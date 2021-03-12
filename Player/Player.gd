@@ -54,7 +54,6 @@ func move():
 	velocity = move_and_slide(velocity)
 
 func update_facing():
-	
 	if direction.x < 0:
 		sprite.scale.x = -1
 	elif direction.x > 0:

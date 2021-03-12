@@ -1,14 +1,49 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Weapons/melee/crowbar/Crowbar.gd" type="Script" id=1]
 [ext_resource path="res://Hacks/HitBox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/sprites/weapons/crowbar.png" type="Texture" id=3]
 
-
-
 [sub_resource type="SegmentShape2D" id=1]
 a = Vector2( 1.5, -1 )
 b = Vector2( 1.5, -11 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "New Anim"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 2,
+"values": [  ]
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray(  ),
+"times": PoolRealArray(  )
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:test_var")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
 
 [node name="Crowbar" type="Sprite"]
 texture = ExtResource( 3 )
@@ -29,5 +64,6 @@ disabled = true
 one_way_collision_margin = 0.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+"anims/New Anim" = SubResource( 2 )
 
 [editable path="HitBox"]

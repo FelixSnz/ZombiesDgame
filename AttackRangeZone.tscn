@@ -10,12 +10,14 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnabledZone"]
+modulate = Color( 1, 1, 1, 0.286275 )
 
 [node name="DisabledZone" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DisabledZone"]
+modulate = Color( 1, 1, 1, 0.278431 )
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
