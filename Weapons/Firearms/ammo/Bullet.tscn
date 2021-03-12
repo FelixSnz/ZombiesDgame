@@ -18,7 +18,7 @@ extents = Vector2( 2, 1 )
 collision_layer = 64
 collision_mask = 16
 script = ExtResource( 2 )
-speed = 228.831
+speed = 324.969
 knockback = 37.789
 
 [node name="Sprite" type="Sprite" parent="."]

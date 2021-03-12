@@ -27,9 +27,9 @@ func shot_bullet():
 
 func create_instance(Obj):
 	var instance = Obj.instance()
+	instance.rotation = get_mouse_direction().angle()
 	var world = get_tree().current_scene
 	world.add_child(instance)
-	instance.rotation = get_mouse_direction().angle()
 	instance.global_position = $Nuzzle.global_position
 
 func get_mouse_direction():

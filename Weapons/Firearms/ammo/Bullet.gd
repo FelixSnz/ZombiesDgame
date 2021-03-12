@@ -10,6 +10,9 @@ export(int) var damage = 1
 
 var direction
 
+func _ready():
+	direction = Vector2(cos(rotation), sin(rotation))
+
 func create_impact(color:Color = Color("#ffda4d")):
 	var impactParticles = create_instance(ImpactParticles)
 	impactParticles.process_material.color = color
@@ -26,10 +29,6 @@ func create_instance(Obj):
 	instance.global_position = global_position
 	return instance
 
-func set_pointing_direction():
-	direction = Vector2(cos(rotation), sin(rotation))
-	return direction
-
 func _process(delta):
-	position += set_pointing_direction() * speed * delta
+	position += direction * speed * delta
 	pass
