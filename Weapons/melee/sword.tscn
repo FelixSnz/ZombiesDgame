@@ -9,7 +9,7 @@ extents = Vector2( 2.08796, 6.39419 )
 
 [sub_resource type="Animation" id=2]
 length = 0.5
-step = 0.05
+step = 0.025
 tracks/0/type = "value"
 tracks/0/path = NodePath("AttackAxis/HandlePosition/HitBox/CollisionShape2D:disabled")
 tracks/0/interp = 1
@@ -29,16 +29,16 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.25, 0.45 ),
+"times": PoolRealArray( 0.025, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
 "args": [ true ],
 "method": "behind"
 }, {
-"args": [ true ],
+"args": [ false ],
 "method": "behind"
 }, {
-"args": [ false ],
+"args": [ true ],
 "method": "behind"
 } ]
 }
@@ -61,10 +61,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.25, 0.3 ),
+"times": PoolRealArray( 0, 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ -32.1, -32.1, 64.3 ]
+"values": [ -32.0, -32.0, 64.0 ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -137,7 +137,7 @@ script = ExtResource( 3 )
 
 [node name="HandlePosition" type="Position2D" parent="AttackAxis"]
 position = Vector2( 0, -6.7 )
-rotation = -0.560251
+rotation = -0.558505
 
 [node name="Sprite" type="Sprite" parent="AttackAxis/HandlePosition"]
 position = Vector2( 0, 6.7 )
@@ -155,8 +155,10 @@ shape = SubResource( 1 )
 disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-playback_speed = 2.08
+playback_speed = 1.6
 anims/attack = SubResource( 2 )
 anims/up_attack = SubResource( 3 )
+
+[node name="Tween" type="Tween" parent="."]
 
 [editable path="AttackAxis/HandlePosition/HitBox"]

@@ -11,13 +11,13 @@ var velocity = Vector2.ZERO
 var direction = Vector2.RIGHT
 
 onready var stats = $Stats
-onready var playerDetectionZone = $PlayerDetectionZone
+onready var sprite = $Sprite
 onready var hurtBox = $HurtBox
 onready var sofCollision = $SoftCollision
-onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
-onready var wanderController = $WanderController
 onready var attackRangeZone = $AttackRangeZone
+onready var wanderController = $WanderController
+onready var playerDetectionZone = $PlayerDetectionZone
 
 enum {
 	IDLE,
@@ -102,7 +102,6 @@ func _on_HurtBox_area_entered(area):
 		area.create_impact()
 	hurtBox.start_invincivility(1)
 	$Blink.play("anim")
-	print(area.knockback)
 	stats.health -= area.damage
 	knockback = area.direction * area.knockback
 

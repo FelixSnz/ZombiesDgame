@@ -9,11 +9,12 @@ var init_degrees
 
 export(float) var test_var
 
+onready var tween = $Tween
+onready var attackAxis = $AttackAxis
 onready var animationPlayer = $AnimationPlayer
 onready var hitBox = $AttackAxis/HandlePosition/HitBox
 onready var handlePosition = $AttackAxis/HandlePosition
 onready var sprite = $AttackAxis/HandlePosition/Sprite
-onready var attackAxis = $AttackAxis
 
 enum {
 	POINTING,
@@ -23,23 +24,13 @@ enum {
 
 var state = POINTING
 
-func _ready():
-	#print(handPosition.name)
-	pass
-
 func _process(delta):
+#	if rotation_degrees >= 360 or rotation_degrees < 0:
+#		rotation = 0
 	hitBox.direction = pointing_dir
 	match state:
 		POINTING:
 			pointing_state()
-#			print(sprite.rotation_degrees)
-#			if sprite.rotation_degrees >= 250:
-#				sprite.rotation_degrees += 70 * delta
-#				if sprite.rotation_degrees > 320:
-#					behind(true)
-#					sprite.flip_h = false
-#				if sprite.rotation_degrees >= 360:
-#					sprite.rotation_degrees = 0
 		ATTACK:
 			attack_state()
 
@@ -50,23 +41,33 @@ func pointing_state():
 	update_rotation(angle)
 	
 	if Input.is_action_just_pressed("click") or Input.is_action_just_pressed("ui_accept"):
+		tween.stop_all()
 		state = ATTACK
 	if Input.is_action_just_released("click"):
 		pass
 
 func attack_state():
-	if attackAxis.rotation_degrees == 0:
+	if attackAxis.rotation_degrees == 0 or attackAxis.rotation_degrees == 360:
 		add_child(Slash.instance())
 		animationPlayer.play("attack")
 		yield(animationPlayer, "animation_finished")
-	elif attackAxis.rotation_degrees == 250:
+		reset_position()
+	elif attackAxis.rotation_degrees >= 250:
 		var slash = Slash.instance()
 		slash.flip_v = true
 		add_child(slash)
 		animationPlayer.play_backwards("attack")
 		yield(animationPlayer, "animation_finished")
+	print(rotation_degrees)
+		
 	
 	state = POINTING
+
+func reset_position():
+	tween.interpolate_property(attackAxis, "rotation_degrees", 250, 360, 1.0, Tween.TRANS_EXPO)
+	tween.interpolate_property(handlePosition, "rotation_degrees", 64, -32, 1.0, Tween.TRANS_EXPO)
+	tween.start()
+	pass
 
 func behind(boolean:bool):
 	get_parent().show_behind_parent = boolean
