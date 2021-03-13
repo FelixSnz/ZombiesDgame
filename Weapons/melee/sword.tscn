@@ -29,16 +29,13 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.025, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0.025, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [ true ],
 "method": "behind"
 }, {
 "args": [ false ],
-"method": "behind"
-}, {
-"args": [ true ],
 "method": "behind"
 } ]
 }
@@ -136,16 +133,16 @@ script = ExtResource( 3 )
 [node name="AttackAxis" type="Position2D" parent="."]
 
 [node name="HandlePosition" type="Position2D" parent="AttackAxis"]
-position = Vector2( 0, -6.7 )
+position = Vector2( 0, -8.196 )
 rotation = -0.558505
 
 [node name="Sprite" type="Sprite" parent="AttackAxis/HandlePosition"]
 position = Vector2( 0, 6.7 )
 texture = ExtResource( 1 )
-offset = Vector2( 0, -12.677 )
+offset = Vector2( 0, -12.99 )
 
 [node name="HitBox" parent="AttackAxis/HandlePosition" instance=ExtResource( 2 )]
-position = Vector2( 0.0936432, -8.2601 )
+position = Vector2( 0, -8.911 )
 collision_layer = 0
 collision_mask = 16
 knockback = 78.874

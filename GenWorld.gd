@@ -31,7 +31,7 @@ func generate_level():
 	var walker_pos = Vector2(RECT_WIDTH/2, RECT_WIDTH/2).ceil()
 	var walker = Walker.new(walker_pos, borders)
 	
-	maps = walker.walk(150)
+	maps = walker.walk(20)
 	
 	
 	individual_rooms = walker.extract_rooms(maps.rooms) #extracting individual rooms 

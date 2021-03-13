@@ -3,11 +3,6 @@ extends Node2D
 const Slash = preload("res://Effects & Particles/SlashEffect.tscn")
 
 var pointing_dir = Vector2.ZERO
-var dir = Vector2.ZERO
-var knockback_vector = Vector2.ZERO
-var init_degrees
-
-export(float) var test_var
 
 onready var tween = $Tween
 onready var attackAxis = $AttackAxis
@@ -25,9 +20,11 @@ enum {
 var state = POINTING
 
 func _process(delta):
-#	if rotation_degrees >= 360 or rotation_degrees < 0:
-#		rotation = 0
 	hitBox.direction = pointing_dir
+	
+#	if attackAxis.rotation_degrees > 359:
+#		behind(true)
+	
 	match state:
 		POINTING:
 			pointing_state()
@@ -35,9 +32,9 @@ func _process(delta):
 			attack_state()
 
 func pointing_state():
-	dir = get_local_mouse_position()
+	var local_mouse_position = get_local_mouse_position()
 	pointing_dir = (get_global_mouse_position() - global_position).normalized()
-	var angle = dir.angle() 
+	var angle = local_mouse_position.angle() 
 	update_rotation(angle)
 	
 	if Input.is_action_just_pressed("click") or Input.is_action_just_pressed("ui_accept"):
@@ -47,7 +44,7 @@ func pointing_state():
 		pass
 
 func attack_state():
-	if attackAxis.rotation_degrees == 0 or attackAxis.rotation_degrees == 360:
+	if attackAxis.rotation_degrees == 0 or attackAxis.rotation_degrees >= 350:
 		add_child(Slash.instance())
 		animationPlayer.play("attack")
 		yield(animationPlayer, "animation_finished")
@@ -64,9 +61,12 @@ func attack_state():
 	state = POINTING
 
 func reset_position():
-	tween.interpolate_property(attackAxis, "rotation_degrees", 250, 360, 1.0, Tween.TRANS_EXPO)
-	tween.interpolate_property(handlePosition, "rotation_degrees", 64, -32, 1.0, Tween.TRANS_EXPO)
+	tween.interpolate_property(attackAxis, "rotation_degrees", 250, 360, 0.8, Tween.TRANS_EXPO)
+	tween.interpolate_property(handlePosition, "rotation_degrees", 64, -32, 0.8, Tween.TRANS_EXPO)
+	
 	tween.start()
+	yield(tween, "tween_completed")
+	behind(true)
 	pass
 
 func behind(boolean:bool):
