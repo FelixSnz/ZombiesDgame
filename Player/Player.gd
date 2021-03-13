@@ -45,8 +45,12 @@ func grab_weapon():
 		var found = false
 		for child in weapon.get_children():
 			print(child.name)
+			if child.name == "HandlePosition":
+				var rightHand = RightHand.instance()
+				child.add_child(rightHand)
+				break
 			for little_child in child.get_children():
-				if little_child.name == "HandPosition":
+				if little_child.name == "HandlePosition":
 					var rightHand = RightHand.instance()
 					little_child.add_child(rightHand)
 					found = true

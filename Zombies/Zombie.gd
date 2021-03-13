@@ -102,6 +102,7 @@ func _on_HurtBox_area_entered(area):
 		area.create_impact()
 	hurtBox.start_invincivility(1)
 	$Blink.play("anim")
+	print(area.knockback)
 	stats.health -= area.damage
 	knockback = area.direction * area.knockback
 

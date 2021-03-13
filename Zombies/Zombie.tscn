@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Hacks/HurtBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Hacks/SoftCollision.tscn" type="PackedScene" id=2]
@@ -133,21 +133,6 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=9]
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ Color( 1, 1, 1, 1 ), Color( 100, 100, 100, 1 ), Color( 1, 1, 1, 1 ), Color( 100, 100, 100, 1 ), Color( 1, 1, 1, 1 ) ]
-}
-
-[sub_resource type="Animation" id=10]
 resource_name = "anim"
 length = 0.5
 tracks/0/type = "value"
@@ -163,10 +148,10 @@ tracks/0/keys = {
 "values": [ true, false, true, false ]
 }
 
-[sub_resource type="CircleShape2D" id=11]
+[sub_resource type="CircleShape2D" id=10]
 radius = 64.387
 
-[sub_resource type="CircleShape2D" id=12]
+[sub_resource type="CircleShape2D" id=11]
 radius = 36.6621
 
 [node name="Zombie" type="KinematicBody2D" groups=[
@@ -234,18 +219,17 @@ shape = SubResource( 5 )
 anims/Idle = SubResource( 6 )
 anims/Jump = SubResource( 7 )
 anims/Run = SubResource( 8 )
-anims/white_flash = SubResource( 9 )
 
 [node name="Blink" type="AnimationPlayer" parent="."]
-anims/anim = SubResource( 10 )
+anims/anim = SubResource( 9 )
 
 [node name="AttackRangeZone" parent="." instance=ExtResource( 13 )]
 
 [node name="CollisionShape2D" parent="AttackRangeZone/EnabledZone" index="0"]
-shape = SubResource( 11 )
+shape = SubResource( 10 )
 
 [node name="CollisionShape2D" parent="AttackRangeZone/DisabledZone" index="0"]
-shape = SubResource( 12 )
+shape = SubResource( 11 )
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="body_entered" from="HurtBox" to="." method="_on_HurtBox_body_entered"]

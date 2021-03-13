@@ -10,9 +10,10 @@ var init_degrees
 export(float) var test_var
 
 onready var animationPlayer = $AnimationPlayer
-onready var handPosition = $Sprite/HandPosition
-onready var hitBox = $Sprite/HitBox
-onready var sprite = $Sprite
+onready var hitBox = $AttackAxis/HandlePosition/HitBox
+onready var handlePosition = $AttackAxis/HandlePosition
+onready var sprite = $AttackAxis/HandlePosition/Sprite
+onready var attackAxis = $AttackAxis
 
 enum {
 	POINTING,
@@ -45,7 +46,7 @@ func _process(delta):
 func pointing_state():
 	dir = get_local_mouse_position()
 	pointing_dir = (get_global_mouse_position() - global_position).normalized()
-	var angle = dir.angle() - (PI/4)
+	var angle = dir.angle() 
 	update_rotation(angle)
 	
 	if Input.is_action_just_pressed("click") or Input.is_action_just_pressed("ui_accept"):
@@ -53,18 +54,19 @@ func pointing_state():
 	if Input.is_action_just_released("click"):
 		pass
 
-
 func attack_state():
-	if sprite.rotation_degrees == 0:
+	if attackAxis.rotation_degrees == 0:
 		add_child(Slash.instance())
-		animationPlayer.play("down_attack")
-	elif sprite.rotation_degrees >= 250:
+		animationPlayer.play("attack")
+		yield(animationPlayer, "animation_finished")
+	elif attackAxis.rotation_degrees == 250:
 		var slash = Slash.instance()
 		slash.flip_v = true
 		add_child(slash)
-		animationPlayer.play("up_attack")
-		
-
+		animationPlayer.play_backwards("attack")
+		yield(animationPlayer, "animation_finished")
+	
+	state = POINTING
 
 func behind(boolean:bool):
 	get_parent().show_behind_parent = boolean
@@ -76,6 +78,3 @@ func update_rotation(angle_to_add):
 		rotation = 0
 	else:
 		rotation = new_rotation
-
-func attack_finished():
-	state = POINTING
