@@ -18,7 +18,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( -0.01, 0.2 ),
+"times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0.0, 250.0 ]
@@ -42,9 +42,15 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.175 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.125, 0.175 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
+"args": [ true ],
+"method": "behind"
+}, {
+"args": [ false ],
+"method": "behind"
+}, {
 "args": [  ],
 "method": "attack_finished"
 } ]
@@ -97,9 +103,15 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.175 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.125, 0.175 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
+"args": [ false ],
+"method": "behind"
+}, {
+"args": [ true ],
+"method": "behind"
+}, {
 "args": [  ],
 "method": "attack_finished"
 } ]
@@ -117,7 +129,10 @@ tracks/3/keys = {
 "values": [ true, true, false ]
 }
 
-[node name="Sword" type="Node2D"]
+[node name="Sword" type="Node2D" groups=[
+"Melee",
+"Weapon",
+]]
 script = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -132,7 +147,9 @@ knockback = 85.857
 
 [node name="CollisionShape2D" parent="Sprite/HitBox" index="0"]
 shape = SubResource( 1 )
-disabled = true
+
+[node name="HandPosition" type="Position2D" parent="Sprite"]
+position = Vector2( 0, -6.7 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/down_attack = SubResource( 2 )

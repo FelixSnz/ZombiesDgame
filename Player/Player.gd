@@ -4,12 +4,18 @@ var velocity = Vector2.ZERO
 export(float, 1, 500) var MAX_SPEED
 export(float, 1, 500) var ACCELERATION
 export(float, 1, 500) var FRICTION
+export(PackedScene) var INITIAL_WEAPON
 
 onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
 onready var hurtBox = $HurtBox
 onready var softCollision = $SoftCollision
+onready var weaponPos = $Sprite/WeaponPos
 onready var stats = PlayerStats
+
+const RightHand = preload("res://Player/RightHand.tscn")
+
+var weapon
 
 enum {
 	MOVE,
@@ -20,7 +26,35 @@ var direction
 
 func _ready():
 	stats.connect("no_health", self, "queue_free")
+	if INITIAL_WEAPON != null:
+		if weaponPos.get_child_count() > 0:
+			weaponPos.remove_child(weaponPos.get_child(0))
+		weapon = INITIAL_WEAPON.instance()
+		weaponPos.add_child(weapon)
+		grab_weapon()
 
+func running_with_weapon():
+	if weapon.is_in_group("Melee"):
+		weapon.reset_rotation()
+
+func has_weapon():
+	return weapon != null
+
+func grab_weapon():
+	if has_weapon():
+		var found = false
+		for child in weapon.get_children():
+			print(child.name)
+			for little_child in child.get_children():
+				if little_child.name == "HandPosition":
+					var rightHand = RightHand.instance()
+					little_child.add_child(rightHand)
+					found = true
+					break
+			if found:
+				break
+			
+	
 func _physics_process(delta):
 	direction = (get_global_mouse_position() - global_position).normalized()
 	
@@ -64,4 +98,4 @@ func _process(_delta):
 
 func _on_HurtBox_area_entered(_area):
 	hurtBox.start_invincivility(1)
-	$AnimationPlayer2.play("inv")
+	$Blink.play("inv")
