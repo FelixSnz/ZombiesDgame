@@ -33,7 +33,7 @@ _global_script_class_icons={
 [application]
 
 config/name="RobotGame"
-run/main_scene="res://World/World.tscn"
+run/main_scene="res://GenWorld.tscn"
 run/low_processor_mode=true
 config/icon="res://icon.png"
 

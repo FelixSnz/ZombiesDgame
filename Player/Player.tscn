@@ -77,7 +77,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 2, 3, 2, 4 ]
+"values": [ 3, 2, 4, 2 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite/WeaponPos:position")
@@ -182,17 +182,18 @@ material = ExtResource( 6 )
 texture = ExtResource( 7 )
 offset = Vector2( 0, -7 )
 hframes = 5
+frame = 3
 
 [node name="LeftHand" type="Sprite" parent="Sprite"]
 use_parent_material = true
-position = Vector2( -6.5, -2.5 )
+position = Vector2( -6, -4 )
 texture = ExtResource( 10 )
 flip_h = true
 
 [node name="WeaponPos" type="Position2D" parent="Sprite"]
 show_behind_parent = true
 use_parent_material = true
-position = Vector2( 3.775, -2.687 )
+position = Vector2( 5, -2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
