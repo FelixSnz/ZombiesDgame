@@ -22,12 +22,12 @@ tracks/0/keys = {
 [node name="Weapon" type="Sprite"]
 z_as_relative = false
 texture = ExtResource( 1 )
-offset = Vector2( 1.5, -1 )
+offset = Vector2( 2.004, -0.584 )
 script = ExtResource( 2 )
 
 [node name="Nuzzle" type="Position2D" parent="."]
 show_behind_parent = true
-position = Vector2( 5, -2 )
+position = Vector2( 4.5, -1.5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/knockback = SubResource( 1 )

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://assets/slash_effect2.png" type="Texture" id=1]
+[ext_resource path="res://assets/slash3.png" type="Texture" id=1]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Default"
@@ -36,8 +36,9 @@ tracks/1/keys = {
 [node name="Sprite" type="Sprite"]
 modulate = Color( 1, 0.690196, 0.690196, 1 )
 texture = ExtResource( 1 )
-offset = Vector2( 6.017, -2.225 )
+offset = Vector2( -2.506, 1.277 )
 hframes = 3
+frame = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Default"

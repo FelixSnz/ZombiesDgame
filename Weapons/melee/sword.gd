@@ -65,12 +65,13 @@ func flip(boolean):
 		sprite.flip_h = boolean
 
 func reset_position():
-	tween.interpolate_property(attackAxis, "rotation_degrees", 250, 360, 0.8, Tween.TRANS_EXPO)
-	tween.interpolate_property(sprite, "rotation_degrees", 64, -32, 0.8, Tween.TRANS_EXPO)
-	tween.start()
-	yield(tween, "tween_completed")
-	behind(true)
-	flip(false)
+#	tween.interpolate_property(attackAxis, "rotation_degrees", 250, 360, 0.8, Tween.TRANS_EXPO)
+#	tween.interpolate_property(sprite, "rotation_degrees", 64, -32, 0.8, Tween.TRANS_EXPO)
+#	tween.start()
+#	yield(tween, "tween_completed")
+#	behind(true)
+#	flip(false)
+	pass
 
 func slash(boolean):
 	var slash = Slash.instance()
@@ -81,16 +82,16 @@ func slash(boolean):
 	else:
 		if not boolean:
 			slash.flip_v = true
-			add_slash(slash, 180)
+			add_slash(slash, 180, 45)
 
-func add_slash(slash, initial_degrees):
+func add_slash(slash, initial_degrees, extra:int = 0):
 	var world = get_tree().current_scene
 	if slash.scale.x == -1:
 		slash.rotation_degrees = get_inverse_degrees(rotation_degrees) + initial_degrees
 		slash.global_position = global_position
 		world.add_child(slash)
 	else:
-		slash.rotation_degrees = rotation_degrees
+		slash.rotation_degrees = rotation_degrees + extra
 		slash.global_position = global_position
 		world.add_child(slash)
 

@@ -70,16 +70,17 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.15, 0.25 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.15, 0.25, 0.475 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ -45.0, -45.0, 45.0 ]
+"values": [ -45.0, -45.0, 45.0, 0.0 ]
 }
 
 [node name="Sword" type="Node2D" groups=[
 "Melee",
 "Weapon",
 ]]
+z_index = 5
 script = ExtResource( 3 )
 
 [node name="AttackAxis" type="Position2D" parent="."]
@@ -88,7 +89,7 @@ script = ExtResource( 3 )
 position = Vector2( 0, -8 )
 rotation = -0.785398
 texture = ExtResource( 1 )
-offset = Vector2( 0.045, -5.971 )
+offset = Vector2( 0, -6 )
 
 [node name="HitBox" parent="AttackAxis/Sprite" instance=ExtResource( 2 )]
 position = Vector2( 0, -8.1 )

@@ -6,6 +6,9 @@ export(float, 1, 500) var ACCELERATION
 export(float, 1, 500) var FRICTION
 export(PackedScene) var INITIAL_WEAPON
 
+const Gun = preload("res://Weapons/Weapon.tscn")
+const Crowbar = preload("res://Weapons/melee/sword.tscn")
+
 onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
 onready var hurtBox = $HurtBox
@@ -25,6 +28,7 @@ var state = MOVE
 var direction
 
 func _ready():
+	
 	stats.connect("no_health", self, "queue_free")
 	if INITIAL_WEAPON != null:
 		if weaponPos.get_child_count() > 0:
@@ -42,6 +46,9 @@ func has_weapon():
 
 func grab_weapon():
 	if has_weapon():
+		if weapon is Sprite:
+			weapon.add_child(RightHand.instance())
+			return
 		var found = false
 		for child in weapon.get_children():
 			print(child.name)
@@ -69,6 +76,22 @@ func _physics_process(delta):
 	if softCollision.is_colliding():
 		velocity += softCollision.get_push_vector() * delta * 600
 		move()
+	
+
+func _input(event):
+	if event is InputEventKey:
+		if event.scancode == KEY_C and event.is_pressed():
+			if weapon.name == "Sword":
+				print("removing crowbar")
+				weaponPos.remove_child(weaponPos.get_child(0))
+				weapon = Gun.instance()
+				weaponPos.add_child(weapon)
+			elif weapon.name == "Weapon":
+				print("removing gun")
+				weaponPos.remove_child(weaponPos.get_child(0))
+				weapon = Crowbar.instance()
+				weaponPos.add_child(weapon)
+			grab_weapon()
 
 func move_state(delta):
 	var input_vec = Vector2.ZERO
@@ -92,10 +115,12 @@ func move():
 	velocity = move_and_slide(velocity)
 
 func update_facing():
+	print(sprite.scale)
 	if direction.x < 0:
 		sprite.scale.x = -1
 	elif direction.x > 0:
 		sprite.scale.x = 1
+
 
 func _process(_delta):
 	$Label.text = str(position /28)

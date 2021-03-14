@@ -66,6 +66,7 @@ func generate_level():
 
 	generate_zombies(individual_rooms, .15)
 	generate_entities(ToxicBarrel, individual_rooms, .08)
+	generate_entities(WoodBarrel, individual_rooms, .02)
 
 	#loop for placing decoration tiles
 	for room in individual_rooms:
