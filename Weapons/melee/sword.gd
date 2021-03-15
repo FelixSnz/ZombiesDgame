@@ -5,15 +5,17 @@ const Slash = preload("res://Effects & Particles/SlashEffect.tscn")
 
 
 onready var attackAxis = $AttackAxis
-onready var animationPlayer = $AnimationPlayer
 onready var hitBox = $AttackAxis/Sprite/HitBox
 var just_attacked = false
 
 func _ready():
 	sprite = $AttackAxis/Sprite
 	tween = $Tween
+	animationPlayer = $AnimationPlayer
 	
 func _process(_delta):
+#	print(state)
+#	print(tween.is_active())
 	hitBox.direction = pointing_direction
 
 
@@ -36,15 +38,19 @@ func attack_state():
 		yield(animationPlayer, "animation_finished")
 		just_attacked = true
 		can_attack = true
-		reset_position()
+#		reset_position()
 
 
 
 func reset_position():
-	tween.interpolate_property(attackAxis, "rotation_degrees", 250, 360, 0.8, Tween.TRANS_EXPO)
-	tween.interpolate_property(sprite, "rotation_degrees", 64, -32, 0.8, Tween.TRANS_EXPO)
+	print("reseting crowbar pos")
+	tween.interpolate_property(attackAxis, "rotation_degrees", 180, 360, 0.8, Tween.TRANS_EXPO)
+	tween.interpolate_property(sprite, "rotation_degrees", 45, -45, 0.8, Tween.TRANS_EXPO)
 	tween.start()
+#	print("tween started")
 	yield(tween, "tween_completed")
+#	print("tween ended")
+	tween.stop_all()
 	just_attacked = false
 	behind(true)
 	flip(false)
@@ -81,3 +87,9 @@ func flip(boolean):
 func behind(boolean:bool):
 	get_parent().show_behind_parent = boolean
 	show_behind_parent = boolean
+
+
+func _on_Tween_tween_started(object, key):
+	pass
+#	print(object.name)
+#	print("on: ", key)

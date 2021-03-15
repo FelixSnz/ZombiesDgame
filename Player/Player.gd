@@ -70,11 +70,9 @@ func grab_weapon():
 	
 func _physics_process(delta):
 	direction = (get_global_mouse_position() - global_position).normalized()
-	
 	match state:
 		MOVE:
 			move_state(delta)
-	
 	if softCollision.is_colliding():
 		velocity += softCollision.get_push_vector() * delta * 600
 		move()
@@ -117,12 +115,8 @@ func move():
 func update_facing():
 	if direction.x < 0:
 		sprite.scale.x = -1
-#		if not twen.is_active() and not weaponPos.get_child(0).position == Vector2(-6, -2):
-#			move_hand(Vector2(-6, -2))
 	elif direction.x > 0:
 		sprite.scale.x = 1
-#		if not twen.is_active() and not weaponPos.get_child(0).position == Vector2(0, -2):
-#			move_hand(Vector2(0, -2))
 
 
 func _process(_delta):

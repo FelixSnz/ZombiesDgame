@@ -61,7 +61,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.475 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0.0, 250.0 ]
+"values": [ 0.0, 180.0 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("AttackAxis/Sprite:rotation_degrees")
@@ -70,10 +70,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.15, 0.25, 0.475 ),
+"times": PoolRealArray( 0, 0.175, 0.325, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ -45.0, -45.0, 45.0, 0.0 ]
+"values": [ -45.0, -35.0, 35.0, 45.0 ]
 }
 
 [node name="Sword" type="Node2D" groups=[
@@ -107,5 +107,6 @@ playback_speed = 1.7
 anims/attack = SubResource( 2 )
 
 [node name="Tween" type="Tween" parent="."]
+[connection signal="tween_started" from="Tween" to="." method="_on_Tween_tween_started"]
 
 [editable path="AttackAxis/Sprite/HitBox"]
