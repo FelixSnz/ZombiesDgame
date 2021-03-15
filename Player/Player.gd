@@ -6,14 +6,16 @@ export(float, 1, 500) var ACCELERATION
 export(float, 1, 500) var FRICTION
 export(PackedScene) var INITIAL_WEAPON
 
-const Gun = preload("res://Weapons/Weapon.tscn")
+const Gun = preload("res://Weapons/Firearms/gun/Gun.tscn")
 const Crowbar = preload("res://Weapons/melee/sword.tscn")
 
 onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
+onready var rightHand = $Sprite/RightHand
 onready var hurtBox = $HurtBox
 onready var softCollision = $SoftCollision
-onready var weaponPos = $Sprite/WeaponPos
+onready var weaponPos = $WeaponPos
+onready var twen = $Tween
 onready var stats = PlayerStats
 
 const RightHand = preload("res://Player/RightHand.tscn")
@@ -28,6 +30,7 @@ var state = MOVE
 var direction
 
 func _ready():
+	sprite.scale = Vector2.ONE
 	
 	stats.connect("no_health", self, "queue_free")
 	if INITIAL_WEAPON != null:
@@ -51,15 +54,14 @@ func grab_weapon():
 			return
 		var found = false
 		for child in weapon.get_children():
-			print(child.name)
 			if child.name == "Sprite":
-				var rightHand = RightHand.instance()
-				child.add_child(rightHand)
+				var rightHand_ = RightHand.instance()
+				child.add_child(rightHand_)
 				break
 			for little_child in child.get_children():
 				if little_child.name == "Sprite":
-					var rightHand = RightHand.instance()
-					little_child.add_child(rightHand)
+					var rightHand_ = RightHand.instance()
+					little_child.add_child(rightHand_)
 					found = true
 					break
 			if found:
@@ -82,12 +84,10 @@ func _input(event):
 	if event is InputEventKey:
 		if event.scancode == KEY_C and event.is_pressed():
 			if weapon.name == "Sword":
-				print("removing crowbar")
 				weaponPos.remove_child(weaponPos.get_child(0))
 				weapon = Gun.instance()
 				weaponPos.add_child(weapon)
-			elif weapon.name == "Weapon":
-				print("removing gun")
+			elif weapon.name == "Gun":
 				weaponPos.remove_child(weaponPos.get_child(0))
 				weapon = Crowbar.instance()
 				weaponPos.add_child(weapon)
@@ -115,11 +115,14 @@ func move():
 	velocity = move_and_slide(velocity)
 
 func update_facing():
-	print(sprite.scale)
 	if direction.x < 0:
 		sprite.scale.x = -1
+#		if not twen.is_active() and not weaponPos.get_child(0).position == Vector2(-6, -2):
+#			move_hand(Vector2(-6, -2))
 	elif direction.x > 0:
 		sprite.scale.x = 1
+#		if not twen.is_active() and not weaponPos.get_child(0).position == Vector2(0, -2):
+#			move_hand(Vector2(0, -2))
 
 
 func _process(_delta):

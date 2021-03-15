@@ -23,11 +23,17 @@ _global_script_classes=[ {
 "class": "Walker",
 "language": "GDScript",
 "path": "res://walker.gd"
+}, {
+"base": "Node2D",
+"class": "Weapon",
+"language": "GDScript",
+"path": "res://Weapon.gd"
 } ]
 _global_script_class_icons={
 "Bullet": "",
 "MapTools": "",
-"Walker": ""
+"Walker": "",
+"Weapon": ""
 }
 
 [application]
