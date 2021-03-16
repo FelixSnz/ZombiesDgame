@@ -13,7 +13,7 @@ var animationPlayer
 enum {
 	POINTING,
 	ATTACK,
-	RESET
+	RESET,
 }
 
 var state = POINTING

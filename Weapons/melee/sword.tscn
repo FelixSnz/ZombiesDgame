@@ -1,17 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/sprites/weapons/crowbar.png" type="Texture" id=1]
 [ext_resource path="res://Hacks/HitBox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Weapons/melee/Melee.gd" type="Script" id=3]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 2.50003, 7.03163 )
-
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 length = 0.5
 step = 0.025
 tracks/0/type = "value"
-tracks/0/path = NodePath("AttackAxis/Sprite/HitBox/CollisionShape2D:disabled")
+tracks/0/path = NodePath("StrikeAxis/Sprite/HitBox/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -52,7 +49,7 @@ tracks/1/keys = {
 } ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("AttackAxis:rotation_degrees")
+tracks/2/path = NodePath("StrikeAxis:rotation_degrees")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -64,7 +61,7 @@ tracks/2/keys = {
 "values": [ 0.0, 180.0 ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("AttackAxis/Sprite:rotation_degrees")
+tracks/3/path = NodePath("StrikeAxis/Sprite:rotation_degrees")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -83,29 +80,22 @@ tracks/3/keys = {
 z_index = 5
 script = ExtResource( 3 )
 
-[node name="AttackAxis" type="Position2D" parent="."]
+[node name="StrikeAxis" type="Position2D" parent="."]
 
-[node name="Sprite" type="Sprite" parent="AttackAxis"]
+[node name="Sprite" type="Sprite" parent="StrikeAxis"]
 position = Vector2( 0, -4 )
 rotation = -0.785398
 texture = ExtResource( 1 )
 offset = Vector2( 0, -6 )
 
-[node name="HitBox" parent="AttackAxis/Sprite" instance=ExtResource( 2 )]
+[node name="HitBox" parent="StrikeAxis/Sprite" instance=ExtResource( 2 )]
 position = Vector2( 0, -8.1 )
 collision_layer = 0
 collision_mask = 16
 knockback = 78.874
 
-[node name="CollisionShape2D" parent="AttackAxis/Sprite/HitBox" index="0"]
-position = Vector2( 0.0174799, 0.160671 )
-shape = SubResource( 1 )
-disabled = true
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 1.7
-anims/attack = SubResource( 2 )
+anims/attack = SubResource( 1 )
 
 [node name="Tween" type="Tween" parent="."]
-
-[editable path="AttackAxis/Sprite/HitBox"]

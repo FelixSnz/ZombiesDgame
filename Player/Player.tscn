@@ -136,6 +136,7 @@ FRICTION = 239.055
 INITIAL_WEAPON = ExtResource( 1 )
 
 [node name="Shadow" type="Sprite" parent="."]
+show_behind_parent = true
 position = Vector2( 0, 0.167043 )
 texture = ExtResource( 3 )
 
@@ -157,7 +158,6 @@ show_behind_parent = true
 position = Vector2( 5, -2.5 )
 
 [node name="WeaponPos" type="Position2D" parent="."]
-show_behind_parent = true
 use_parent_material = true
 position = Vector2( 3, -2.5 )
 

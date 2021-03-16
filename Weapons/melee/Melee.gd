@@ -2,14 +2,14 @@ extends Weapon
 
 const Slash = preload("res://Effects & Particles/SlashEffect.tscn")
 
-onready var strikeAxis = $AttackAxis
-onready var hitBox = $AttackAxis/Sprite/HitBox
+onready var strikeAxis = $StrikeAxis
+onready var hitBox = $StrikeAxis/Sprite/HitBox
 var extra_rotation = 0
 var just_attacked
 
 
 func _ready():
-	sprite = $AttackAxis/Sprite
+	sprite = $StrikeAxis/Sprite
 	tween = $Tween
 	animationPlayer = $AnimationPlayer
 
@@ -17,6 +17,7 @@ func _ready():
 func _pointing_state():
 	hitBox.direction = pointing_direction
 	rotation_degrees = mouse_angle - extra_rotation
+#	print(pointing_direction)
 	
 	if not tween.is_active():
 		if facing_right:
@@ -39,20 +40,44 @@ func _pointing_state():
 #			sprite.flip_v = true
 
 func attack_state():
+		
 	tween.stop_all()
-	if just_attacked:
-		animationPlayer.play_backwards("attack")
-		state = POINTING
-		yield(animationPlayer, "animation_finished")
-		just_attacked = false
-		can_attack = true
-
+	if facing_right:
+		if just_attacked:
+			animationPlayer.play_backwards("attack")
+			state = POINTING
+			yield(animationPlayer, "animation_finished")
+			just_attacked = not just_attacked
+			can_attack = true
+			print("attacking up")
+				
+		else:
+			animationPlayer.play("attack")
+			state = POINTING
+			yield(animationPlayer, "animation_finished")
+			just_attacked = not just_attacked
+			can_attack = true
+			print("attacking down")
+			if facing_right:
+				reset_rotation(360, -45, false)
 	else:
-		animationPlayer.play("attack")
-		state = POINTING
-		yield(animationPlayer, "animation_finished")
-		just_attacked = true
-		can_attack = true
+		if not just_attacked:
+			animationPlayer.play_backwards("attack")
+			state = POINTING
+			yield(animationPlayer, "animation_finished")
+			just_attacked = not just_attacked
+			can_attack = true
+			print("attacking up")
+			reset_rotation(-180, 45, true)
+				
+		else:
+			animationPlayer.play("attack")
+			state = POINTING
+			yield(animationPlayer, "animation_finished")
+			just_attacked = not just_attacked
+			can_attack = true
+			print("attacking down")
+#			reset_rotation(180, 45, false)
 
 
 func reset_left():
@@ -64,21 +89,25 @@ func reset_left():
 	yield(tween, "tween_completed")
 #	print("tween ended")
 	tween.stop_all()
-	just_attacked = false
+	just_attacked = not just_attacked
 	behind(true)
 	flip(true)
 	pass
 	
 
-func reset_right(final1, final2, side:bool, vec:Vector2 = position):
+func reset_rotation(final1, final2, side:bool, \
+vec:Vector2 = position, duration:float = 0.8):
+	
+	if tween.is_active():
+		tween.stop_all()
 	tween.interpolate_property(strikeAxis, "rotation_degrees", \
-	strikeAxis.rotation_degrees, final1, 0.8, Tween.TRANS_EXPO)
+	strikeAxis.rotation_degrees, final1, duration, Tween.TRANS_EXPO)
 	
 	tween.interpolate_property(sprite, "rotation_degrees", \
-	sprite.rotation_degrees, final2, 0.8, Tween.TRANS_EXPO)
+	sprite.rotation_degrees, final2, duration, Tween.TRANS_EXPO)
 	
 	tween.interpolate_property(self, "position", \
-	position, vec, 0.8, Tween.TRANS_EXPO)
+	position, vec, duration, Tween.TRANS_EXPO)
 	
 	tween.start()
 	yield(tween, "tween_completed")
@@ -89,9 +118,13 @@ func reset_right(final1, final2, side:bool, vec:Vector2 = position):
 
 func facing_side_changued(side):
 	if side == -1:
-		reset_right(180, 45, true, Vector2(-6, -2))
+		just_attacked = not just_attacked
+		reset_rotation(180, 45, true, Vector2(-6, -2))
 	elif side == 1:
-		reset_right(360, -45, false, Vector2(0, -2))
+		if pointing_direction.y > 0:
+			reset_rotation(0, -45, false, Vector2(0, -2))
+		else:
+			reset_rotation(360, -45, false, Vector2(0, -2))
 
 func slash(boolean):
 	var slash = Slash.instance()
@@ -124,3 +157,4 @@ func flip(boolean:bool):
 func behind(boolean:bool):
 	get_parent().show_behind_parent = boolean
 	show_behind_parent = boolean
+
