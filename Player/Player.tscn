@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=2]
 
-[ext_resource path="res://Weapons/melee/sword.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Weapons/melee/crowbar/Crowbar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
 [ext_resource path="res://assets/sprites/shadows/SmallShadow.png" type="Texture" id=3]
 [ext_resource path="res://Hacks/HurtBox.tscn" type="PackedScene" id=4]
@@ -121,6 +121,30 @@ tracks/0/keys = {
 "update": 1,
 "values": [ false, true, false, true, false ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite/LeftHand:use_parent_material")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.02, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite/RightHand:use_parent_material")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.02, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false ]
+}
 
 [node name="Player" type="KinematicBody2D" groups=[
 "Player",
@@ -148,6 +172,7 @@ hframes = 5
 frame = 1
 
 [node name="LeftHand" type="Sprite" parent="Sprite"]
+material = ExtResource( 6 )
 position = Vector2( -6, -2.5 )
 texture = ExtResource( 10 )
 flip_h = true
@@ -155,6 +180,7 @@ flip_h = true
 [node name="RightHand" parent="Sprite" instance=ExtResource( 9 )]
 visible = false
 show_behind_parent = true
+material = ExtResource( 6 )
 position = Vector2( 5, -2.5 )
 
 [node name="WeaponPos" type="Position2D" parent="."]

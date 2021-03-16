@@ -21,4 +21,4 @@ offset = Vector2( 3.5, 0 )
 [node name="Nuzzle" type="Position2D" parent="Sprite"]
 position = Vector2( 4.5, -1.5 )
 
-[node name="Tween" type="Tween" parent="."]
+[node name="TweenGun" type="Tween" parent="."]

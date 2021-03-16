@@ -29,13 +29,8 @@ func _pointing_state():
 			global_position = get_parent().get_parent().rightHand.global_position + Vector2(2, -2)
 
 func move_hand(final_pos):
-	if is_in_group("Melee"):
-		if animationPlayer.is_playing():
-			animationPlayer.stop()
-			can_attack = true
 	if tween.is_active():
 		tween.stop_all()
-	print("tween started")
 	tween.interpolate_property(self, "position", \
 	position, final_pos, .3, Tween.TRANS_CUBIC)
 	tween.start()

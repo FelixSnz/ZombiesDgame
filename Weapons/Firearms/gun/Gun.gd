@@ -3,9 +3,10 @@ extends FireArm
 onready var nuzzle = $Sprite/Nuzzle
 
 func _ready():
+	get_parent().show_behind_parent = false
 	init_nuzzle_position = nuzzle.position
 	sprite = $Sprite
-	tween =  $Tween
+	tween =  $TweenGun
 
 func attack_state():
 	if not facing_right:
@@ -34,3 +35,7 @@ func create_instance(Obj):
 	var world = get_tree().current_scene
 	world.add_child(instance)
 	instance.global_position = nuzzle.global_position
+
+
+func facing_side_changued(_side):
+	pass

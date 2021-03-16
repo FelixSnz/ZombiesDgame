@@ -18,10 +18,6 @@ enum {
 
 var state = POINTING
 
-func _ready():
-	if $Tween != null:
-		tween = $Tween
-
 func _process(_delta):
 	var parent_scale_x = get_parent().get_parent().get_node("Sprite").scale.x
 	if parent_scale_x == -1:
