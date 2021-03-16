@@ -19,7 +19,7 @@ onready var twen = $Tween
 onready var stats = PlayerStats
 
 const RightHand = preload("res://Player/RightHand.tscn")
-
+signal face_side_changued(side)
 var weapon
 
 enum {
@@ -27,6 +27,7 @@ enum {
 	INV
 }
 var state = MOVE
+var can_toggle = true
 var direction
 
 func _ready():
@@ -39,6 +40,7 @@ func _ready():
 		weapon = INITIAL_WEAPON.instance()
 		weaponPos.add_child(weapon)
 		grab_weapon()
+	connect("face_side_changued", weapon, "facing_side_changued")
 
 func running_with_weapon():
 	if weapon.is_in_group("Melee"):
@@ -113,9 +115,15 @@ func move():
 	velocity = move_and_slide(velocity)
 
 func update_facing():
-	if direction.x < 0:
+	if direction.x < 0 and can_toggle:
+		print("facing left")
+		emit_signal("face_side_changued", -1)
+		can_toggle = not can_toggle
 		sprite.scale.x = -1
-	elif direction.x > 0:
+	elif direction.x > 0 and not can_toggle:
+		print("facing right")
+		emit_signal("face_side_changued", 1)
+		can_toggle = not can_toggle
 		sprite.scale.x = 1
 
 

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/sprites/weapons/crowbar.png" type="Texture" id=1]
 [ext_resource path="res://Hacks/HitBox.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Weapons/melee/sword.gd" type="Script" id=3]
+[ext_resource path="res://Weapons/melee/Melee.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2.50003, 7.03163 )
@@ -107,6 +107,5 @@ playback_speed = 1.7
 anims/attack = SubResource( 2 )
 
 [node name="Tween" type="Tween" parent="."]
-[connection signal="tween_started" from="Tween" to="." method="_on_Tween_tween_started"]
 
 [editable path="AttackAxis/Sprite/HitBox"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=2]
 
-[ext_resource path="res://Weapons/Firearms/gun/Gun.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Weapons/melee/sword.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
 [ext_resource path="res://assets/sprites/shadows/SmallShadow.png" type="Texture" id=3]
 [ext_resource path="res://Hacks/HurtBox.tscn" type="PackedScene" id=4]
@@ -10,7 +10,6 @@
 [ext_resource path="res://Fps.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Player/RightHand.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/sprites/player/right_hand.png" type="Texture" id=10]
-
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 1.99999
@@ -107,7 +106,7 @@ tracks/2/keys = {
 "values": [ Vector2( 5, -4.5 ), Vector2( 3, -3 ), Vector2( 2, -3 ), Vector2( 3, -3 ) ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 length = 0.5
 step = 0.01
 tracks/0/type = "value"
@@ -161,7 +160,6 @@ position = Vector2( 5, -2.5 )
 show_behind_parent = true
 use_parent_material = true
 position = Vector2( 3, -2.5 )
-z_index = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -192,7 +190,7 @@ anims/Idle = SubResource( 4 )
 anims/Run = SubResource( 5 )
 
 [node name="Blink" type="AnimationPlayer" parent="."]
-anims/inv = SubResource( 7 )
+anims/inv = SubResource( 6 )
 
 [node name="Tween" type="Tween" parent="."]
 
