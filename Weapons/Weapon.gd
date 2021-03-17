@@ -18,7 +18,7 @@ enum {
 
 var state = POINTING
 
-func _process(_delta):
+func _process(delta):
 	var parent_scale_x = get_parent().get_parent().get_node("Sprite").scale.x
 	if parent_scale_x == -1:
 		facing_right = false
@@ -33,13 +33,13 @@ func _process(_delta):
 		
 	match state:
 		POINTING:
-			pointing_state()
+			pointing_state(delta)
 		ATTACK:
 			attack_state()
 
-func pointing_state():
+func pointing_state(delta):
 	rotation = mouse_angle
-	_pointing_state()
+	_pointing_state(delta)
 
 func _input(event):
 	if event.is_action_pressed("click") and can_attack:
@@ -60,5 +60,5 @@ func get_mouse_direction() -> Vector2:
 func attack_state():
 	pass
 
-func _pointing_state():
+func _pointing_state(_delta):
 	pass

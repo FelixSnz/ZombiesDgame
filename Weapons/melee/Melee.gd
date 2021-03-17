@@ -15,11 +15,9 @@ func _ready():
 	animationPlayer = $AnimationPlayer
 
 
-func _pointing_state():
+func _pointing_state(_delta):
 	hitBox.direction = pointing_direction
 	rotation_degrees = mouse_angle - extra_rotation
-#	print(pointing_direction)
-	
 	if not tween.is_active():
 		if facing_right:
 			global_position = get_parent().get_parent().rightHand.global_position + Vector2(-2, -2)
@@ -27,34 +25,43 @@ func _pointing_state():
 			global_position = get_parent().get_parent().rightHand.global_position + Vector2(2, -2)
 
 func attack_state():
-		
-	tween.stop_all()
 	if facing_right:
-		if just_attacked:
+		if round(strikeAxis.rotation_degrees) >= 180 \
+		and round(strikeAxis.rotation_degrees) < 360:
+			tween.stop_all()
 			animationPlayer.play_backwards("attack")
 			state = POINTING
 			yield(animationPlayer, "animation_finished")
 			just_attacked = not just_attacked
 			can_attack = true
-#			print("shouldnt return")
 				
-		else:
+		elif round(strikeAxis.rotation_degrees) == 0:
+			tween.stop_all()
 			animationPlayer.play("attack")
 			state = POINTING
 			yield(animationPlayer, "animation_finished")
 			just_attacked = not just_attacked
 			can_attack = true
-			reset_rotation(360, -45, false)
+#			print("lo mas normal")
+			if not round(strikeAxis.rotation_degrees) == 0 \
+			and facing_right and pointing_direction.y > 0:
+				reset_rotation(360, -45, false, position, true)
 	else:
-		if not just_attacked:
+		if round(strikeAxis.rotation_degrees) == 180:
+			tween.stop_all()
 			animationPlayer.play_backwards("attack")
 			state = POINTING
 			yield(animationPlayer, "animation_finished")
 			just_attacked = not just_attacked
 			can_attack = true
-			reset_rotation(-180, 45, true)
+			if not round(strikeAxis.rotation_degrees) == 180 \
+			and not facing_right and pointing_direction.y > 0:
+				reset_rotation(-180, 45, true, position, true)
+			
 				
-		else:
+		elif round(strikeAxis.rotation_degrees) == 0 \
+		or round(strikeAxis.rotation_degrees) < 0 :
+			tween.stop_all()
 			animationPlayer.play("attack")
 			state = POINTING
 			yield(animationPlayer, "animation_finished")
@@ -63,40 +70,41 @@ func attack_state():
 #			print("shouldnt return")
 
 func reset_rotation(final1, final2, side:bool, \
-vec:Vector2 = position, duration:float = 0.8):
-	print("reseting and ", randf())
-	
-	if tween.is_active():
+vec:Vector2 = position, from_attack:bool = false, duration:float = .8):
+#	print("reseting and ", randf())
+	if not animationPlayer.is_playing():
+		if tween.is_active():
+			tween.stop_all()
+			if final1 == -180:
+				final1 = 180
+			if final1 == 360:
+				final1 = 0
+		tween.interpolate_property(strikeAxis, "rotation_degrees", \
+		strikeAxis.rotation_degrees, final1, duration, Tween.TRANS_EXPO)
+		
+		tween.interpolate_property(sprite, "rotation_degrees", \
+		sprite.rotation_degrees, final2, duration, Tween.TRANS_EXPO)
+		
+		tween.interpolate_property(self, "position", \
+		position, vec, duration, Tween.TRANS_EXPO)
+		
+		tween.start()
+		yield(tween, "tween_completed")
+	#	print("strikees: ", strikeAxis.rotation_degrees)
+		if round(strikeAxis.rotation_degrees) == -180:
+			strikeAxis.rotation_degrees = 180
+		if round(strikeAxis.rotation_degrees) == 360:
+			strikeAxis.rotation_degrees = 0
 		tween.stop_all()
-	tween.interpolate_property(strikeAxis, "rotation_degrees", \
-	strikeAxis.rotation_degrees, final1, duration, Tween.TRANS_EXPO)
-	
-	tween.interpolate_property(sprite, "rotation_degrees", \
-	sprite.rotation_degrees, final2, duration, Tween.TRANS_EXPO)
-	
-	tween.interpolate_property(self, "position", \
-	position, vec, duration, Tween.TRANS_EXPO)
-	
-	tween.start()
-	yield(tween, "tween_completed")
-	tween.stop_all()
-	just_attacked = false
-	tween_behind(true)
-	flip(side)
+		just_attacked = false
+		tween_behind(true)
+		flip(side)
 
 func facing_side_changued(side):
-	print("la cara cambio")
 	if side == -1:
-		just_attacked = not just_attacked
-		if pointing_direction.y < 0:
-			reset_rotation(180, 45, true, Vector2(-6, -2))
-		else:
-			reset_rotation(-180, 45, true, Vector2(-6, -2))
+		reset_rotation(-180, 45, true, Vector2(-6, -2))
 	elif side == 1:
-		if pointing_direction.y > 0:
-			reset_rotation(0, -45, false, Vector2(0, -2))
-		else:
-			reset_rotation(360, -45, false, Vector2(0, -2))
+		reset_rotation(360, -45, false, Vector2(0, -2))
 
 func slash(boolean):
 	var slash = Slash.instance()
@@ -130,8 +138,8 @@ func tween_behind(boolean:bool):
 	get_parent().show_behind_parent = boolean
 
 func behind(boolean:bool):
-	print("behindeando ")
-	print("parentname: ", get_parent().name)
+#	print("behindeando ")
+#	print("parentname: ", get_parent().name)
 	if facing_right:
 		get_parent().show_behind_parent = boolean
 	else:
