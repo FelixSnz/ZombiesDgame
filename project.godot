@@ -12,27 +12,27 @@ _global_script_classes=[ {
 "base": "Area2D",
 "class": "Bullet",
 "language": "GDScript",
-"path": "res://Weapons/Firearms/ammo/Bullet.gd"
+"path": "res://src/Weapons/Firearms/ammo/Bullet.gd"
 }, {
 "base": "Weapon",
 "class": "FireArm",
 "language": "GDScript",
-"path": "res://Weapons/Firearms/FireArm.gd"
+"path": "res://src/Weapons/Firearms/FireArm.gd"
 }, {
 "base": "Node",
 "class": "MapTools",
 "language": "GDScript",
-"path": "res://Hacks/MapTools.gd"
+"path": "res://src/Hacks/MapTools.gd"
 }, {
 "base": "Node",
 "class": "Walker",
 "language": "GDScript",
-"path": "res://walker.gd"
+"path": "res://src/World/walker.gd"
 }, {
 "base": "Node2D",
 "class": "Weapon",
 "language": "GDScript",
-"path": "res://Weapons/Weapon.gd"
+"path": "res://src/Weapons/Weapon.gd"
 } ]
 _global_script_class_icons={
 "Bullet": "",
@@ -45,14 +45,14 @@ _global_script_class_icons={
 [application]
 
 config/name="RobotGame"
-run/main_scene="res://GenWorld.tscn"
+run/main_scene="res://src/World/GenWorld.tscn"
 run/low_processor_mode=true
 config/icon="res://icon.png"
 
 [autoload]
 
-PlayerStats="*res://Player/PlayerStats.tscn"
-worldenviroment="*res://World/worldenv.tscn"
+PlayerStats="*res://src/Player/PlayerStats.tscn"
+worldenviroment="*res://src/World/worldenv.tscn"
 
 [debug]
 
@@ -145,4 +145,3 @@ click={
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
 environment/default_clear_color=Color( 0.129412, 0.117647, 0.152941, 1 )
-environment/default_environment="res://default_env.tres"

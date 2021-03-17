@@ -1,0 +1,130 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://src/Tiles/f&wtileset.tres" type="TileSet" id=1]
+[ext_resource path="res://assets/tilemaps/down_walls.png" type="Texture" id=2]
+[ext_resource path="res://src/Tiles/dec_tiles.tres" type="TileSet" id=3]
+[ext_resource path="res://src/World/WoodBarrel.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/Zombies/Zombie.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/World/ToxicBarrel.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=8]
+
+
+
+
+
+[sub_resource type="TileSet" id=1]
+0/name = "down_walls.png 0"
+0/texture = ExtResource( 2 )
+0/tex_offset = Vector2( 0, -3 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 112, 28 )
+0/tile_mode = 1
+0/autotile/bitmask_mode = 1
+0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 48, Vector2( 1, 0 ), 56, Vector2( 2, 0 ), 24, Vector2( 3, 0 ), 16 ]
+0/autotile/icon_coordinate = Vector2( 3, 0 )
+0/autotile/tile_size = Vector2( 28, 28 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[node name="World" type="Node2D"]
+z_as_relative = false
+
+[node name="Walls" type="TileMap" parent="."]
+z_index = -1
+tile_set = SubResource( 1 )
+cell_size = Vector2( 28, 28 )
+collision_layer = 0
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( 196608, 0, 3, 196617, 0, 3, 262145, 0, 0, 262146, 0, 1, 262147, 0, 1, 262148, 0, 1, 262149, 0, 1, 262150, 0, 1, 262151, 0, 1, 262152, 0, 2, 262163, 0, 0, 262164, 0, 1, 262165, 0, 2, 327695, 0, 3, 327698, 0, 3, 393232, 0, 0, 393233, 0, 2, 786448, 0, 0, 786449, 0, 1, 786450, 0, 1, 786451, 0, 2, 851980, 0, 0, 851981, 0, 1, 851982, 0, 1, 851983, 0, 2, 2097144, 0, 3, 2031617, 0, 3, 2162681, 0, 0, 2162682, 0, 1, 2162683, 0, 1, 2162684, 0, 1, 2162685, 0, 1, 2162686, 0, 1, 2162687, 0, 1, 2097152, 0, 2 )
+
+[node name="floor&dwalls" type="TileMap" parent="."]
+z_index = -1
+z_as_relative = false
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 28, 28 )
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( -65538, 3, 0, -65537, 3, 1, -131072, 3, 1, -131071, 3, 1, -131070, 3, 1, -131069, 3, 1, -131068, 3, 1, -131067, 3, 2, -3, 3, 0, -2, 3, 131078, -1, 3, 65537, -65536, 3, 65537, -65535, 3, 65537, -65534, 3, 0, -65533, 3, 0, -65532, 3, 0, -65531, 3, 0, -65530, 3, 0, -65529, 3, 0, 65531, 3, 0, 65532, 3, 0, 65533, 3, 0, 65534, 3, 0, 65535, 3, 0, 0, 3, 0, 1, 3, 0, 2, 3, 0, 3, 2, 0, 4, 2, 1, 5, 2, 1, 6, 2, 1, 7, 2, 2, 8, 3, 0, 131067, 3, 65536, 131068, 3, 0, 131070, 3, 0, 131071, 3, 0, 65536, 2, 0, 65537, 2, 1, 65538, 2, 1, 65539, 2, 131078, 65540, 2, 65537, 65541, 2, 65537, 65542, 2, 65537, 65543, 2, 131077, 65544, 2, 1, 65545, 2, 2, 65552, 2, 0, 65553, 2, 1, 65554, 2, 1, 65555, 2, 2, 196603, 3, 65536, 196604, 3, 0, 196607, 3, 0, 131072, 2, 131072, 131073, 2, 65542, 131074, 2, 65537, 131075, 2, 65537, 131076, 2, 65537, 131077, 2, 65537, 131078, 2, 65537, 131079, 2, 65537, 131080, 2, 65541, 131081, 2, 196613, 131082, 2, 196609, 131083, 2, 196609, 131084, 2, 196609, 131085, 2, 196609, 131086, 2, 196609, 131087, 2, 6, 131088, 2, 131078, 131089, 2, 65537, 131090, 2, 65537, 131091, 2, 131077, 131092, 2, 1, 131093, 2, 2, 262139, 3, 131072, 262140, 3, 0, 262141, 3, 0, 262142, 3, 0, 196609, 2, 131072, 196610, 2, 131073, 196611, 2, 131073, 196612, 2, 131073, 196613, 2, 131073, 196614, 2, 131073, 196615, 2, 131073, 196616, 2, 131074, 196623, 2, 65536, 196624, 2, 65537, 196625, 2, 65537, 196626, 2, 65541, 196627, 2, 131073, 196628, 2, 131073, 196629, 2, 131074, 327675, 0, 0, 327676, 0, 1, 327677, 0, 1, 327678, 0, 0, 327679, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 262159, 2, 131072, 262160, 2, 65542, 262161, 2, 65541, 262162, 2, 131074, 327680, 0, 0, 327696, 2, 131072, 327697, 2, 65543, 393233, 2, 65539, 458769, 2, 65539, 524305, 2, 65539, 589838, 2, 0, 589839, 2, 1, 589840, 2, 1, 589841, 2, 131080, 589842, 2, 2, 655373, 2, 0, 655374, 2, 131078, 655375, 2, 65537, 655376, 2, 65537, 655377, 2, 65537, 655378, 2, 131077, 655379, 2, 2, 720908, 2, 0, 720909, 2, 131078, 720910, 2, 65537, 720911, 2, 65541, 720912, 2, 131073, 720913, 2, 131073, 720914, 2, 131073, 720915, 2, 131074, 786444, 2, 131072, 786445, 2, 131073, 786446, 2, 65544, 786447, 2, 131074, 851982, 2, 65539, 917518, 2, 65539, 983054, 2, 65539, 1048590, 2, 65539, 1114126, 2, 65539, 1179662, 2, 65539, 1245198, 2, 65539, 1310734, 2, 65539, 1376270, 2, 65539, 1441806, 2, 65539, 1507339, 0, 0, 1507342, 2, 65539, 1572878, 2, 65539, 1638414, 2, 65539, 1703950, 2, 65539, 1769484, 2, 0, 1769485, 2, 1, 1769486, 2, 131080, 1769487, 2, 2, 1900537, 2, 0, 1900538, 2, 1, 1900539, 2, 1, 1900540, 2, 1, 1900541, 2, 1, 1900542, 2, 1, 1900543, 2, 1, 1835008, 2, 2, 1835019, 2, 0, 1835020, 2, 131078, 1835021, 2, 65537, 1835022, 2, 65537, 1835023, 2, 131077, 1835024, 2, 2, 1966072, 2, 0, 1966073, 2, 131078, 1966074, 2, 65537, 1966075, 2, 65537, 1966076, 2, 65537, 1966077, 2, 65537, 1966078, 2, 65537, 1966079, 2, 65537, 1900544, 2, 131077, 1900545, 2, 2, 1900555, 2, 65536, 1900556, 2, 65537, 1900557, 2, 65537, 1900558, 2, 65537, 1900559, 2, 65537, 1900560, 2, 65538, 2031608, 2, 131072, 2031609, 2, 65542, 2031610, 2, 65537, 2031611, 2, 65537, 2031612, 2, 65537, 2031613, 2, 65537, 2031614, 2, 65537, 2031615, 2, 65537, 1966080, 2, 65541, 1966081, 2, 196613, 1966082, 2, 196609, 1966083, 2, 196609, 1966084, 2, 196609, 1966085, 2, 196609, 1966086, 2, 196609, 1966087, 2, 196609, 1966088, 2, 196609, 1966089, 2, 196609, 1966090, 2, 196609, 1966091, 2, 196614, 1966092, 2, 65542, 1966093, 2, 65537, 1966094, 2, 65537, 1966095, 2, 65541, 1966096, 2, 131074, 2097145, 2, 131072, 2097146, 2, 131073, 2097147, 2, 131073, 2097148, 2, 131073, 2097149, 2, 131073, 2097150, 2, 131073, 2097151, 2, 131073, 2031616, 2, 131074, 2031628, 2, 65536, 2031629, 2, 65537, 2031630, 2, 65537, 2031631, 2, 65538, 2097164, 2, 65536, 2097165, 2, 65537, 2097166, 2, 65541, 2097167, 2, 131074, 2162700, 2, 131072, 2162701, 2, 131073, 2162702, 2, 131074 )
+
+[node name="over_floor" type="TileMap" parent="."]
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 28, 28 )
+collision_layer = 0
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( 4, 6, 0, 7, 3, 0, 65537, 7, 0, 65545, 2, 0, 65553, 2, 0, 131074, 7, 0, 131075, 8, 0, 131093, 3, 0, 196609, 3, 0, 196612, 6, 0, 196614, 0, 0, 196623, 2, 0, 196625, 0, 0, 262145, 5, 0, 262146, 4, 0, 262148, 5, 0, 262150, 4, 0, 262152, 5, 0, 262163, 5, 0, 262165, 4, 0, 327696, 2, 0, 393232, 5, 0, 786448, 4, 0, 786450, 5, 0, 851981, 4, 0, 851982, 5, 0, 1900539, 7, 0, 1966072, 2, 0, 1966076, 0, 0, 1966077, 2, 0, 1966078, 6, 0, 2031608, 0, 0, 2031610, 8, 0, 2031615, 1, 0, 1966081, 2, 0, 2097148, 6, 0, 2097151, 0, 0, 2162682, 5, 0, 2162685, 4, 0, 2162687, 4, 0 )
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="WoodenBarrels" type="YSort" parent="YSort"]
+
+[node name="WoodBarrel" parent="YSort/WoodenBarrels" instance=ExtResource( 5 )]
+position = Vector2( 259.081, 52.1674 )
+
+[node name="WoodBarrel2" parent="YSort/WoodenBarrels" instance=ExtResource( 5 )]
+position = Vector2( 484.695, 46.5551 )
+
+[node name="WoodBarrel3" parent="YSort/WoodenBarrels" instance=ExtResource( 5 )]
+position = Vector2( 488.624, 90.8923 )
+
+[node name="WoodBarrel4" parent="YSort/WoodenBarrels" instance=ExtResource( 5 )]
+position = Vector2( 463.93, 103.239 )
+
+[node name="ToxicBarrels" type="YSort" parent="YSort"]
+
+[node name="ToxicBarrel" parent="YSort/ToxicBarrels" instance=ExtResource( 7 )]
+position = Vector2( 104.203, 20.4473 )
+
+[node name="ToxicBarrel2" parent="YSort/ToxicBarrels" instance=ExtResource( 7 )]
+position = Vector2( 167.939, 95.2057 )
+
+[node name="ToxicBarrel3" parent="YSort/ToxicBarrels" instance=ExtResource( 7 )]
+position = Vector2( 56.4039, 93.6846 )
+
+[node name="ToxicBarrel4" parent="YSort/ToxicBarrels" instance=ExtResource( 7 )]
+position = Vector2( 20.4048, 47.7788 )
+
+[node name="ToxicBarrel5" parent="YSort/ToxicBarrels" instance=ExtResource( 7 )]
+position = Vector2( 46.2729, 67.6589 )
+
+[node name="ToxicBarrel6" parent="YSort/ToxicBarrels" instance=ExtResource( 7 )]
+position = Vector2( 19.3861, 68.3873 )
+
+[node name="ToxicBarrel7" parent="YSort/ToxicBarrels" instance=ExtResource( 7 )]
+position = Vector2( 237.245, 95.4694 )
+
+[node name="ToxicBarrel8" parent="YSort/ToxicBarrels" instance=ExtResource( 7 )]
+position = Vector2( 121.544, 26.5044 )
+
+[node name="ToxicBarrel9" parent="YSort/ToxicBarrels" instance=ExtResource( 7 )]
+position = Vector2( 199.372, 28.4181 )
+
+[node name="Zombies" type="YSort" parent="YSort"]
+
+[node name="Zombie" parent="YSort/Zombies" instance=ExtResource( 6 )]
+position = Vector2( 149.467, 24.9065 )
+
+[node name="Zombie2" parent="YSort/Zombies" instance=ExtResource( 6 )]
+position = Vector2( 97.512, 89.3179 )
+
+[node name="Zombie3" parent="YSort/Zombies" instance=ExtResource( 6 )]
+position = Vector2( 83.0763, 45.3122 )
+
+[node name="Zombie4" parent="YSort/Zombies" instance=ExtResource( 6 )]
+position = Vector2( 49.4531, 52.2097 )
+
+[node name="Player" parent="YSort" instance=ExtResource( 8 )]
+position = Vector2( 375.789, 71.947 )
+ACCELERATION = 275.679

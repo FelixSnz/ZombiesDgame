@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/Hacks/HurtBox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/sprites/world/woodbarrel.png" type="Texture" id=2]
+[ext_resource path="res://src/World/WoodBarrel.gd" type="Script" id=3]
+
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 3.0
+height = 6.0
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 6.0
+height = 4.0
+
+[node name="WoodBarrel" type="StaticBody2D"]
+position = Vector2( 0, -2 )
+collision_mask = 6
+script = ExtResource( 3 )
+colors = [ Color( 0.384314, 0.231373, 0.160784, 1 ), Color( 0.231373, 0.145098, 0.2, 1 ), Color( 0.32549, 0.188235, 0.152941, 1 ) ]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+offset = Vector2( 0, -4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="HurtBox" parent="." instance=ExtResource( 1 )]
+collision_mask = 64
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2( 0, -4 )
+shape = SubResource( 2 )
+[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
+
+[editable path="HurtBox"]

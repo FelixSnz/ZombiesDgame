@@ -1,0 +1,247 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://src/Player/RightHand.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/sprites/player/character_no_hands.png" type="Texture" id=2]
+[ext_resource path="res://Debug and Testing/Fps.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Weapons/melee/crowbar/Crowbar.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/sprites/player/right_hand.png" type="Texture" id=5]
+[ext_resource path="res://src/Player/Player.gd" type="Script" id=6]
+[ext_resource path="res://src/Hacks/SoftCollision.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/Hacks/HurtBox.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/sprites/shadows/SmallShadow.png" type="Texture" id=9]
+[ext_resource path="res://src/Shaders/White_blink.tres" type="Material" id=10]
+
+
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 1.99999
+height = 2.00002
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 5.0
+height = 6.0
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 2.0
+height = 4.0
+
+[sub_resource type="Animation" id=4]
+resource_name = "Idle"
+length = 0.6
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.025, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 1, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite/LeftHand:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.025, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( -6, -2 ), Vector2( -6, -2.5 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite/RightHand:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.025, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 5, -2 ), Vector2( 5, -2.5 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Run"
+length = 0.4
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 2, 4, 2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite/LeftHand:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -6, -4.5 ), Vector2( -4, -3 ), Vector2( -2, -3 ), Vector2( -4, -3 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite/RightHand:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 5, -4.5 ), Vector2( 3, -3 ), Vector2( 2, -3 ), Vector2( 3, -3 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.5
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:material:shader_param/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.02, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite/LeftHand:use_parent_material")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.02, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite/RightHand:use_parent_material")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.02, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false ]
+}
+
+[node name="Player" type="KinematicBody2D" groups=[
+"Player",
+]]
+light_mask = 2
+z_as_relative = false
+collision_layer = 2
+collision_mask = 2147484033
+script = ExtResource( 6 )
+MAX_SPEED = 83.404
+ACCELERATION = 280.257
+FRICTION = 239.055
+INITIAL_WEAPON = ExtResource( 4 )
+
+[node name="Shadow" type="Sprite" parent="."]
+show_behind_parent = true
+position = Vector2( 0, 0.167043 )
+texture = ExtResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = ExtResource( 10 )
+texture = ExtResource( 2 )
+offset = Vector2( 0, -7 )
+hframes = 5
+frame = 1
+
+[node name="LeftHand" type="Sprite" parent="Sprite"]
+material = ExtResource( 10 )
+position = Vector2( -6, -2 )
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="RightHand" parent="Sprite" instance=ExtResource( 1 )]
+visible = false
+show_behind_parent = true
+material = ExtResource( 10 )
+position = Vector2( 5, -2 )
+
+[node name="WeaponPos" type="Position2D" parent="."]
+use_parent_material = true
+position = Vector2( 3, -2.5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="HurtBox" parent="." instance=ExtResource( 8 )]
+visible = false
+collision_layer = 8
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2( 0, -7 )
+shape = SubResource( 2 )
+
+[node name="SoftCollision" parent="." instance=ExtResource( 7 )]
+visible = false
+collision_layer = 32
+collision_mask = 32
+
+[node name="CollisionShape2D" parent="SoftCollision" index="0"]
+position = Vector2( 0, -1 )
+rotation = 1.5708
+shape = SubResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 0.8
+anims/Idle = SubResource( 4 )
+anims/Run = SubResource( 5 )
+
+[node name="Blink" type="AnimationPlayer" parent="."]
+anims/inv = SubResource( 6 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.3, 0.3 )
+smoothing_enabled = true
+
+[node name="Label" type="Label" parent="."]
+visible = false
+margin_left = -56.0
+margin_top = -28.0
+margin_right = -16.0
+margin_bottom = -14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fps" parent="." instance=ExtResource( 3 )]
+margin_left = -56.0
+margin_bottom = 14.0
+[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
+
+[editable path="HurtBox"]
+
+[editable path="SoftCollision"]

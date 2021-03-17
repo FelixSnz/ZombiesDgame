@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/World/GenWorld.gd" type="Script" id=1]
+[ext_resource path="res://assets/tilemaps/down_walls.png" type="Texture" id=2]
+[ext_resource path="res://src/Tiles/dec_tiles.tres" type="TileSet" id=3]
+[ext_resource path="res://src/Tiles/f&wtileset.tres" type="TileSet" id=4]
+
+[sub_resource type="TileSet" id=1]
+0/name = "down_walls.png 0"
+0/texture = ExtResource( 2 )
+0/tex_offset = Vector2( 0, -3 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 112, 28 )
+0/tile_mode = 1
+0/autotile/bitmask_mode = 1
+0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 48, Vector2( 1, 0 ), 56, Vector2( 2, 0 ), 24, Vector2( 3, 0 ), 16 ]
+0/autotile/icon_coordinate = Vector2( 3, 0 )
+0/autotile/tile_size = Vector2( 28, 28 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[node name="world" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 28, 28 )
+collision_layer = 129
+collision_mask = 0
+format = 1
+
+[node name="TileMap2" type="TileMap" parent="."]
+z_index = -1
+tile_set = SubResource( 1 )
+cell_size = Vector2( 28, 28 )
+format = 1
+
+[node name="TileMap3" type="TileMap" parent="."]
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 28, 28 )
+format = 1
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Zombies" type="YSort" parent="YSort"]
+
+[node name="ToxicBarrels" type="YSort" parent="YSort"]
+
+[node name="WoodBarrels" type="YSort" parent="YSort"]
