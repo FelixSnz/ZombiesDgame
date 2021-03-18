@@ -37,5 +37,5 @@ func create_instance(Obj):
 	instance.global_position = nuzzle.global_position
 
 
-func facing_side_changued(_side):
+func _facing_side_changued(_side):
 	pass
