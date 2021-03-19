@@ -3,10 +3,19 @@ extends FireArm
 onready var nuzzle = $Sprite/Nuzzle
 
 func _ready():
+	print("weapon ready")
 	get_parent().show_behind_parent = false
 	init_nuzzle_position = nuzzle.position
 	sprite = $Sprite
 	tween =  $TweenGun
+	var parent_scale_x = get_parent().get_parent().get_node("Sprite").scale.x
+	print(parent_scale_x)
+	print("bef: ", sprite.flip_v)
+	if parent_scale_x == -1:
+		facing_right = false
+	else:
+		sprite.flip_v = true
+	print("after: ", sprite.flip_v)
 
 func attack_state():
 	if not facing_right:

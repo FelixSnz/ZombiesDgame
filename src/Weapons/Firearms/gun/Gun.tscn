@@ -5,19 +5,19 @@
 [ext_resource path="res://src/Weapons/Firearms/ammo/Bullet.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/sprites/weapons/gun.png" type="Texture" id=4]
 
-
 [node name="Gun" type="Node2D" groups=[
 "FireArm",
 "Weapon",
 ]]
 script = ExtResource( 2 )
+semi_major_axis = 9
+semi_minor_axis = 5
 bullet = ExtResource( 3 )
 fireShot = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 4, 0 )
 texture = ExtResource( 4 )
-offset = Vector2( 3.5, 0 )
+offset = Vector2( 2, 0 )
 
 [node name="Nuzzle" type="Position2D" parent="Sprite"]
 position = Vector2( 4.5, -1.5 )

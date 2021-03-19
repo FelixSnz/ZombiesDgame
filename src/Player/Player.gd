@@ -41,6 +41,7 @@ func _ready():
 		weaponPos.add_child(weapon)
 		grab_weapon()
 
+# warning-ignore:return_value_discarded
 	connect("face_side_changued", weapon, "facing_side_changued")
 
 func running_with_weapon():
@@ -84,12 +85,13 @@ func _physics_process(delta):
 func _input(event):
 	if event is InputEventKey:
 		if event.scancode == KEY_C and event.is_pressed():
-			if weapon.name == "Sword":
+			if weapon.name == "Crowbar":
 				var wep = weaponPos.get_child(0)
 				wep.queue_free()
 				weapon = Gun.instance()
 				weaponPos.add_child(weapon)
 
+				# warning-ignore:return_value_discarded
 				connect("face_side_changued", weapon, "facing_side_changued")
 			elif weapon.name == "Gun":
 				var wep = weaponPos.get_child(0)
@@ -97,6 +99,7 @@ func _input(event):
 				weapon = Crowbar.instance()
 				weaponPos.add_child(weapon)
 
+				# warning-ignore:return_value_discarded
 				connect("face_side_changued", weapon, "facing_side_changued")
 			grab_weapon()
 
@@ -123,12 +126,10 @@ func move():
 
 func update_facing():
 	if direction.x < 0 and can_toggle:
-		print("facing left")
 		emit_signal("face_side_changued", -1)
 		can_toggle = not can_toggle
 		sprite.scale.x = -1
 	elif direction.x > 0 and not can_toggle:
-		print("facing right")
 		emit_signal("face_side_changued", 1)
 		can_toggle = not can_toggle
 		sprite.scale.x = 1

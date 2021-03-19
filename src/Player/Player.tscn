@@ -11,8 +11,6 @@
 [ext_resource path="res://assets/sprites/shadows/SmallShadow.png" type="Texture" id=9]
 [ext_resource path="res://src/Shaders/White_blink.tres" type="Material" id=10]
 
-
-
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 1.99999
 height = 2.00002

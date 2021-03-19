@@ -6,7 +6,7 @@ export(PackedScene) var fireShot
 
 var init_nuzzle_position
 
-func _pointing_state(delta):
+func _pointing_state(_delta):
 	if not facing_right:
 		sprite.flip_v = true
 	else:
