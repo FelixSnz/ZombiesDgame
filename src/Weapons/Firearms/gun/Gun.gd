@@ -7,14 +7,6 @@ func _ready():
 	init_nuzzle_position = nuzzle.position
 	sprite = $Sprite
 	tween =  $TweenGun
-	var parent_scale_x = get_parent().get_parent().get_node("Sprite").scale.x
-	print(parent_scale_x)
-	print("bef: ", sprite.flip_v)
-	if parent_scale_x == -1:
-		facing_right = false
-	else:
-		sprite.flip_v = true
-	print("after: ", sprite.flip_v)
 
 func attack_state():
 	if not facing_right:
@@ -43,7 +35,6 @@ func create_instance(Obj):
 	var world = get_tree().current_scene
 	world.add_child(instance)
 	instance.global_position = nuzzle.global_position
-
 
 func _facing_side_changued(_side):
 	pass

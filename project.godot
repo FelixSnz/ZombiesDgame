@@ -51,8 +51,8 @@ config/icon="res://icon.png"
 
 [autoload]
 
-PlayerStats="*res://src/Player/PlayerStats.tscn"
 worldenviroment="*res://src/World/worldenv.tscn"
+Global="*res://src/Singletons/global.gd"
 
 [debug]
 

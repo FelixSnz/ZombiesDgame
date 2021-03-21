@@ -104,7 +104,7 @@ shape = SubResource( 1 )
 disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-playback_speed = 2.0
+playback_speed = 1.5
 anims/attack = SubResource( 2 )
 
 [editable path="StrikeAxis/Sprite/HitBox"]

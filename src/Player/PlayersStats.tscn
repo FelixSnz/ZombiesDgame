@@ -2,6 +2,5 @@
 
 [ext_resource path="res://src/Zombies/Stats.tscn" type="PackedScene" id=1]
 
-
 [node name="PlayersStats" instance=ExtResource( 1 )]
 max_health = 4

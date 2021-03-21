@@ -3,7 +3,6 @@ class_name Weapon
 
 export(int) var semi_major_axis
 export(int) var semi_minor_axis
-export(bool) var movement_while_running = false
 
 var pointing_direction = Vector2.ZERO
 var mouse_angle
@@ -15,18 +14,25 @@ var tween
 var animationPlayer
 var player_center
 var player_anim
+var parent_scale_x
 
 enum {
 	POINTING,
 	ATTACK,
-	RESET,
 }
 
 var state = POINTING
 
+func _ready():
+	parent_scale_x = Global.player.sprite.scale.x
+	if parent_scale_x == 1:
+		facing_right = true
+	else:
+		facing_right = false
+	_on_ready()
 
 func _process(delta):
-	player_center = get_parent().get_parent().global_position - Vector2(0, 4)
+	player_center = Global.player.global_position - Vector2(0, 4)
 	pointing_direction = (get_global_mouse_position() - player_center).normalized()
 	
 	if facing_right:
@@ -40,19 +46,31 @@ func _process(delta):
 		ATTACK:
 			attack_state()
 
+func _input(event):
+	if event.is_action_pressed("click") and can_attack:
+		can_attack = false
+		state = ATTACK
+
 func pointing_state(delta):
 	rotation_degrees = mouse_angle
-	var player = get_parent().get_parent()
-	var player_sprite = player.get_node("Sprite")
-	var player_hand = player_sprite.get_node("RightHand2")
-	player_anim = player.animationPlayer.current_animation
-	var extra_movement
+	player_anim = Global.player.animationPlayer.current_animation
 	
+	var extra_mov = get_extra_movement()
+	
+	if is_in_group("Melee"):
+		update_position(delta, extra_mov)
+	else:
+		update_position(delta)
+		
+	_pointing_state(delta)
 
+func get_extra_movement():
+	var player_hand = Global.player.sprite.get_node("RightHand2")
+	var extra_movement
 	if player_anim == "Idle":
 		extra_movement = player_hand.position - Vector2(5, -2)
 	elif player_anim == "Run":
-		if movement_while_running:
+		if is_in_group("Melee"):
 			if facing_right:
 				extra_movement = player_hand.position - Vector2(2.5, -3)
 			else:
@@ -61,21 +79,22 @@ func pointing_state(delta):
 			extra_movement = Vector2.ZERO
 	else:
 		extra_movement = Vector2.ZERO
-		
+	return extra_movement
+
+func update_position(delta, extra_movement:Vector2 = Vector2.ZERO):
 	if is_in_ellipse(player_center, semi_major_axis, semi_minor_axis, get_global_mouse_position()):
 		global_position = global_position.linear_interpolate(get_global_mouse_position(), delta * .5) + extra_movement
 	else:
 		var ellip_radius = get_ellipse_radius(semi_major_axis, semi_minor_axis, pointing_direction.angle())
 		var diff = player_center + pointing_direction * ellip_radius
 		global_position = global_position.linear_interpolate(diff, delta * 5) + extra_movement
-	_pointing_state(delta)
-	
-	global_position = global_position 
 
-func _input(event):
-	if event.is_action_pressed("click") and can_attack:
-		can_attack = false
-		state = ATTACK
+func facing_side_changued(side):
+	if side == 1:
+		facing_right = true
+	else:
+		facing_right = false
+	_facing_side_changued(side)
 
 func get_inverse_degrees(degrees) -> int:
 	var radians = deg2rad(degrees)
@@ -98,13 +117,6 @@ func get_ellipse_radius(a, b, angle):
 	var r = a*b/sqrt(pow(a, 2) * pow(sin(angle), 2) + pow(b, 2) * pow(cos(angle), 2) )
 	return r
 
-func facing_side_changued(side):
-	if side == 1:
-		facing_right = true
-	else:
-		facing_right = false
-	_facing_side_changued(side)
-
 func behind(boolean:bool):
 	if facing_right:
 		get_parent().show_behind_parent = boolean
@@ -117,5 +129,11 @@ func _pointing_state(_delta):
 func _facing_side_changued(_side):
 	pass
 
+func player_anim_changued(_anim_name):
+	pass
+
 func attack_state():
+	pass
+
+func _on_ready():
 	pass
