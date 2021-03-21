@@ -5,6 +5,8 @@ const Slash = preload("res://src/Effects & Particles/SlashEffect.tscn")
 onready var strikeAxis = $StrikeAxis
 onready var hitBox = $StrikeAxis/Sprite/HitBox
 
+
+
 var initial_strike_rotation
 var final_strke_rotation
 var initial_sprite_rotation
@@ -71,6 +73,7 @@ func flip(boolean:bool):
 	sprite.flip_h = boolean
 
 func update_behind_check(inverted:int = 1, inv_bool:bool = false):
+	pass
 	if facing_right:
 		if round(strikeAxis.rotation_degrees) >= final_strke_rotation:
 			vertical_side = 1 * inverted

@@ -4,6 +4,8 @@ class_name Weapon
 export(int) var semi_major_axis
 export(int) var semi_minor_axis
 
+
+
 var pointing_direction = Vector2.ZERO
 var mouse_angle
 var facing_right = true

@@ -8,6 +8,7 @@
 [node name="Gun" type="Node2D" groups=[
 "FireArm",
 "Weapon",
+"camera_shaker",
 ]]
 script = ExtResource( 2 )
 semi_major_axis = 8

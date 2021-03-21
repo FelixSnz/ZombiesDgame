@@ -20,6 +20,7 @@ onready var stats = $PlayersStats
 
 signal face_side_changued(side)
 signal anim_started(anim_name)
+signal weapon_changued
 
 enum {
 	MOVE,
@@ -44,6 +45,7 @@ func _ready():
 		weaponPos.add_child(weapon)
 		grab_weapon()
 	connect_weapon_methods()
+	emit_signal("weapon_changued")
 
 func _physics_process(delta):
 	direction = (get_global_mouse_position() - global_position).normalized()
@@ -78,12 +80,14 @@ func _input(event):
 				weapon = Gun.instance()
 				weaponPos.add_child(weapon)
 				connect_weapon_methods()
+				emit_signal("weapon_changued")
 			elif weapon.name == "Gun":
 				var wep = weaponPos.get_child(0)
 				wep.queue_free()
 				weapon = Crowbar.instance()
 				weaponPos.add_child(weapon)
 				connect_weapon_methods()
+				emit_signal("weapon_changued")
 			grab_weapon()
 
 func grab_weapon():

@@ -19,6 +19,8 @@ onready var attackRangeZone = $AttackRangeZone
 onready var wanderController = $WanderController
 onready var playerDetectionZone = $PlayerDetectionZone
 
+
+
 enum {
 	IDLE,
 	WANDER,
@@ -103,6 +105,7 @@ func _on_HurtBox_area_entered(area):
 	hurtBox.start_invincivility(1)
 	$Blink.play("anim")
 	stats.health -= area.damage
+	
 	knockback = area.direction * area.knockback
 
 func _on_HurtBox_body_entered(_body):

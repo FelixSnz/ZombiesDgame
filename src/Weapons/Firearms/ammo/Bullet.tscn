@@ -5,7 +5,6 @@
 [ext_resource path="res://assets/shader textures/rect_bullet_emission.png" type="Texture" id=3]
 [ext_resource path="res://src/Weapons/Firearms/ammo/Bullet.gd" type="Script" id=4]
 
-
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
 shader = ExtResource( 2 )

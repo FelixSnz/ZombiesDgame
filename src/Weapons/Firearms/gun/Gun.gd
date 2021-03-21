@@ -1,5 +1,6 @@
 extends FireArm
 
+signal camera_shake_requested
 onready var nuzzle = $Sprite/Nuzzle
 
 func _ready():
@@ -13,12 +14,16 @@ func attack_state():
 		nuzzle.position.y = init_nuzzle_position.y * -1
 	else:
 		nuzzle.position.y = init_nuzzle_position.y
-	create_instance(bullet)
+	var bullt = create_instance(bullet)
+	bullt.connect("made_damage", self, "_on_Bullet_made_damage")
 	create_instance(fireShot)
 	knockback_push()
 	state = POINTING
 	yield(tween, "tween_all_completed")
 	can_attack = true
+
+func _on_Bullet_made_damage():
+	emit_signal("camera_shake_requested")
 
 func knockback_push():
 	tween.interpolate_property(sprite, "position", sprite.position, \
@@ -35,6 +40,7 @@ func create_instance(Obj):
 	var world = get_tree().current_scene
 	world.add_child(instance)
 	instance.global_position = nuzzle.global_position
+	return instance
 
 func _facing_side_changued(_side):
 	pass
