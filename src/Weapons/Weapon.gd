@@ -3,6 +3,7 @@ class_name Weapon
 
 export(int) var semi_major_axis
 export(int) var semi_minor_axis
+export(bool) var movement_while_running = false
 
 var pointing_direction = Vector2.ZERO
 var mouse_angle
@@ -13,6 +14,7 @@ var sprite
 var tween
 var animationPlayer
 var player_center
+var player_anim
 
 enum {
 	POINTING,
@@ -24,7 +26,7 @@ var state = POINTING
 
 
 func _process(delta):
-	player_center = get_parent().get_parent().global_position - Vector2(0, 5)
+	player_center = get_parent().get_parent().global_position - Vector2(0, 4)
 	pointing_direction = (get_global_mouse_position() - player_center).normalized()
 	
 	if facing_right:
@@ -40,14 +42,35 @@ func _process(delta):
 
 func pointing_state(delta):
 	rotation_degrees = mouse_angle
+	var player = get_parent().get_parent()
+	var player_sprite = player.get_node("Sprite")
+	var player_hand = player_sprite.get_node("RightHand2")
+	player_anim = player.animationPlayer.current_animation
+	var extra_movement
+	
+
+	if player_anim == "Idle":
+		extra_movement = player_hand.position - Vector2(5, -2)
+	elif player_anim == "Run":
+		if movement_while_running:
+			if facing_right:
+				extra_movement = player_hand.position - Vector2(2.5, -3)
+			else:
+				extra_movement = (player_hand.position - Vector2(2.5, -3.5)) * -1
+		else:
+			extra_movement = Vector2.ZERO
+	else:
+		extra_movement = Vector2.ZERO
+		
 	if is_in_ellipse(player_center, semi_major_axis, semi_minor_axis, get_global_mouse_position()):
-		global_position = global_position.linear_interpolate(get_global_mouse_position(), delta * .5)
+		global_position = global_position.linear_interpolate(get_global_mouse_position(), delta * .5) + extra_movement
 	else:
 		var ellip_radius = get_ellipse_radius(semi_major_axis, semi_minor_axis, pointing_direction.angle())
 		var diff = player_center + pointing_direction * ellip_radius
-		global_position = global_position.linear_interpolate(diff, delta * 5)
-	
+		global_position = global_position.linear_interpolate(diff, delta * 5) + extra_movement
 	_pointing_state(delta)
+	
+	global_position = global_position 
 
 func _input(event):
 	if event.is_action_pressed("click") and can_attack:
@@ -81,6 +104,12 @@ func facing_side_changued(side):
 	else:
 		facing_right = false
 	_facing_side_changued(side)
+
+func behind(boolean:bool):
+	if facing_right:
+		get_parent().show_behind_parent = boolean
+	else:
+		get_parent().show_behind_parent = not boolean
 
 func _pointing_state(_delta):
 	pass

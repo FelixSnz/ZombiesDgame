@@ -3,7 +3,6 @@ extends FireArm
 onready var nuzzle = $Sprite/Nuzzle
 
 func _ready():
-	print("weapon ready")
 	get_parent().show_behind_parent = false
 	init_nuzzle_position = nuzzle.position
 	sprite = $Sprite

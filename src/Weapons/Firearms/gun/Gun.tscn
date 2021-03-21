@@ -10,7 +10,7 @@
 "Weapon",
 ]]
 script = ExtResource( 2 )
-semi_major_axis = 9
+semi_major_axis = 8
 semi_minor_axis = 5
 bullet = ExtResource( 3 )
 fireShot = ExtResource( 1 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/Hacks/HitBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Weapons/melee/Melee.gd" type="Script" id=2]
@@ -7,7 +7,32 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2.50815, 6.95316 )
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="CurveTexture" id=13]
+
+[sub_resource type="CurveTexture" id=9]
+
+[sub_resource type="Curve" id=10]
+_data = [ Vector2( 0, 0 ), 0.0, 0.673804, 0, 0, Vector2( 0.496183, 0.684091 ), 0.0541324, 0.0541324, 0, 0, Vector2( 0.992366, 0 ), -0.587408, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=11]
+width = 2708
+curve = SubResource( 10 )
+
+[sub_resource type="ParticlesMaterial" id=12]
+flag_disable_z = true
+direction = Vector3( -1, 0, 0 )
+spread = 0.0
+flatness = 1.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 168.24
+orbit_velocity = 1.77
+orbit_velocity_random = 0.0
+orbit_velocity_curve = SubResource( 9 )
+linear_accel_curve = SubResource( 13 )
+scale = 13.0
+scale_curve = SubResource( 11 )
+
+[sub_resource type="Animation" id=7]
 length = 0.5
 step = 0.025
 tracks/0/type = "value"
@@ -73,7 +98,19 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 0.175, 0.325, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ -45.0, -35.0, 35.0, 45.0 ]
+"values": [ 0.0, -35.0, 35.0, 0.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("StrikeAxis/Sprite/Particles2D:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 1, 1 ), Vector2( -1, 1 ) ]
 }
 
 [node name="Crowbar" type="Node2D" groups=[
@@ -85,15 +122,14 @@ semi_major_axis = 5
 semi_minor_axis = 2
 
 [node name="StrikeAxis" type="Position2D" parent="."]
-rotation = 3.14159
 
 [node name="Sprite" type="Sprite" parent="StrikeAxis"]
 position = Vector2( 0, -5 )
-rotation = 0.785398
 texture = ExtResource( 3 )
 offset = Vector2( 0, -6 )
 
 [node name="HitBox" parent="StrikeAxis/Sprite" instance=ExtResource( 1 )]
+visible = false
 position = Vector2( 0, -8.1 )
 collision_layer = 0
 collision_mask = 16
@@ -103,10 +139,16 @@ knockback = 78.874
 shape = SubResource( 1 )
 disabled = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-playback_speed = 1.7
-anims/attack = SubResource( 2 )
+[node name="Particles2D" type="Particles2D" parent="StrikeAxis/Sprite"]
+show_behind_parent = true
+position = Vector2( 0, -10 )
+emitting = false
+lifetime = 0.29
+one_shot = true
+process_material = SubResource( 12 )
 
-[node name="TweenCrow" type="Tween" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 1.5
+anims/attack = SubResource( 7 )
 
 [editable path="StrikeAxis/Sprite/HitBox"]
