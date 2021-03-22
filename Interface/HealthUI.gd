@@ -8,6 +8,7 @@ onready var heartUIEmpty = $Cointainer
 
 func set_hearts(value):
 	hearts = clamp(value, 0, max_hearts)
+#	print(hearts)
 	if heartUIFull != null:
 		heartUIFull.rect_size.x = hearts * 10
 
@@ -17,15 +18,10 @@ func set_max_hearts(value):
 	if heartUIEmpty != null:
 		heartUIEmpty.rect_size.x = max_hearts * 10
 
-
-func player_ready():
-	self.max_hearts = Global.player.stats.max_health
-	self.hearts = Global.player.stats.health
+func _ready():
 	# warning-ignore:return_value_discarded
 	Global.player.stats.connect("health_changed", self, "set_hearts")
 	# warning-ignore:return_value_discarded
 	Global.player.stats.connect("max_health_changed", self, "set_max_hearts")
-
-func _ready():
-	pass
-	
+	self.max_hearts = Global.player.stats.max_health
+	self.hearts = Global.player.stats.health

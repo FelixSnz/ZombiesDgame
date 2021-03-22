@@ -8,7 +8,7 @@ export(Array, Color) var colors
 
 func create_destroyed_effect():
 	var destroyedEffect = DestroyedEffect.instance()
-	var world = get_tree().current_scene.get_node("YSort")
+	var world = get_tree().current_scene.get_node("LevelGenerator/YSort")
 	destroyedEffect.global_position = global_position
 	world.add_child(destroyedEffect)
 

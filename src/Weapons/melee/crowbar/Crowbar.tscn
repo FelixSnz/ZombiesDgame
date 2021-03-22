@@ -95,6 +95,7 @@ offset = Vector2( 0, -6 )
 
 [node name="HitBox" parent="StrikeAxis/Sprite" groups=[
 "camera_shaker",
+"frame_freezer",
 ] instance=ExtResource( 1 )]
 position = Vector2( 0, -8.1 )
 collision_layer = 0

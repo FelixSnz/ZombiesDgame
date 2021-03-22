@@ -15,8 +15,6 @@ onready var tilemap = $TileMap
 onready var undertile = $TileMap2
 onready var overtile = $TileMap3
 
-var maptools = MapTools.new()
-
 var glob_counter = 0
 var individual_rooms
 var maps
@@ -44,7 +42,7 @@ func generate_level():
 	var end_room = walker.get_end_room(player_initial_pos, individual_rooms)
 	var exit_position = walker.get_room_center(end_room)
 	var exit = create_instance(Exit, exit_position * cell_size \
-	+ Vector2(cell_size/2.0, cell_size/2.0))
+	+ Vector2(cell_size/2.0, cell_size/2.0), $YSort)
 	exit.connect("leaving_level", self, "reload_level")
 
 	walker.queue_free()
@@ -54,13 +52,13 @@ func generate_level():
 	#placing the rooms
 	place_tilemap(tilemap, maps.rooms, 2)
 	#placing the walls under the rooms
-	down_walls_map = maptools.direction_map(maps.rooms, Vector2.DOWN)
+	down_walls_map = MapTools.direction_map(maps.rooms, Vector2.DOWN)
 
 	#placing the bridges
 	place_tilemap(tilemap, maps.bridges, 2)
 
 	#placing down walls under the room tiles created by the bridge map
-	down_walls_map += maptools.sub_map(maps.all, 1, Vector2.DOWN)
+	down_walls_map += MapTools.sub_map(maps.all, 1, Vector2.DOWN)
 	place_tilemap(undertile, down_walls_map, 0)
 
 
@@ -70,15 +68,15 @@ func generate_level():
 
 	#loop for placing decoration tiles
 	for room in individual_rooms:
-		var outer_bricks = maptools.neighbors_map(room, [2,3]) 
-		var inner_bricks = maptools.neighbors_map(room, 4)
+		var outer_bricks = MapTools.neighbors_map(room, [2,3]) 
+		var inner_bricks = MapTools.neighbors_map(room, 4)
 
 		outer_bricks.shuffle()
 		inner_bricks.shuffle()
 		down_walls_map.shuffle()
-		outer_bricks = maptools.random_items(outer_bricks, round(outer_bricks.size() * 0.25))
-		inner_bricks = maptools.random_items(inner_bricks, round(inner_bricks.size() * .2))
-		down_walls_map = maptools.random_items(down_walls_map, round(down_walls_map.size() * .5))
+		outer_bricks = MapTools.random_items(outer_bricks, round(outer_bricks.size() * 0.25))
+		inner_bricks = MapTools.random_items(inner_bricks, round(inner_bricks.size() * .2))
+		down_walls_map = MapTools.random_items(down_walls_map, round(down_walls_map.size() * .5))
 
 		for location in outer_bricks:
 			overtile.set_cellv(location, randi()%2 + 2)
@@ -100,7 +98,7 @@ func generate_zombies(ind_rooms, porcentage):
 			continue
 		var n_zombies = round(room.size() * porcentage)
 		room.shuffle()
-		var positions = maptools.random_items(room, n_zombies)
+		var positions = MapTools.random_items(room, n_zombies)
 		for position in positions:
 			create_instance(Zombie, position * cell_size \
 			+ Vector2(cell_size/2.0, cell_size/2.0), $YSort/Zombies)
@@ -110,9 +108,9 @@ func generate_entities(entity, ind_rooms, porcentage):
 	for room in ind_rooms:
 		var n_barrels = round(room.size() * porcentage)
 		room.shuffle()
-		var positions = maptools.random_items(room, n_barrels)
+		var positions = MapTools.random_items(room, n_barrels)
 		for position in positions:
-			var neighbors = maptools.get_neighbors(position)
+			var neighbors = MapTools.get_neighbors(position)
 			for neighbor in neighbors.values():
 				if not neighbor in maps.bridges:
 					can_generate = true
@@ -152,12 +150,12 @@ func _input(event):
 		if event.scancode == KEY_1:
 			place_tilemap(tilemap, maps.rooms, 2)
 		if event.scancode == KEY_2:
-			var walls_map = maptools.direction_map(maps.rooms, Vector2.DOWN)
+			var walls_map = MapTools.direction_map(maps.rooms, Vector2.DOWN)
 			place_tilemap(undertile, walls_map, 0)
 		if event.scancode == KEY_3:
 			place_tilemap(tilemap, maps.bridges, 2)
 		if event.scancode == KEY_4:
-			var walls_map = maptools.sub_map(maps.all, 1, Vector2.DOWN)
+			var walls_map = MapTools.sub_map(maps.all, 1, Vector2.DOWN)
 			place_tilemap(undertile, walls_map, 0)
 		if event.scancode == KEY_5:
 			tilemap.hide()

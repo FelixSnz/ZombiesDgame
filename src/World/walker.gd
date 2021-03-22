@@ -2,7 +2,6 @@ extends Node
 class_name Walker
 
 const DIRECTIONS = [Vector2.RIGHT, Vector2.UP, Vector2.LEFT, Vector2.DOWN]
-var maptools = MapTools.new()
 var position = Vector2.ZERO
 var direction = Vector2.RIGHT
 var borders = Rect2()
@@ -28,7 +27,7 @@ func walk(steps):
 		else:
 			changue_direction()
 	for step in step_history:
-		var neighbors = maptools.get_neighbors(step)
+		var neighbors = MapTools.get_neighbors(step)
 		if (neighbors.top in step_history or neighbors.down in step_history) \
 		and (neighbors.right in step_history or neighbors.left in step_history):
 			rooms_map.append(step)
@@ -67,7 +66,7 @@ func extract_rooms(all_rooms):
 #given a map "cells" and an individul cell "test_cell" 
 #checks if "test_cell" is around of any of the elements in "cells"
 func has_around(map, location):
-	var neighbors = maptools.get_neighbors(location)
+	var neighbors = MapTools.get_neighbors(location)
 	for neighbor in neighbors.values():
 		if map.has(neighbor):
 			return true
@@ -147,10 +146,10 @@ func get_room_center(room):
 	var center = Vector2(round((x_max - x_min)/2) + x_min, \
 	round((y_max - y_min)/2) + y_min)
 	
-	var neighbors = maptools.get_neighbors(center)
+	var neighbors = MapTools.get_neighbors(center)
 	for neighbor in neighbors.values():
 		if not neighbor in room or not center in room:
-			var sub_map = maptools.neighbors_map(room, 4)
+			var sub_map = MapTools.neighbors_map(room, 4)
 			center = sub_map[randi() % sub_map.size()]
 	return center
 

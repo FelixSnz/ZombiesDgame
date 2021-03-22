@@ -4,8 +4,6 @@ class_name Weapon
 export(int) var semi_major_axis
 export(int) var semi_minor_axis
 
-
-
 var pointing_direction = Vector2.ZERO
 var mouse_angle
 var facing_right = true
@@ -26,6 +24,7 @@ enum {
 var state = POINTING
 
 func _ready():
+#	print("weapon started")
 	parent_scale_x = Global.player.sprite.scale.x
 	if parent_scale_x == 1:
 		facing_right = true
@@ -67,7 +66,7 @@ func pointing_state(delta):
 	_pointing_state(delta)
 
 func get_extra_movement():
-	var player_hand = Global.player.sprite.get_node("RightHand2")
+	var player_hand = Global.player.rightHand2
 	var extra_movement
 	if player_anim == "Idle":
 		extra_movement = player_hand.position - Vector2(5, -2)
@@ -84,10 +83,10 @@ func get_extra_movement():
 	return extra_movement
 
 func update_position(delta, extra_movement:Vector2 = Vector2.ZERO):
-	if is_in_ellipse(player_center, semi_major_axis, semi_minor_axis, get_global_mouse_position()):
+	if MathTools.is_in_ellipse(player_center, semi_major_axis, semi_minor_axis, get_global_mouse_position()):
 		global_position = global_position.linear_interpolate(get_global_mouse_position(), delta * .5) + extra_movement
 	else:
-		var ellip_radius = get_ellipse_radius(semi_major_axis, semi_minor_axis, pointing_direction.angle())
+		var ellip_radius = MathTools.get_ellipse_radius(semi_major_axis, semi_minor_axis, pointing_direction.angle())
 		var diff = player_center + pointing_direction * ellip_radius
 		global_position = global_position.linear_interpolate(diff, delta * 5) + extra_movement
 
@@ -106,18 +105,7 @@ func get_inverse_degrees(degrees) -> int:
 func get_mouse_direction() -> Vector2:
 	return (get_global_mouse_position() - global_position).normalized()
 
-func is_in_circle(circle_position, radius, vector):
-	return pow(vector.x - circle_position.x, 2) + \
-	pow(vector.y - circle_position.y, 2) < pow(radius, 2)
 
-func is_in_ellipse(ellipse_position, x_axis, y_axis, vector):
-	var term1 = pow(vector.x - ellipse_position.x, 2)/pow(x_axis, 2)
-	var term2 = pow(vector.y - ellipse_position.y, 2)/pow(y_axis, 2)
-	return term1 + term2 <= 1
-	
-func get_ellipse_radius(a, b, angle):
-	var r = a*b/sqrt(pow(a, 2) * pow(sin(angle), 2) + pow(b, 2) * pow(cos(angle), 2) )
-	return r
 
 func behind(boolean:bool):
 	if facing_right:

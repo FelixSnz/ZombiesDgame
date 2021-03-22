@@ -1,7 +1,7 @@
 extends Node
 class_name MapTools
 
-func neighbors_map(map, neighbors_per_location):
+static func neighbors_map(map, neighbors_per_location):
 	var sub_map = []
 	var neighbor_count = 0
 	if neighbors_per_location is int:
@@ -16,7 +16,7 @@ func neighbors_map(map, neighbors_per_location):
 		neighbor_count = 0
 	return sub_map
 
-func direction_map(map, dir):
+static func direction_map(map, dir):
 	var neighbor_map = []
 	for location in map:
 		if not location + dir in map:
@@ -28,10 +28,10 @@ func direction_map(map, dir):
 #number of adjacent cells matches with "surround_amount", appends
 #the adjacent cell determinated by "dir_to_get" to an array to be returned
 #NOTE: "surround_amount" can be an array of various permited matches
-func sub_map(map, neighbors_per_location, dir):
+static func sub_map(map, neighbors_per_location, dir):
 	return direction_map(neighbors_map(map, neighbors_per_location), dir)
 
-func random_items(arr, n):
+static func random_items(arr, n):
 	var new_arr = []
 	while new_arr.size() < n:
 		var rand_i = randi() % arr.size()
@@ -39,7 +39,7 @@ func random_items(arr, n):
 			new_arr.append(arr[rand_i])
 	return new_arr
 
-func get_neighbors(location):
+static func get_neighbors(location):
 	return {
 		down = location + Vector2.DOWN, 
 		top = location + Vector2.UP, 

@@ -11,13 +11,14 @@ const RightHand = preload("res://src/Player/RightHand.tscn")
 
 onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
-onready var healthUI = $HealthUI
 onready var rightHand = $Sprite/RightHand
+onready var rightHand2 = $Sprite/RightHand2
 onready var hurtBox = $HurtBox
 onready var softCollision = $SoftCollision
 onready var weaponPos = $WeaponPos
 onready var twen = $Tween
 onready var stats = $PlayerStats
+onready var remoteTransform = $RemoteTransform2D
 
 signal face_side_changued(side)
 signal anim_started(anim_name)
@@ -36,9 +37,13 @@ var direction
 var weapon
 
 func _ready():
+	var camera = get_tree().current_scene.get_node("Camera2D")
 	Global.player = self
+# warning-ignore:return_value_discarded
+	connect("weapon_changued", camera, "_on_Player_weapon_changued")
+	remoteTransform.remote_path = NodePath(camera.get_path())
 	sprite.scale = Vector2.ONE
-	stats.connect("no_health", self, "queue_free")
+#	stats.connect("no_health", self, "queue_free")
 	if INITIAL_WEAPON != null:
 		if weaponPos.get_child_count() > 0:
 			weaponPos.remove_child(weaponPos.get_child(0))
@@ -47,7 +52,6 @@ func _ready():
 		grab_weapon()
 	connect_weapon_methods()
 	emit_signal("weapon_changued")
-	healthUI.player_ready()
 
 func _physics_process(delta):
 	direction = (get_global_mouse_position() - global_position).normalized()
@@ -134,6 +138,8 @@ func connect_weapon_methods():
 func _on_HurtBox_area_entered(area):
 	hurtBox.start_invincivility(1)
 	stats.health -= area.damage
+	if stats.health <= 0:
+		queue_free()
 	$Blink.play("inv")
 
 func _on_AnimationPlayer_animation_started(anim_name):

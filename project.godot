@@ -22,7 +22,12 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "MapTools",
 "language": "GDScript",
-"path": "res://src/Hacks/MapTools.gd"
+"path": "res://src/Singletons/MapTools.gd"
+}, {
+"base": "Node",
+"class": "MathTools",
+"language": "GDScript",
+"path": "res://src/Singletons/MathTools.gd"
 }, {
 "base": "Node",
 "class": "Walker",
@@ -38,6 +43,7 @@ _global_script_class_icons={
 "Bullet": "",
 "FireArm": "",
 "MapTools": "",
+"MathTools": "",
 "Walker": "",
 "Weapon": ""
 }
@@ -45,13 +51,12 @@ _global_script_class_icons={
 [application]
 
 config/name="RobotGame"
-run/main_scene="res://src/World/LevelGenerator.tscn"
+run/main_scene="res://Game.tscn"
 run/low_processor_mode=true
 config/icon="res://icon.png"
 
 [autoload]
 
-worldenviroment="*res://src/World/worldenv.tscn"
 Global="*res://src/Singletons/global.gd"
 
 [debug]
@@ -60,8 +65,8 @@ settings/fps/force_fps=60
 
 [display]
 
-window/size/width=640
-window/size/height=360
+window/size/width=480
+window/size/height=270
 window/size/test_width=1280
 window/size/test_height=720
 window/stretch/mode="2d"
@@ -142,6 +147,8 @@ click={
 
 [rendering]
 
+quality/2d/use_pixel_snap=true
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
 environment/default_clear_color=Color( 0.129412, 0.117647, 0.152941, 1 )
+environment/default_environment="res://default_env.tres"
