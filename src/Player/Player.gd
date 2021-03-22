@@ -11,12 +11,13 @@ const RightHand = preload("res://src/Player/RightHand.tscn")
 
 onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
+onready var healthUI = $HealthUI
 onready var rightHand = $Sprite/RightHand
 onready var hurtBox = $HurtBox
 onready var softCollision = $SoftCollision
 onready var weaponPos = $WeaponPos
 onready var twen = $Tween
-onready var stats = $PlayersStats
+onready var stats = $PlayerStats
 
 signal face_side_changued(side)
 signal anim_started(anim_name)
@@ -46,6 +47,7 @@ func _ready():
 		grab_weapon()
 	connect_weapon_methods()
 	emit_signal("weapon_changued")
+	healthUI.player_ready()
 
 func _physics_process(delta):
 	direction = (get_global_mouse_position() - global_position).normalized()
@@ -129,8 +131,9 @@ func connect_weapon_methods():
 # warning-ignore:return_value_discarded
 	connect("anim_started", weapon, "player_anim_changued")
 
-func _on_HurtBox_area_entered(_area):
+func _on_HurtBox_area_entered(area):
 	hurtBox.start_invincivility(1)
+	stats.health -= area.damage
 	$Blink.play("inv")
 
 func _on_AnimationPlayer_animation_started(anim_name):

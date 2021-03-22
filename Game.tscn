@@ -7,8 +7,6 @@
 
 [node name="LevelGenerator" parent="." instance=ExtResource( 1 )]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
 [node name="FrameFreezer" type="Node" parent="." groups=[
 "freezer",
 ]]

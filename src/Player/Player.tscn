@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/Player/RightHand.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/player/character_no_hands.png" type="Texture" id=2]
@@ -10,7 +10,8 @@
 [ext_resource path="res://src/Hacks/HurtBox.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/sprites/shadows/SmallShadow.png" type="Texture" id=9]
 [ext_resource path="res://src/Shaders/White_blink.tres" type="Material" id=10]
-[ext_resource path="res://src/Player/PlayersStats.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/Player/PlayerStats.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Interface/HealthUI.tscn" type="PackedScene" id=12]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 1.99999
@@ -184,7 +185,9 @@ ACCELERATION = 280.257
 FRICTION = 239.055
 INITIAL_WEAPON = ExtResource( 4 )
 
-[node name="PlayersStats" parent="." instance=ExtResource( 11 )]
+[node name="PlayerStats" parent="." groups=[
+"camera_shaker",
+] instance=ExtResource( 11 )]
 
 [node name="Shadow" type="Sprite" parent="."]
 show_behind_parent = true
@@ -258,6 +261,13 @@ zoom = Vector2( 0.7, 0.7 )
 amplitude = 2.93
 duration = 0.334
 DAMP_EASING = 1.41421
+
+[node name="HealthUI" parent="." instance=ExtResource( 12 )]
+anchor_bottom = 0.0
+margin_left = -210.0
+margin_top = -120.0
+margin_right = -210.0
+margin_bottom = -120.0
 [connection signal="weapon_changued" from="." to="Camera" method="_on_Player_weapon_changued"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="animation_started" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_started"]

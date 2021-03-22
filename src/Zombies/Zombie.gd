@@ -13,6 +13,7 @@ var direction = Vector2.RIGHT
 onready var stats = $Stats
 onready var sprite = $Sprite
 onready var hurtBox = $HurtBox
+onready var hitBox = $HitBox
 onready var sofCollision = $SoftCollision
 onready var animationPlayer = $AnimationPlayer
 onready var attackRangeZone = $AttackRangeZone
@@ -78,10 +79,12 @@ func accelerate_towards_point(point, delta):
 	sprite.flip_h = velocity.x < 0
 
 func jump_attack():
+#	hitBox.get_node("CollisionShape2D").disabled = false
 	animationPlayer.play("Jump")
 	velocity = move_and_slide(direction * SPRINT)
 
 func jump_finished():
+#	hitBox.get_node("CollisionShape2D").disabled = true
 	state = IDLE
 
 func seek_player():
