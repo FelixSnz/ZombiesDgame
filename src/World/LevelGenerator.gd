@@ -14,6 +14,7 @@ const WoodBarrel = preload("res://src/World/WoodBarrel.tscn")
 onready var tilemap = $TileMap
 onready var undertile = $TileMap2
 onready var overtile = $TileMap3
+onready var player = $YSort/Player
 
 var glob_counter = 0
 var individual_rooms
@@ -35,9 +36,13 @@ func generate_level():
 	individual_rooms = walker.extract_rooms(maps.rooms) #extracting individual rooms 
 	var start_room = walker.get_start_room(individual_rooms)
 	
-	player_initial_pos = walker.get_room_center(start_room)
-	create_instance(Player, player_initial_pos * cell_size \
-	+ Vector2(cell_size/2.0, cell_size/2.0), $YSort)
+	player_initial_pos = walker.get_room_center(start_room) 
+	
+	player.global_position = player_initial_pos * cell_size \
+	+ Vector2(cell_size/2.0, cell_size/2.0)
+	
+#	create_instance(Player, player_initial_pos * cell_size \
+#	+ Vector2(cell_size/2.0, cell_size/2.0), $YSort)
 	
 	var end_room = walker.get_end_room(player_initial_pos, individual_rooms)
 	var exit_position = walker.get_room_center(end_room)

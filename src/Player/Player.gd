@@ -37,11 +37,11 @@ var direction
 var weapon
 
 func _ready():
-	var camera = get_tree().current_scene.get_node("Camera2D")
+#	var camera = get_tree().current_scene.get_node("Camera2D")
 	Global.player = self
 # warning-ignore:return_value_discarded
-	connect("weapon_changued", camera, "_on_Player_weapon_changued")
-	remoteTransform.remote_path = NodePath(camera.get_path())
+#	connect("weapon_changued", camera, "_on_Player_weapon_changued")
+#	remoteTransform.remote_path = NodePath(camera.get_path())
 	sprite.scale = Vector2.ONE
 #	stats.connect("no_health", self, "queue_free")
 	if INITIAL_WEAPON != null:

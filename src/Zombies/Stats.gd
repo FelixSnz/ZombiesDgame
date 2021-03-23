@@ -22,8 +22,8 @@ func set_max_health(value):
 	emit_signal("max_health_changed")
 
 func _ready():
-	var heal_ui_node = get_tree().current_scene.get_node("CanvasLayer/HealthUI")
-# warning-ignore:return_value_discarded
-	connect("health_changed", heal_ui_node, "_on_player_health_changued")
+#	var heal_ui_node = get_tree().current_scene.get_node("CanvasLayer/HealthUI")
+## warning-ignore:return_value_discarded
+#	connect("health_changed", heal_ui_node, "_on_player_health_changued")
 	self.health = max_health
 	

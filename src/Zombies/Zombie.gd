@@ -21,7 +21,6 @@ onready var wanderController = $WanderController
 onready var playerDetectionZone = $PlayerDetectionZone
 
 
-
 enum {
 	IDLE,
 	WANDER,
@@ -34,6 +33,7 @@ var state = IDLE
 func _ready():
 	var style_index = int(round(rand_range(0, styles.size() -1)))
 	sprite.texture = styles[style_index]
+	$EnemyHealthBar.initialize(stats.max_health)
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
@@ -89,7 +89,13 @@ func jump_finished():
 
 func seek_player():
 	if playerDetectionZone.can_see_player():
+		$EnemyHealthBar.show()
 		state = CHASE
+	else:
+		if not $EnemyHealthBar/Timer.time_left > 0:
+			$EnemyHealthBar.hide()
+		else:
+			$EnemyHealthBar.show()
 
 func update_wander():
 	state = pick_random_state([IDLE, WANDER])
