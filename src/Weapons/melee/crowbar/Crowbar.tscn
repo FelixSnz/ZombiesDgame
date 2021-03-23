@@ -101,6 +101,7 @@ position = Vector2( 0, -8.1 )
 collision_layer = 0
 collision_mask = 16
 knockback = 78.874
+damage = 10
 
 [node name="CollisionShape2D" parent="StrikeAxis/Sprite/HitBox" index="0"]
 shape = SubResource( 1 )
