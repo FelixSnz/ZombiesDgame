@@ -140,7 +140,7 @@ func _on_HurtBox_area_entered(area):
 	stats.health -= area.damage
 	if stats.health <= 0:
 		queue_free()
-	$Blink.play("inv")
+	$Blink.play("default")
 
 func _on_AnimationPlayer_animation_started(anim_name):
 	if prev_anim != anim_name and anim_toggle:

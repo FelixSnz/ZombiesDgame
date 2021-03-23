@@ -1,11 +1,28 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/World/LevelGenerator.tscn" type="PackedScene" id=1]
 [ext_resource path="res://FrameFreezer.gd" type="Script" id=2]
 [ext_resource path="res://Interface/HealthUI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Camera/Camera.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/World/worldenv.tscn" type="PackedScene" id=5]
+
+[sub_resource type="Environment" id=1]
+resource_local_to_scene = true
+background_mode = 4
+dof_blur_near_distance = 1.02
+dof_blur_near_transition = 0.09
+dof_blur_near_amount = 0.16
+glow_enabled = true
+glow_intensity = 8.0
+glow_strength = 0.48
+glow_blend_mode = 0
+glow_hdr_threshold = 2.9
+glow_bicubic_upscale = true
 
 [node name="Game" type="Node"]
+
+[node name="WorldEnvironment" parent="." instance=ExtResource( 5 )]
+environment = SubResource( 1 )
 
 [node name="Camera2D" parent="." instance=ExtResource( 4 )]
 amplitude = 4.589

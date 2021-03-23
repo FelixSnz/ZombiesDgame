@@ -55,14 +55,8 @@ func _input(event):
 func pointing_state(delta):
 	rotation_degrees = mouse_angle
 	player_anim = Global.player.animationPlayer.current_animation
-	
-	var extra_mov = get_extra_movement()
-	
-	if is_in_group("Melee"):
-		update_position(delta, extra_mov)
-	else:
-		update_position(delta)
-		
+
+	update_position(delta, get_extra_movement())
 	_pointing_state(delta)
 
 func get_extra_movement():
@@ -104,8 +98,6 @@ func get_inverse_degrees(degrees) -> int:
 
 func get_mouse_direction() -> Vector2:
 	return (get_global_mouse_position() - global_position).normalized()
-
-
 
 func behind(boolean:bool):
 	if facing_right:

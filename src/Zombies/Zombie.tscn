@@ -133,8 +133,9 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=9]
-resource_name = "anim"
-length = 0.5
+resource_name = "default"
+length = 0.2
+step = 0.02
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:material:shader_param/active")
 tracks/0/interp = 1
@@ -142,10 +143,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.3, 0.4 ),
+"times": PoolRealArray( 0, 0.04, 0.16, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ true, false, true, false ]
+"values": [ false, true, true, false ]
 }
 
 [sub_resource type="CircleShape2D" id=10]
@@ -224,7 +225,7 @@ anims/Jump = SubResource( 7 )
 anims/Run = SubResource( 8 )
 
 [node name="Blink" type="AnimationPlayer" parent="."]
-anims/anim = SubResource( 9 )
+anims/default = SubResource( 9 )
 
 [node name="AttackRangeZone" parent="." instance=ExtResource( 12 )]
 

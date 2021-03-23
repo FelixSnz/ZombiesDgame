@@ -130,8 +130,8 @@ tracks/3/keys = {
 "values": [ Vector2( 3, -3.75 ), Vector2( 2.25, -3 ), Vector2( 2, -3 ), Vector2( 2.25, -3 ) ]
 }
 
-[sub_resource type="Animation" id=7]
-resource_name = "default"
+[sub_resource type="Animation" id=6]
+resource_name = "Electric"
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:modulate")
@@ -146,7 +146,8 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 27.851, 27.851, 27.851, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
+resource_name = "default"
 length = 0.2
 step = 0.02
 tracks/0/type = "value"
@@ -156,30 +157,6 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.04, 0.16, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, true, false ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite/LeftHand:use_parent_material")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.04, 0.16, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, true, false ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite/RightHand:use_parent_material")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0, 0.04, 0.16, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
@@ -217,7 +194,7 @@ hframes = 5
 frame = 1
 
 [node name="LeftHand" type="Sprite" parent="Sprite"]
-material = ExtResource( 10 )
+use_parent_material = true
 position = Vector2( -6, -2 )
 texture = ExtResource( 5 )
 flip_h = true
@@ -225,13 +202,13 @@ flip_h = true
 [node name="RightHand" parent="Sprite" instance=ExtResource( 1 )]
 visible = false
 show_behind_parent = true
-material = ExtResource( 10 )
+use_parent_material = true
 position = Vector2( 5, -2 )
 
 [node name="RightHand2" parent="Sprite" instance=ExtResource( 1 )]
 visible = false
 show_behind_parent = true
-material = ExtResource( 10 )
+use_parent_material = true
 position = Vector2( 5, -2 )
 
 [node name="WeaponPos" type="Position2D" parent="."]
@@ -269,8 +246,8 @@ anims/Idle = SubResource( 4 )
 anims/Run = SubResource( 5 )
 
 [node name="Blink" type="AnimationPlayer" parent="."]
+anims/Electric = SubResource( 6 )
 anims/default = SubResource( 7 )
-anims/inv = SubResource( 6 )
 
 [node name="Tween" type="Tween" parent="."]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
