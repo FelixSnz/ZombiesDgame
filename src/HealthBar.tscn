@@ -29,36 +29,12 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 0.282353, 0.00392157, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("./Count/Number:rect_position")
+tracks/1/path = NodePath("./Count/Icon:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.05, 0.15, 0.25, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 60, 22 ), Vector2( 50, 10 ), Vector2( 80, 30 ), Vector2( 75, 10 ), Vector2( 60, 22 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("./Count/Icon:rect_position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.05, 0.15, 0.25, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 20, 17 ), Vector2( 10, 5 ), Vector2( 40, 25 ), Vector2( 35, 5 ), Vector2( 20, 17 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("./Count/Icon:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
 "times": PoolRealArray( 0, 0.15, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
@@ -76,6 +52,8 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+amplitude = 7.261
+DAMP_EASING = 1.86607
 
 [node name="TextureProgress" type="TextureProgress" parent="."]
 margin_left = -0.132429
@@ -92,9 +70,9 @@ __meta__ = {
 }
 
 [node name="Count" type="NinePatchRect" parent="."]
-margin_left = -0.132431
-margin_right = 39.8676
-margin_bottom = 40.0
+margin_right = 304.0
+margin_bottom = 54.0
+rect_clip_content = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -125,3 +103,6 @@ __meta__ = {
 anims/NumberShake = SubResource( 2 )
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
