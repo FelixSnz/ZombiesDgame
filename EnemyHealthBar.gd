@@ -19,7 +19,7 @@ func animate_value(start, end):
 		pass
 #		$AnimationPlayer.play("NumberShake")
 
-func update_count_text(value):
+func update_count_text(_value):
 	pass
 #	$Count/Number.text = str(clamp(round(value / values_scalar), 0, maximum)) + '/' + str(maximum/values_scalar) + "Hp"
 

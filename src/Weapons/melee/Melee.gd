@@ -4,8 +4,8 @@ const Slash = preload("res://src/Effects & Particles/SlashEffect.tscn")
 
 onready var strikeAxis = $StrikeAxis
 onready var hitBox = $StrikeAxis/Sprite/HitBox
-
-
+onready var sprite = $StrikeAxis/Sprite 
+onready var animationPlayer = $AnimationPlayer
 
 var initial_strike_rotation
 var final_strke_rotation
@@ -14,15 +14,14 @@ var final_sprite_rotation
 var vertical_side = 0
 
 func _ready():
-	sprite = $StrikeAxis/Sprite
-	animationPlayer = $AnimationPlayer
 	set_animation_values()
 	update_behind_check()
 
 func _pointing_state(_delta):
+	look_at(get_global_mouse_position())
 	hitBox.direction = pointing_direction
 	if Global.player.animationPlayer.is_playing():
-		if player_anim == "Run" and vertical_side == 1:
+		if Global.player.animationPlayer.current_animation == "Run" and vertical_side == 1:
 			if facing_right:
 				behind(true)
 			else:
@@ -66,8 +65,8 @@ func add_slash(slash):
 		slash.global_position = global_position
 	else:
 		slash.global_position = global_position
-	slash.rotation_degrees = mouse_angle
 	world.add_child(slash)
+	slash.rotation = rotation
 
 func flip(boolean:bool): 
 	sprite.flip_h = boolean
@@ -91,14 +90,14 @@ func update_behind_check(inverted:int = 1, inv_bool:bool = false):
 	if Global.player.animationPlayer.is_playing():
 		if vertical_side == 1:
 			if facing_right:
-				if player_anim == "Run":
+				if Global.player.animationPlayer.current_animation == "Run":
 					behind(true)
-				elif player_anim == "Idle":
+				elif Global.player.animationPlayer.current_animation == "Idle":
 					behind(false)
 			else:
-				if player_anim == "Run":
+				if Global.player.animationPlayer.current_animation == "Run":
 					behind(false)
-				elif player_anim == "Idle":
+				elif Global.player.animationPlayer.current_animation == "Idle":
 					behind(true)
 
 func set_animation_values():

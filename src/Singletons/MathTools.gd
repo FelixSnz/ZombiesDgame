@@ -13,3 +13,8 @@ static func is_in_ellipse(ellipse_position, x_axis, y_axis, vector):
 static func get_ellipse_radius(a, b, angle):
 	var r = a*b/sqrt(pow(a, 2) * pow(sin(angle), 2) + pow(b, 2) * pow(cos(angle), 2) )
 	return r
+
+static func get_inverse_degrees(degrees) -> int:
+	var radians = deg2rad(degrees)
+	var inverse_vector = Vector2(sin(radians), cos(radians))
+	return int(rad2deg(inverse_vector.angle()) + 90)

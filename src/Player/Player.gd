@@ -35,15 +35,12 @@ var anim_toggle = true
 var prev_anim
 var direction
 var weapon
+var weaponHand
+var center
 
 func _ready():
-#	var camera = get_tree().current_scene.get_node("Camera2D")
 	Global.player = self
-# warning-ignore:return_value_discarded
-#	connect("weapon_changued", camera, "_on_Player_weapon_changued")
-#	remoteTransform.remote_path = NodePath(camera.get_path())
 	sprite.scale = Vector2.ONE
-#	stats.connect("no_health", self, "queue_free")
 	if INITIAL_WEAPON != null:
 		if weaponPos.get_child_count() > 0:
 			weaponPos.remove_child(weaponPos.get_child(0))
@@ -53,7 +50,8 @@ func _ready():
 	connect_weapon_methods()
 	emit_signal("weapon_changued")
 
-func _physics_process(delta):
+func _process(delta):
+	center = global_position - Vector2(0, 4)
 	direction = (get_global_mouse_position() - global_position).normalized()
 	match state:
 		MOVE:
@@ -99,18 +97,19 @@ func _input(event):
 func grab_weapon():
 	if has_weapon():
 		if weapon is Sprite:
-			weapon.add_child(RightHand.instance())
+			weaponHand = RightHand.instance()
+			weapon.add_child(weaponHand)
 			return
 		var found = false
 		for child in weapon.get_children():
 			if child.name == "Sprite":
-				var rightHand_ = RightHand.instance()
-				child.add_child(rightHand_)
+				weaponHand = RightHand.instance()
+				child.add_child(weaponHand)
 				break
 			for little_child in child.get_children():
 				if little_child.name == "Sprite":
-					var rightHand_ = RightHand.instance()
-					little_child.add_child(rightHand_)
+					weaponHand = RightHand.instance()
+					little_child.add_child(weaponHand)
 					found = true
 					break
 			if found:
@@ -118,10 +117,14 @@ func grab_weapon():
 
 func update_facing():
 	if direction.x < 0 and side_toggle:
+		if weaponHand != null:
+			weaponHand.flip_v = true
 		emit_signal("face_side_changued", -1)
 		side_toggle = not side_toggle
 		sprite.scale.x = -1
 	elif direction.x > 0 and not side_toggle:
+		if weaponHand != null:
+			weaponHand.flip_v = false
 		emit_signal("face_side_changued", 1)
 		side_toggle = not side_toggle
 		sprite.scale.x = 1

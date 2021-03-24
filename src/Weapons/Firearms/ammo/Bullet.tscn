@@ -18,7 +18,7 @@ extents = Vector2( 2, 1 )
 collision_layer = 64
 collision_mask = 16
 script = ExtResource( 4 )
-speed = 324.969
+speed = 299.742
 knockback = 37.789
 damage = 22
 

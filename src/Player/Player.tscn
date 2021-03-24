@@ -12,7 +12,7 @@
 [ext_resource path="res://src/Shaders/White_blink.tres" type="Material" id=10]
 [ext_resource path="res://src/Player/PlayerStats.tscn" type="PackedScene" id=11]
 
-[sub_resource type="Shader" id=2]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 uniform bool active = true;
 
@@ -29,14 +29,14 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id=11]
+[sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
-shader = SubResource( 2 )
+shader = SubResource( 1 )
 shader_param/active = false
 
 [sub_resource type="ShaderMaterial" id=3]
 resource_local_to_scene = true
-shader = SubResource( 2 )
+shader = SubResource( 1 )
 shader_param/active = false
 
 [sub_resource type="CapsuleShape2D" id=4]
@@ -227,7 +227,7 @@ flip_h = true
 [node name="RightHand" parent="Sprite" instance=ExtResource( 1 )]
 visible = false
 show_behind_parent = true
-material = SubResource( 11 )
+material = SubResource( 2 )
 use_parent_material = true
 position = Vector2( 5, -2 )
 

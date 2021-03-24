@@ -43,7 +43,6 @@ func set_shake(value: bool) -> void:
 	$Count.rect_position = Vector2.ZERO
 	if shake:
 		timer.start()
-	print(shake)
 
 func initialize(max_val):
 	$TextureProgress.max_value = max_val * values_scalar
