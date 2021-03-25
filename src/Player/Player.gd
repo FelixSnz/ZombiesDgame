@@ -23,6 +23,7 @@ onready var remoteTransform = $RemoteTransform2D
 signal face_side_changued(side)
 signal anim_started(anim_name)
 signal weapon_changued
+signal damaged
 
 enum {
 	MOVE,
@@ -141,6 +142,7 @@ func connect_weapon_methods():
 func _on_HurtBox_area_entered(area):
 	hurtBox.start_invincivility(1)
 	stats.health -= area.damage
+	emit_signal("damaged")
 	if stats.health <= 0:
 		queue_free()
 	$Blink.play("default")

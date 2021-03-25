@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/ProgressBar.gd" type="Script" id=1]
 [ext_resource path="res://assets/template_bar.png" type="Texture" id=2]
 [ext_resource path="res://assets/bar_container.png" type="Texture" id=3]
 [ext_resource path="res://src/Fonts/PixelRPG.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://assets/health_icon_outline.png" type="Texture" id=5]
+[ext_resource path="res://src/Shaker.tscn" type="PackedScene" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 24
@@ -52,15 +53,25 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-amplitude = 7.261
-DAMP_EASING = 1.86607
+
+[node name="TextureProgress2" type="TextureProgress" parent="."]
+margin_left = -0.132431
+margin_right = 851.868
+margin_bottom = 65.0
+rounded = true
+texture_under = ExtResource( 2 )
+texture_over = ExtResource( 3 )
+texture_progress = ExtResource( 2 )
+tint_under = Color( 0.180392, 0.180392, 0.180392, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TextureProgress" type="TextureProgress" parent="."]
 margin_left = -0.132429
 margin_right = 851.868
 margin_bottom = 65.0
 rounded = true
-texture_under = ExtResource( 2 )
 texture_over = ExtResource( 3 )
 texture_progress = ExtResource( 2 )
 tint_under = Color( 0.180392, 0.180392, 0.180392, 1 )
@@ -99,10 +110,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Shaker" parent="Count" instance=ExtResource( 6 )]
+parent_property = "rect_position"
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/NumberShake = SubResource( 2 )
 
 [node name="Tween" type="Tween" parent="."]
-
-[node name="Timer" type="Timer" parent="."]
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="health_changued" from="." to="Count/Shaker" method="_on_shake_requested"]

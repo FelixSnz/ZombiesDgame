@@ -57,9 +57,6 @@ shader_param/active = false
 environment = SubResource( 1 )
 
 [node name="Camera2D" parent="." instance=ExtResource( 4 )]
-amplitude = 4.589
-duration = 0.302
-DAMP_EASING = 1.46409
 
 [node name="FrameFreezer" type="Node" parent="." groups=[
 "freezer",
