@@ -11,7 +11,8 @@ smoothing_enabled = true
 script = ExtResource( 1 )
 
 [node name="Shaker" parent="." instance=ExtResource( 2 )]
-parent_property = "offset"
+node_path = NodePath("..")
+node_property = "offset"
 amplitude = 4.198
 duration = 0.224
 DAMP_EASING = 0.353553
