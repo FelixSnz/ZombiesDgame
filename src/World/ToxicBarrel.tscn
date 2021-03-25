@@ -6,7 +6,6 @@
 [ext_resource path="res://assets/sprites/world/toxic-barrels.png" type="Texture" id=4]
 [ext_resource path="res://src/World/ToxicBarrel.gd" type="Script" id=5]
 
-
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 3.0
 height = 6.0
@@ -58,7 +57,9 @@ anim_speed_curve = SubResource( 4 )
 radius = 5.39546
 height = 5.61319
 
-[node name="ToxicBarrel" type="StaticBody2D"]
+[node name="ToxicBarrel" type="StaticBody2D" groups=[
+"world_objects",
+]]
 collision_mask = 0
 script = ExtResource( 5 )
 
@@ -73,7 +74,6 @@ hframes = 4
 frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 rotation = 1.5708
 shape = SubResource( 1 )
 
@@ -88,10 +88,10 @@ process_material = SubResource( 9 )
 texture = ExtResource( 2 )
 
 [node name="HurtBox" parent="." instance=ExtResource( 1 )]
+collision_layer = 1
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 position = Vector2( 0, -4.51751 )
 shape = SubResource( 10 )
-[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 
 [editable path="HurtBox"]

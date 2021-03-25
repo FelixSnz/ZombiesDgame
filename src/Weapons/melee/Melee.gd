@@ -61,10 +61,7 @@ func slash(boolean):
 
 func add_slash(slash):
 	var world = get_tree().current_scene
-	if not facing_right:
-		slash.global_position = global_position
-	else:
-		slash.global_position = global_position
+	slash.global_position = global_position
 	world.add_child(slash)
 	slash.rotation = rotation
 

@@ -109,8 +109,6 @@ func _on_Stats_no_health():
 	queue_free()
 
 func _on_HurtBox_area_entered(area):
-	if area is Bullet:
-		area.create_impact()
 	hurtBox.start_invincivility(1)
 	$Blink.play("default")
 	stats.health -= area.damage

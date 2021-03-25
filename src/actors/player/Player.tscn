@@ -12,10 +12,6 @@
 [ext_resource path="res://src/Hacks/HurtBox.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/Hacks/SoftCollision.tscn" type="PackedScene" id=11]
 
-
-
-
-
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 uniform bool active = true;
@@ -204,9 +200,7 @@ ACCELERATION = 280.257
 FRICTION = 239.055
 INITIAL_WEAPON = ExtResource( 2 )
 
-[node name="PlayerStats" parent="." groups=[
-"camera_shaker",
-] instance=ExtResource( 6 )]
+[node name="PlayerStats" parent="." instance=ExtResource( 6 )]
 script = ExtResource( 4 )
 max_health = 100
 

@@ -6,7 +6,3 @@ func _ready():
 	$Sprite.frame = rnd_idx
 	if rnd_idx < 2:
 		$Particles2D.emitting = true
-
-func _on_HurtBox_area_entered(area):
-	if area is Bullet:
-		area.create_impact()

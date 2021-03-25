@@ -1,4 +1,5 @@
 extends Node
+
 const RECT_WIDTH = round(320/7)
 const RECT_HEIGHT = round(180/7)
 const cell_size = 28
@@ -15,14 +16,35 @@ onready var tilemap = $TileMap
 onready var undertile = $TileMap2
 onready var overtile = $TileMap3
 onready var player = $YSort/Player
+var exit_door
 
 var glob_counter = 0
 var individual_rooms
 var maps
 var player_initial_pos
 
+signal level_generated
+signal level_cleared
+signal objects_generated
+signal enemies_generated
+
 func _ready():
 	randomize()
+	generate_level()
+
+func clear_level():
+	tilemap.clear()
+	undertile.clear()
+	overtile.clear()
+	
+	for world_object in get_tree().get_nodes_in_group("world_objects"):
+		world_object.queue_free()
+		
+	for enemy in get_tree().get_nodes_in_group("Enemies"):
+		enemy.queue_free()
+	
+	exit_door.queue_free()
+	emit_signal("level_cleared")
 	generate_level()
 	
 func generate_level():
@@ -46,9 +68,9 @@ func generate_level():
 	
 	var end_room = walker.get_end_room(player_initial_pos, individual_rooms)
 	var exit_position = walker.get_room_center(end_room)
-	var exit = create_instance(Exit, exit_position * cell_size \
+	exit_door = create_instance(Exit, exit_position * cell_size \
 	+ Vector2(cell_size/2.0, cell_size/2.0), $YSort)
-	exit.connect("leaving_level", self, "reload_level")
+	exit_door.connect("leaving_level", self, "reload_level")
 
 	walker.queue_free()
 
@@ -96,6 +118,7 @@ func generate_level():
 		for location in down_walls_map:
 			if not location in maps.bridges:
 				overtile.set_cellv(location, randi() % 2+ 4)
+	emit_signal("level_generated")
 
 func generate_zombies(ind_rooms, porcentage):
 	for room in ind_rooms:
@@ -107,6 +130,7 @@ func generate_zombies(ind_rooms, porcentage):
 		for position in positions:
 			create_instance(Zombie, position * cell_size \
 			+ Vector2(cell_size/2.0, cell_size/2.0), $YSort/Zombies)
+	emit_signal("enemies_generated")
 
 func generate_entities(entity, ind_rooms, porcentage):
 	var can_generate = false
@@ -128,6 +152,7 @@ func generate_entities(entity, ind_rooms, porcentage):
 				parent.add_child(instance)
 				instance.position = position * cell_size \
 				+ Vector2(cell_size/2.0, cell_size/2.0)
+	emit_signal("objects_generated")
 
 func place_tilemap(tiles, map, t_index):
 	if t_index is Array:
@@ -146,7 +171,11 @@ func create_instance(Obj, pos, parent = null):
 	return obj
 
 func reload_level():
-	var _err = get_tree().reload_current_scene()
+	
+	clear_level()
+	yield(self, "level_cleared")
+	print("cleared")
+	
 
 func _input(event):
 	if event.is_action_pressed("ui_accept"):

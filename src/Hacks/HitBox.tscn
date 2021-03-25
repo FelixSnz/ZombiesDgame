@@ -2,8 +2,13 @@
 
 [ext_resource path="res://src/Hacks/HitBox.gd" type="Script" id=1]
 
-[node name="HitBox" type="Area2D"]
+[node name="HitBox" type="Area2D" groups=[
+"freeze_trigger",
+"shake_trigger",
+]]
 space_override = 1
+collision_layer = 512
+collision_mask = 17
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

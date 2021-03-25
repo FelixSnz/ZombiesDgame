@@ -11,7 +11,8 @@ signal max_health_changed(value)
 
 func set_health(value):
 	health = value
-	emit_signal("camera_shake_requested")
+	if value < health:
+		emit_signal("camera_shake_requested")
 	emit_signal("health_changed", health)
 	if health <= 0:
 		emit_signal("no_health")

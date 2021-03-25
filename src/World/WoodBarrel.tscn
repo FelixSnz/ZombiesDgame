@@ -4,18 +4,19 @@
 [ext_resource path="res://assets/sprites/world/woodbarrel.png" type="Texture" id=2]
 [ext_resource path="res://src/World/WoodBarrel.gd" type="Script" id=3]
 
-
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 3.0
 height = 6.0
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 6.0
-height = 4.0
+height = 4.2433
 
-[node name="WoodBarrel" type="StaticBody2D"]
+[node name="WoodBarrel" type="StaticBody2D" groups=[
+"world_objects",
+]]
 position = Vector2( 0, -2 )
-collision_mask = 6
+collision_mask = 0
 script = ExtResource( 3 )
 colors = [ Color( 0.384314, 0.231373, 0.160784, 1 ), Color( 0.231373, 0.145098, 0.2, 1 ), Color( 0.32549, 0.188235, 0.152941, 1 ) ]
 
@@ -29,7 +30,6 @@ rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="HurtBox" parent="." instance=ExtResource( 1 )]
-collision_mask = 64
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 position = Vector2( 0, -4 )

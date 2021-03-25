@@ -27,6 +27,4 @@ func _on_HurtBox_area_entered(area):
 	create_matchwood(3, Color(0.384314, 0.231373, 0.160784, 1), 5)
 	create_matchwood(3, Color("#533127"), 5)
 	create_matchwood(3, Color("#3b2533"), 5)
-	if area is Bullet:
-		area.create_impact()
 	queue_free()
