@@ -22,17 +22,17 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "MapTools",
 "language": "GDScript",
-"path": "res://src/Singletons/MapTools.gd"
+"path": "res://src/utils/MapTools.gd"
 }, {
 "base": "Node",
 "class": "MathTools",
 "language": "GDScript",
-"path": "res://src/Singletons/MathTools.gd"
+"path": "res://src/utils/MathTools.gd"
 }, {
 "base": "Node",
 "class": "Walker",
 "language": "GDScript",
-"path": "res://src/World/walker.gd"
+"path": "res://src/Levels/walker.gd"
 }, {
 "base": "Node2D",
 "class": "Weapon",
@@ -51,9 +51,9 @@ _global_script_class_icons={
 [application]
 
 config/name="RobotGame"
-run/main_scene="res://Game.tscn"
+run/main_scene="res://src/Game.tscn"
 run/low_processor_mode=true
-config/icon="res://icon.png"
+config/icon="res://src/icon.png"
 
 [autoload]
 
@@ -69,7 +69,7 @@ window/size/width=384
 window/size/height=216
 window/size/test_width=1280
 window/size/test_height=720
-mouse_cursor/custom_image="res://assets/cursor.png"
+mouse_cursor/custom_image="res://assets/UI/cursor.png"
 mouse_cursor/tooltip_position_offset=Vector2( 4, 4 )
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
@@ -153,4 +153,4 @@ quality/2d/use_pixel_snap=true
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
 environment/default_clear_color=Color( 0.129412, 0.117647, 0.152941, 1 )
-environment/default_environment="res://default_env.tres"
+environment/default_environment="res://src/default_env.tres"

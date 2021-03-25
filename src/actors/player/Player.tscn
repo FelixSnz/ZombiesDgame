@@ -1,0 +1,289 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://src/actors/player/RightHand.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Weapons/melee/crowbar/Crowbar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/sprites/player/right_hand.png" type="Texture" id=3]
+[ext_resource path="res://src/actors/enemies/Stats.gd" type="Script" id=4]
+[ext_resource path="res://src/actors/player/Player.gd" type="Script" id=5]
+[ext_resource path="res://src/actors/player/PlayerStats.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/Shaders/White_blink.tres" type="Material" id=7]
+[ext_resource path="res://assets/sprites/shadows/SmallShadow.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/player/character_no_hands.png" type="Texture" id=9]
+[ext_resource path="res://src/Hacks/HurtBox.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/Hacks/SoftCollision.tscn" type="PackedScene" id=11]
+
+
+
+
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+uniform bool active = true;
+
+void fragment() {
+	vec4 previus_color = texture(TEXTURE, UV);
+	vec4 white_color = vec4(1.0, 1.0, 1.0, previus_color.a);
+	
+	if (active == true) {
+		COLOR = white_color
+	}
+	else {
+		COLOR = previus_color
+	}
+}
+"
+
+[sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/active = false
+
+[sub_resource type="ShaderMaterial" id=3]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/active = false
+
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 1.99999
+height = 2.00002
+
+[sub_resource type="CapsuleShape2D" id=5]
+radius = 5.0
+height = 6.0
+
+[sub_resource type="CapsuleShape2D" id=6]
+radius = 2.0
+height = 4.0
+
+[sub_resource type="Animation" id=7]
+length = 0.6
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.025, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 1, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite/LeftHand:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.025, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( -6, -2 ), Vector2( -6, -2.5 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite/RightHand:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.025, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 5, -2 ), Vector2( 5, -2.25 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite/RightHand2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.025, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 5, -2 ), Vector2( 5, -2.25 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.4
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 2, 4, 2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite/LeftHand:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -6, -4.5 ), Vector2( -4, -3 ), Vector2( -2, -3 ), Vector2( -4, -3 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite/RightHand:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 5, -4.5 ), Vector2( 3, -3 ), Vector2( 2, -3 ), Vector2( 3, -3 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite/RightHand2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 3, -3.75 ), Vector2( 2.25, -3 ), Vector2( 2, -3 ), Vector2( 2.25, -3 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 0.217638, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 27.851, 27.851, 27.851, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+length = 0.2
+step = 0.02
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:material:shader_param/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.04, 0.16, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, true, false ]
+}
+
+[node name="Player" type="KinematicBody2D" groups=[
+"Player",
+]]
+light_mask = 0
+z_as_relative = false
+collision_layer = 2
+collision_mask = 2147484033
+script = ExtResource( 5 )
+MAX_SPEED = 83.404
+ACCELERATION = 280.257
+FRICTION = 239.055
+INITIAL_WEAPON = ExtResource( 2 )
+
+[node name="PlayerStats" parent="." groups=[
+"camera_shaker",
+] instance=ExtResource( 6 )]
+script = ExtResource( 4 )
+max_health = 100
+
+[node name="Shadow" type="Sprite" parent="."]
+show_behind_parent = true
+position = Vector2( 0, 0.167043 )
+texture = ExtResource( 8 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = ExtResource( 7 )
+texture = ExtResource( 9 )
+offset = Vector2( 0, -7 )
+hframes = 5
+frame = 1
+
+[node name="LeftHand" type="Sprite" parent="Sprite"]
+use_parent_material = true
+position = Vector2( -6, -2 )
+texture = ExtResource( 3 )
+flip_h = true
+
+[node name="RightHand" parent="Sprite" instance=ExtResource( 1 )]
+visible = false
+show_behind_parent = true
+material = SubResource( 2 )
+use_parent_material = true
+position = Vector2( 5, -2 )
+
+[node name="RightHand2" parent="Sprite" instance=ExtResource( 1 )]
+visible = false
+show_behind_parent = true
+material = SubResource( 3 )
+use_parent_material = true
+position = Vector2( 5, -2 )
+
+[node name="WeaponPos" type="Position2D" parent="."]
+use_parent_material = true
+position = Vector2( 3, -2.5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+rotation = 1.5708
+shape = SubResource( 4 )
+
+[node name="HurtBox" parent="." instance=ExtResource( 10 )]
+visible = false
+collision_layer = 8
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2( 0, -7 )
+shape = SubResource( 5 )
+
+[node name="SoftCollision" parent="." instance=ExtResource( 11 )]
+visible = false
+collision_layer = 32
+collision_mask = 32
+
+[node name="CollisionShape2D" parent="SoftCollision" index="0"]
+position = Vector2( 0, -1 )
+rotation = 1.5708
+shape = SubResource( 6 )
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 0.8
+anims/Idle = SubResource( 7 )
+anims/Run = SubResource( 8 )
+
+[node name="Blink" type="AnimationPlayer" parent="."]
+anims/Electric = SubResource( 9 )
+anims/default = SubResource( 10 )
+
+[node name="Tween" type="Tween" parent="."]
+[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
+[connection signal="animation_started" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_started"]
+
+[editable path="HurtBox"]
+
+[editable path="SoftCollision"]

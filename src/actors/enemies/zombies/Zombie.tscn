@@ -1,0 +1,258 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://src/Hacks/HitBox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/actors/enemies/zombies/Zombie.gd" type="Script" id=2]
+[ext_resource path="res://src/actors/enemies/AttackRangeZone.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/actors/enemies/Stats.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/Shaders/White_blink.tres" type="Material" id=5]
+[ext_resource path="res://assets/sprites/shadows/SmallShadow.png" type="Texture" id=6]
+[ext_resource path="res://src/Hacks/HurtBox.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/Hacks/SoftCollision.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/actors/enemies/PlayerDetectionZone.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/sprites/enemies/zombie2.png" type="Texture" id=10]
+[ext_resource path="res://assets/sprites/enemies/zombie3.png" type="Texture" id=11]
+[ext_resource path="res://assets/sprites/enemies/zombie0.png" type="Texture" id=12]
+[ext_resource path="res://src/actors/enemies/EnemyHealthBar.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/actors/enemies/WanderController.tscn" type="PackedScene" id=14]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 2.0
+height = 2.0
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 5.0
+height = 4.0
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 111.769
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 3.0
+
+[sub_resource type="CapsuleShape2D" id=5]
+radius = 5.0
+height = 4.0
+
+[sub_resource type="Animation" id=6]
+resource_local_to_scene = true
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 1, 0 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_local_to_scene = true
+resource_name = "Jump"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -10 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "jump_finished"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SoftCollision/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.35, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("HurtBox/CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -7 ), Vector2( 0, -17 ), Vector2( 0, -7 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("HitBox/CollisionShape2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -7 ), Vector2( 0, -17 ), Vector2( 0, -7 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_local_to_scene = true
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 3, 2, 4 ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "default"
+length = 0.2
+step = 0.02
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:material:shader_param/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.04, 0.16, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, true, false ]
+}
+
+[sub_resource type="CircleShape2D" id=10]
+radius = 64.387
+
+[sub_resource type="CircleShape2D" id=11]
+radius = 36.6621
+
+[node name="Zombie" type="KinematicBody2D" groups=[
+"Enemies",
+"Zombies",
+]]
+z_as_relative = false
+collision_layer = 4
+script = ExtResource( 2 )
+MAX_SPEED = 40.0
+ACCELERATION = 382.349
+FRICTION = 122.707
+SPRINT = 150.295
+styles = [ ExtResource( 12 ), ExtResource( 10 ), ExtResource( 11 ) ]
+
+[node name="Stats" parent="." instance=ExtResource( 4 )]
+max_health = 110
+
+[node name="Shadow" type="Sprite" parent="."]
+texture = ExtResource( 6 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = ExtResource( 5 )
+texture = ExtResource( 12 )
+offset = Vector2( 0, -7 )
+hframes = 5
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -1 )
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="WanderController" parent="." instance=ExtResource( 14 )]
+
+[node name="HurtBox" parent="." groups=[
+"hurt_boxes",
+] instance=ExtResource( 7 )]
+collision_mask = 193
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2( 0, -7 )
+shape = SubResource( 2 )
+
+[node name="PlayerDetectionZone" parent="." instance=ExtResource( 9 )]
+
+[node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
+shape = SubResource( 3 )
+
+[node name="SoftCollision" parent="." instance=ExtResource( 8 )]
+collision_layer = 32
+collision_mask = 32
+
+[node name="CollisionShape2D" parent="SoftCollision" index="0"]
+position = Vector2( 0, -1 )
+shape = SubResource( 4 )
+
+[node name="HitBox" parent="." instance=ExtResource( 1 )]
+collision_layer = 0
+collision_mask = 8
+knockback = 28.145
+damage = 7
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2( 0, -7 )
+shape = SubResource( 5 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Idle = SubResource( 6 )
+anims/Jump = SubResource( 7 )
+anims/Run = SubResource( 8 )
+
+[node name="Blink" type="AnimationPlayer" parent="."]
+anims/default = SubResource( 9 )
+
+[node name="AttackRangeZone" parent="." instance=ExtResource( 3 )]
+
+[node name="CollisionShape2D" parent="AttackRangeZone/EnabledZone" index="0"]
+shape = SubResource( 10 )
+
+[node name="CollisionShape2D" parent="AttackRangeZone/DisabledZone" index="0"]
+shape = SubResource( 11 )
+
+[node name="EnemyHealthBar" parent="." instance=ExtResource( 13 )]
+margin_left = -11.0124
+margin_top = -21.0237
+margin_right = 840.988
+margin_bottom = 43.9763
+[connection signal="health_changed" from="Stats" to="EnemyHealthBar" method="_on_Stats_health_changed"]
+[connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
+[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
+[connection signal="body_entered" from="HurtBox" to="." method="_on_HurtBox_body_entered"]
+
+[editable path="HurtBox"]
+
+[editable path="PlayerDetectionZone"]
+
+[editable path="SoftCollision"]
+
+[editable path="HitBox"]
+
+[editable path="AttackRangeZone"]
