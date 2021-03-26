@@ -21,7 +21,7 @@ extents = Vector2( 1.98096, 1.021 )
 material = SubResource( 1 )
 texture = ExtResource( 3 )
 script = ExtResource( 5 )
-speed = 299.742
+speed = 267.55
 
 [node name="HitBox" parent="." groups=[
 "bullets",
@@ -32,6 +32,5 @@ damage = 25
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
 shape = SubResource( 2 )
-[connection signal="hitted_something" from="HitBox" to="." method="_on_HitBox_hitted_something"]
 
 [editable path="HitBox"]

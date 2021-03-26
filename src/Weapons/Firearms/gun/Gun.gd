@@ -1,6 +1,5 @@
 extends FireArm
 
-signal camera_shake_requested
 onready var muzzle = $Sprite/Muzzle
 onready var animationPlayer = $AnimationPlayer
 
@@ -17,7 +16,7 @@ func attack_state():
 	else:
 		muzzle.position.y = init_muzzle_position.y
 	var bullt = create_instance(bullet)
-	bullt.connect("impacted", self, "_on_Bullet_impacted")
+	bullt.connect("destroyed", self, "send_shake_request")
 	create_instance(fireShot)
 	Global.player.stats.energy -= energy_cost
 	animationPlayer.play("knockback_push")
@@ -35,6 +34,10 @@ func create_instance(Obj):
 	world.add_child(instance)
 	instance.global_position = muzzle.global_position
 	return instance
+
+func send_shake_request():
+	emit_signal("camera_shake_requested", shake_values)
+
 
 func _facing_side_changued(_side):
 	pass

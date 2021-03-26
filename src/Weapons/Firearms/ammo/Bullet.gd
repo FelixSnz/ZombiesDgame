@@ -1,6 +1,6 @@
 extends Sprite
 
-signal impacted
+signal destroyed
 
 const ImpactParticles = preload("res://src/Effects & Particles/ImpactParticles.tscn")
 const ImpactEffect = preload("res://src/Effects & Particles/ImpactAnimation.tscn")
@@ -19,7 +19,7 @@ func create_impact(color:Color = Color("#ffda4d")):
 
 	var impactEffect = create_instance(ImpactEffect)
 	impactEffect.modulate = color + Color(.4,.4,.4,0)
-	emit_signal("impacted")
+	emit_signal("destroyed")
 	queue_free()
 
 func create_instance(Obj):
@@ -31,7 +31,3 @@ func create_instance(Obj):
 
 func _process(delta):
 	position += direction * speed * delta
-
-
-func _on_HitBox_hitted_something(_area):
-	create_impact()

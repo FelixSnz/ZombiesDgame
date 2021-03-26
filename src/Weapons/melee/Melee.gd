@@ -133,3 +133,8 @@ func player_anim_changued(anim_name):
 				behind(false)
 			elif anim_name == "Idle":
 				behind(true)
+
+
+func _on_HitBox_hit_something():
+	emit_signal("camera_shake_requested", shake_values)
+	emit_signal("frame_freeze_requested")

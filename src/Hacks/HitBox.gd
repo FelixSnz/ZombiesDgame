@@ -1,14 +1,13 @@
 extends Area2D
 
-signal hitted_something(area)
+signal hit_something
 
 var direction = Vector2.ZERO
 export(float, 1, 100) var knockback
 
-
 export(int) var damage = 1
 
-func hitted(area):
-	emit_signal("hitted_something", area)
-
+func has_hit_something():
+	emit_signal("hit_something")
+	
 

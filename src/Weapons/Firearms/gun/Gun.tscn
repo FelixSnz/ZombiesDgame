@@ -25,10 +25,18 @@ tracks/0/keys = {
 [node name="Gun" type="Node2D" groups=[
 "FireArm",
 "Weapon",
+"camera_shaker",
+"frame_freezer",
 ]]
 script = ExtResource( 2 )
 semi_major_axis = 8
 semi_minor_axis = 5
+shake_values = {
+"amplitude": 3.002,
+"damp_easing": 0.437,
+"duration": 0.1,
+"override": true
+}
 sight_elevation = 3.5
 bullet = ExtResource( 3 )
 fireShot = ExtResource( 1 )

@@ -25,9 +25,9 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.15, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"transitions": PoolRealArray( 1, 1.7411, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0.282353, 0.00392157, 1 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.0196078, 0.870588, 0.933333, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Count/Icon:modulate")
@@ -37,9 +37,9 @@ tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0, 0.15, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"transitions": PoolRealArray( 1, 1.62451, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0.282353, 0.00392157, 1 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.0196078, 0.870588, 0.933333, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [node name="EnergyBar" type="Control"]
@@ -53,6 +53,7 @@ script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+trans_type = 5
 
 [node name="TextureProgress2" type="TextureProgress" parent="."]
 margin_left = -0.132431
@@ -111,8 +112,7 @@ __meta__ = {
 }
 
 [node name="Shaker" parent="Count" instance=ExtResource( 4 )]
-node_path = NodePath("../../../EnergyBar/Count")
-node_property = "rect_position"
+parent_property = "rect_position"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/NumberShake = SubResource( 2 )

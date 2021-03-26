@@ -79,10 +79,18 @@ tracks/3/keys = {
 [node name="Crowbar" type="Node2D" groups=[
 "Melee",
 "Weapon",
+"camera_shaker",
+"frame_freezer",
 ]]
 script = ExtResource( 2 )
 semi_major_axis = 5
 semi_minor_axis = 2
+shake_values = {
+"amplitude": 5.961,
+"damp_easing": 0.647,
+"duration": 0.188,
+"override": true
+}
 
 [node name="StrikeAxis" type="Position2D" parent="."]
 rotation = -0.349066
@@ -107,5 +115,6 @@ disabled = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 1.5
 anims/attack = SubResource( 2 )
+[connection signal="hit_something" from="StrikeAxis/Sprite/HitBox" to="." method="_on_HitBox_hit_something"]
 
 [editable path="StrikeAxis/Sprite/HitBox"]

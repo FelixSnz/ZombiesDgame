@@ -1,8 +1,18 @@
 extends Node2D
 class_name Weapon
 
+signal camera_shake_requested(values)
+signal frame_freeze_requested
+
 export(int) var semi_major_axis
 export(int) var semi_minor_axis
+
+export(Dictionary) var shake_values = {
+	"amplitude":0.1,
+	"duration":0.1,
+	"damp_easing":0.1,
+	"override":false
+}
 
 var pointing_direction = Vector2.ZERO
 var facing_right = true

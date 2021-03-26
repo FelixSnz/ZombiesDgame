@@ -5,8 +5,7 @@ var invincible = false setget set_invincibility
 
 signal invincibility_started
 signal invincibility_ended
-signal camera_shake_requested
-signal frame_freeze_requested
+
 
 onready var timer = $Timer
 
@@ -34,8 +33,7 @@ func _on_Timer_timeout():
 
 
 func _on_HurtBox_area_entered(area):
-	area.hitted(self)
-	if area.is_in_group("shake_trigger"):
-		emit_signal("camera_shake_requested")
-	if area.is_in_group("freeze_trigger"):
-		emit_signal("frame_freeze_requested")
+	if area.is_in_group("bullets"):
+		area.get_parent().create_impact()
+	area.has_hit_something()
+

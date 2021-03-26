@@ -140,6 +140,7 @@ click={
 2d_physics/layer_7="Bullet"
 2d_physics/layer_8="edge_floor"
 2d_physics/layer_9="item"
+2d_physics/layer_10="hitbox"
 
 [rendering]
 
