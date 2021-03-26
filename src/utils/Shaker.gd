@@ -20,6 +20,7 @@ func _process(_delta: float) -> void:
 	var damping : = ease(timer.time_left / timer.wait_time, DAMP_EASING)
 	
 	if node_to_shake != null:
+		print("auuuuuuuuuuuu")
 		node_to_shake.set_indexed(node_property, 
 		Vector2 (
 		rand_range(amplitude, -amplitude) * damping,
@@ -43,4 +44,5 @@ func set_shake(value: bool) -> void:
 		timer.start()
 
 func _on_shake_requested():
+	print("cagadaaaa")
 	self.shake = true

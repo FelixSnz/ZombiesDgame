@@ -21,9 +21,10 @@ func animate_value(start, end):
 	if end < start:
 		pass
 
-func _on_Stats_health_changed(value):
-	animate_value(current_health, value * values_scalar)
-	current_health = value * values_scalar
-
 func _on_Timer_timeout():
 	hide()
+
+
+func _on_EnemyStats_health_changed(value):
+	animate_value(current_health, value * values_scalar)
+	current_health = value * values_scalar

@@ -1,17 +1,20 @@
 extends Node
 
-#signal camera_shake_requested
-
 export(int) var max_health setget set_max_health
 var health = max_health setget set_health
+
+export(int) var max_energy setget set_max_energy
+var energy = max_energy setget set_energy
 
 signal no_health
 signal health_changed(value)
 signal max_health_changed(value)
 
+signal no_energy
+signal energy_changed(value)
+signal max_energy_changed(value)
+
 func set_health(value):
-#	if value < health:
-#		emit_signal("camera_shake_requested")
 	health = value
 	emit_signal("health_changed", health)
 	if health <= 0:
@@ -24,4 +27,15 @@ func set_max_health(value):
 
 func _ready():
 	self.health = max_health
-	
+	self.energy = max_energy
+
+func set_energy(value):
+	energy = value
+	emit_signal("energy_changed", energy)
+	if energy <= 0:
+		emit_signal("no_energy")
+
+func set_max_energy(value):
+	max_energy = value
+	self.energy = min(energy, max_energy)
+	emit_signal("max_energy_changed")

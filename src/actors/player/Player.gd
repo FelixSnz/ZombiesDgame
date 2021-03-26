@@ -143,8 +143,6 @@ func _on_HurtBox_area_entered(area):
 	hurtBox.start_invincivility(1)
 	stats.health -= area.damage
 	emit_signal("damaged")
-	if stats.health <= 0:
-		queue_free()
 	$Blink.play("default")
 
 func _on_AnimationPlayer_animation_started(anim_name):
@@ -154,3 +152,7 @@ func _on_AnimationPlayer_animation_started(anim_name):
 	elif prev_anim == anim_name and not anim_toggle:
 		anim_toggle = not anim_toggle
 	prev_anim = anim_name
+
+
+func _on_Stats_no_health():
+	queue_free()

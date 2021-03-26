@@ -3,7 +3,7 @@
 [ext_resource path="res://src/Hacks/HitBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actors/enemies/zombies/Zombie.gd" type="Script" id=2]
 [ext_resource path="res://src/actors/enemies/AttackRangeZone.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/actors/enemies/Stats.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/actors/enemies/EnemyStats.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Shaders/White_blink.tres" type="Material" id=5]
 [ext_resource path="res://assets/sprites/shadows/SmallShadow.png" type="Texture" id=6]
 [ext_resource path="res://src/Hacks/HurtBox.tscn" type="PackedScene" id=7]
@@ -169,8 +169,8 @@ FRICTION = 122.707
 SPRINT = 150.295
 styles = [ ExtResource( 12 ), ExtResource( 10 ), ExtResource( 11 ) ]
 
-[node name="Stats" parent="." instance=ExtResource( 4 )]
-max_health = 110
+[node name="EnemyStats" parent="." instance=ExtResource( 4 )]
+max_health = 14
 
 [node name="Shadow" type="Sprite" parent="."]
 texture = ExtResource( 6 )
@@ -239,8 +239,8 @@ margin_left = -11.0124
 margin_top = -21.0237
 margin_right = 840.988
 margin_bottom = 43.9763
-[connection signal="health_changed" from="Stats" to="EnemyHealthBar" method="_on_Stats_health_changed"]
-[connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
+[connection signal="health_changed" from="EnemyStats" to="EnemyHealthBar" method="_on_EnemyStats_health_changed"]
+[connection signal="no_health" from="EnemyStats" to="." method="_on_Stats_no_health"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="body_entered" from="HurtBox" to="." method="_on_HurtBox_body_entered"]
 

@@ -4,6 +4,8 @@ signal camera_shake_requested
 onready var muzzle = $Sprite/Muzzle
 onready var animationPlayer = $AnimationPlayer
 
+export(int) var energy_cost = 10
+
 func _ready():
 	get_parent().show_behind_parent = false
 	init_muzzle_position = muzzle.position
@@ -17,6 +19,7 @@ func attack_state():
 	var bullt = create_instance(bullet)
 	bullt.connect("impacted", self, "_on_Bullet_impacted")
 	create_instance(fireShot)
+	Global.player.stats.energy -= energy_cost
 	animationPlayer.play("knockback_push")
 	state = POINTING
 	yield(animationPlayer, "animation_finished")

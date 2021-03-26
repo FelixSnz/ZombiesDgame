@@ -27,8 +27,13 @@ func animate_value(start, end):
 	if end < start:
 		pass
 		$AnimationPlayer.play("NumberShake")
-		emit_signal("health_changued")
+#		emit_signal("health_changued")
 		
+		
+func update_value(value):
+	animate_value(current_health, value * values_scalar)
+	update_count_text(value)
+	current_health = value * values_scalar
 
 func update_count_text(value):
 	$Count/Number.text = str(clamp(round(value / values_scalar), 0, maximum)) + '/' + str(maximum/values_scalar) + "Hp"

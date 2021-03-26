@@ -10,7 +10,7 @@ var knockback = Vector2.ZERO
 var velocity = Vector2.ZERO
 var direction = Vector2.RIGHT
 
-onready var stats = $Stats
+onready var stats = $EnemyStats
 onready var sprite = $Sprite
 onready var hurtBox = $HurtBox
 onready var hitBox = $HitBox
