@@ -195,9 +195,9 @@ z_as_relative = false
 collision_layer = 2
 collision_mask = 2147484033
 script = ExtResource( 5 )
-MAX_SPEED = 83.404
-ACCELERATION = 280.257
-FRICTION = 239.055
+MAX_SPEED = 107.549
+ACCELERATION = 210.258
+FRICTION = 416.119
 INITIAL_WEAPON = ExtResource( 2 )
 
 [node name="PlayerStats" parent="." instance=ExtResource( 6 )]

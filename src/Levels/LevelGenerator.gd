@@ -16,19 +16,20 @@ onready var tilemap = $TileMap
 onready var undertile = $TileMap2
 onready var overtile = $TileMap3
 onready var player = $YSort/Player
-var exit_door
+onready var exit_door = $ExitDoor
 
 var glob_counter = 0
 var individual_rooms
 var maps
 var player_initial_pos
+var exit_position
 
 signal level_generated
-signal level_cleared
 signal objects_generated
 signal enemies_generated
 
 func _ready():
+	exit_door.connect("leaving_level", self, "reload_level")
 	randomize()
 	generate_level()
 
@@ -36,42 +37,30 @@ func clear_level():
 	tilemap.clear()
 	undertile.clear()
 	overtile.clear()
-	
 	for world_object in get_tree().get_nodes_in_group("world_objects"):
 		world_object.queue_free()
-		
 	for enemy in get_tree().get_nodes_in_group("Enemies"):
 		enemy.queue_free()
-	
-	exit_door.queue_free()
-	emit_signal("level_cleared")
-	generate_level()
-	
+
 func generate_level():
 	
 	var walker_pos = Vector2(RECT_WIDTH/2, RECT_WIDTH/2).ceil()
 	var walker = Walker.new(walker_pos, borders)
 	
-	maps = walker.walk(20)
-	
+	maps = walker.walk(30)
 	
 	individual_rooms = walker.extract_rooms(maps.rooms) #extracting individual rooms 
+	
 	var start_room = walker.get_start_room(individual_rooms)
-	
-	player_initial_pos = walker.get_room_center(start_room) 
-	
+	player_initial_pos = walker.get_room_center(start_room)
 	player.global_position = player_initial_pos * cell_size \
 	+ Vector2(cell_size/2.0, cell_size/2.0)
 	
-#	create_instance(Player, player_initial_pos * cell_size \
-#	+ Vector2(cell_size/2.0, cell_size/2.0), $YSort)
-	
 	var end_room = walker.get_end_room(player_initial_pos, individual_rooms)
-	var exit_position = walker.get_room_center(end_room)
-	exit_door = create_instance(Exit, exit_position * cell_size \
-	+ Vector2(cell_size/2.0, cell_size/2.0), $YSort)
-	exit_door.connect("leaving_level", self, "reload_level")
-
+	exit_position = walker.get_room_center(end_room)
+	exit_door.global_position = exit_position * cell_size \
+	+ Vector2(cell_size/2.0, cell_size/2.0)
+	
 	walker.queue_free()
 
 	var down_walls_map
@@ -89,8 +78,8 @@ func generate_level():
 	place_tilemap(undertile, down_walls_map, 0)
 
 
-	generate_zombies(individual_rooms, .15)
-	generate_entities(ToxicBarrel, individual_rooms, .08)
+	generate_zombies(individual_rooms, .08)
+	generate_entities(ToxicBarrel, individual_rooms, .10)
 	generate_entities(WoodBarrel, individual_rooms, .02)
 
 	#loop for placing decoration tiles
@@ -149,7 +138,7 @@ func generate_entities(entity, ind_rooms, porcentage):
 			if can_generate:
 				var instance = entity.instance()
 				var parent = get_node("YSort/%s" %instance.name + "s")
-				parent.add_child(instance)
+				parent.call_deferred("add_child", instance)
 				instance.position = position * cell_size \
 				+ Vector2(cell_size/2.0, cell_size/2.0)
 	emit_signal("objects_generated")
@@ -166,16 +155,14 @@ func create_instance(Obj, pos, parent = null):
 	var obj = Obj.instance()
 	if parent == null:
 		parent = get_tree().current_scene
-	parent.add_child(obj)
+	
+	parent.call_deferred("add_child", obj)
 	obj.position = pos
 	return obj
 
 func reload_level():
-	
 	clear_level()
-	yield(self, "level_cleared")
-	print("cleared")
-	
+	generate_level()
 
 func _input(event):
 	if event.is_action_pressed("ui_accept"):

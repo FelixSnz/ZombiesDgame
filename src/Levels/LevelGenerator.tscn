@@ -1,13 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/Levels/LevelGenerator.gd" type="Script" id=1]
 [ext_resource path="res://assets/tilemaps/down_walls.png" type="Texture" id=2]
 [ext_resource path="res://src/Tiles/dec_tiles.tres" type="TileSet" id=3]
 [ext_resource path="res://src/Tiles/f&wtileset.tres" type="TileSet" id=4]
 [ext_resource path="res://src/actors/player/Player.tscn" type="PackedScene" id=5]
-
-
-
+[ext_resource path="res://src/Levels/ExitDoor.tscn" type="PackedScene" id=6]
 
 [sub_resource type="TileSet" id=1]
 0/name = "down_walls.png 0"
@@ -64,3 +62,5 @@ format = 1
 [node name="WoodBarrels" type="YSort" parent="YSort"]
 
 [node name="Player" parent="YSort" instance=ExtResource( 5 )]
+
+[node name="ExitDoor" parent="." instance=ExtResource( 6 )]
