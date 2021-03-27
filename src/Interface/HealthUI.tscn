@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/Interface/HealthBar.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/Interface/EnergyBar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Interface/AmmorBar.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Interface/HealthUI.gd" type="Script" id=5]
 
 [node name="StatsUI" type="Control"]

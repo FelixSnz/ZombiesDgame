@@ -1,5 +1,7 @@
 extends Node2D
 
+export(String) var stat_supplier
+
 
 onready var playerDetectionZone = $PlayerDetectionZone
 onready var animationPlayer = $AnimationPlayer
@@ -15,5 +17,7 @@ func _process(delta):
 		var player = playerDetectionZone.player
 		global_position = global_position.linear_interpolate(player.global_position, interpolation * delta)
 		if MathTools.is_in_circle(player.global_position, 3, global_position):
-			player.stats.energy += 20
+			var stat = Global.player.stats.get_indexed(stat_supplier)
+			Global.player.stats.set_indexed(stat_supplier, stat + 20)
+			player.stats.ammo += 20
 			queue_free()

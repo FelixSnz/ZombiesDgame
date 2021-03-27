@@ -4,21 +4,21 @@ export(int) var max_health setget set_max_health
 var health = 0 setget set_health
 var health_full = false
 
-export(int) var max_energy setget set_max_energy
-var energy = 0 setget set_energy
-var energy_full = false
+export(int) var max_ammo setget set_max_ammo
+var ammo = 0 setget set_ammo
+var ammo_full = false
 
 signal no_health
 signal health_changed(value)
 signal max_health_changed(value)
 
-signal no_energy
-signal energy_changed(value)
-signal max_energy_changed(value)
+signal no_ammo
+signal ammo_changed(value)
+signal max_ammo_changed(value)
 
 func _ready():
 	self.health = max_health
-	self.energy = max_energy
+	self.ammo = max_ammo
 
 func set_health(value):
 	health = clamp(value, 0, max_health)
@@ -35,16 +35,16 @@ func set_max_health(value):
 	self.health = min(health, max_health)
 	emit_signal("max_health_changed")
 
-func set_energy(value):
-	var initial_energy = energy
-	energy = clamp(value, 0, max_energy)
-	if initial_energy != energy:
-		emit_signal("energy_changed", energy)
-	if energy <= 0:
-		emit_signal("no_energy")
+func set_ammo(value):
+	var initial_ammo = ammo
+	ammo = clamp(value, 0, max_ammo)
+	if initial_ammo != ammo:
+		emit_signal("ammo_changed", ammo)
+	if ammo <= 0:
+		emit_signal("no_ammo")
 
 
-func set_max_energy(value):
-	max_energy = value
-	self.energy = min(energy, max_energy)
-	emit_signal("max_energy_changed")
+func set_max_ammo(value):
+	max_ammo = value
+	self.ammo = min(ammo, max_ammo)
+	emit_signal("max_ammo_changed")

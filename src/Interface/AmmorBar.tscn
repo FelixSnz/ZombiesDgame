@@ -27,7 +27,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.15, 0.3 ),
 "transitions": PoolRealArray( 1, 1.7411, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 0.0196078, 0.870588, 0.933333, 1 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.980392, 0.988235, 0.0313726, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Count/Icon:modulate")
@@ -39,10 +39,10 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.15, 0.3 ),
 "transitions": PoolRealArray( 1, 1.62451, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 0.0196078, 0.870588, 0.933333, 1 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.980392, 0.988235, 0.0313726, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[node name="EnergyBar" type="Control"]
+[node name="AmmoBar" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 374.0

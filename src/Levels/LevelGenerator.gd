@@ -11,7 +11,8 @@ const Player = preload("res://src/actors/player/Player.tscn")
 const Zombie = preload("res://src/actors/enemies/zombies/Zombie.tscn")
 const ToxicBarrel = preload("res://src/World/ToxicBarrel.tscn")
 const WoodBarrel = preload("res://src/World/WoodBarrel.tscn")
-const Energy = preload("res://Energy.tscn")
+const AmmoBox = preload("res://Ammo.tscn")
+const MedicalKit = preload("res://MedicalKit.tscn")
 
 onready var tilemap = $TileMap
 onready var undertile = $TileMap2
@@ -82,7 +83,8 @@ func generate_level():
 	generate_zombies(individual_rooms, .08)
 	generate_entities(ToxicBarrel, individual_rooms, .10)
 	generate_entities(WoodBarrel, individual_rooms, .02)
-	generate_entities(Energy, individual_rooms, .05)
+	generate_entities(AmmoBox, individual_rooms, .05)
+	generate_entities(MedicalKit, individual_rooms, .05)
 
 	#loop for placing decoration tiles
 	for room in individual_rooms:

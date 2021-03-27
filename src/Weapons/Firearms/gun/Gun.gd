@@ -4,7 +4,7 @@ onready var muzzle = $Sprite/Muzzle
 onready var animationPlayer = $AnimationPlayer
 onready var cameraShaker = $CameraShaker
 
-export(int) var energy_cost = 10
+export(int) var ammo_cost = 10
 
 func _ready():
 	get_parent().show_behind_parent = false
@@ -12,7 +12,7 @@ func _ready():
 	
 
 func attack_state():
-	if Global.player.stats.energy > energy_cost:
+	if Global.player.stats.ammo > ammo_cost:
 		if not facing_right:
 			muzzle.position.y = init_muzzle_position.y * -1
 		else:
@@ -20,7 +20,7 @@ func attack_state():
 		var bullt = create_instance(bullet)
 		bullt.connect("destroyed", self, "_on_Bullet_destroyed")
 		create_instance(fireShot)
-		Global.player.stats.energy -= energy_cost
+		Global.player.stats.ammo -= ammo_cost
 		animationPlayer.play("knockback_push")
 		state = POINTING
 		yield(animationPlayer, "animation_finished")

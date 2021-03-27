@@ -201,7 +201,6 @@ INITIAL_WEAPON = ExtResource( 2 )
 
 [node name="PlayerStats" parent="." instance=ExtResource( 4 )]
 max_health = 120
-max_energy = 200
 
 [node name="Shadow" type="Sprite" parent="."]
 show_behind_parent = true

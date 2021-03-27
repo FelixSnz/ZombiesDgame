@@ -66,6 +66,9 @@ delay_mseconds = 55
 
 [node name="LevelGenerator" parent="." instance=ExtResource( 2 )]
 
+[node name="PlayerStats" parent="LevelGenerator/YSort/Player" index="0"]
+max_ammo = 200
+
 [node name="Sprite" parent="LevelGenerator/YSort/Player" index="2"]
 material = SubResource( 3 )
 
@@ -85,7 +88,7 @@ remote_path = NodePath("../../../../Camera2D")
 [connection signal="level_generated" from="LevelGenerator" to="Camera2D" method="_on_LevelGenerator_level_generated"]
 [connection signal="level_generated" from="LevelGenerator" to="FrameFreezer" method="_on_LevelGenerator_level_generated"]
 [connection signal="weapon_changued" from="LevelGenerator/YSort/Player" to="Camera2D" method="_on_Player_weapon_changued"]
-[connection signal="energy_changed" from="LevelGenerator/YSort/Player/PlayerStats" to="CanvasLayer/HealthUI" method="_on_PlayerStats_energy_changed"]
+[connection signal="ammo_changed" from="LevelGenerator/YSort/Player/PlayerStats" to="CanvasLayer/HealthUI" method="_on_PlayerStats_ammo_changed"]
 [connection signal="health_changed" from="LevelGenerator/YSort/Player/PlayerStats" to="CanvasLayer/HealthUI" method="_on_PlayerStats_health_changed"]
 
 [editable path="LevelGenerator"]
