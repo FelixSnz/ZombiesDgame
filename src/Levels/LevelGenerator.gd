@@ -11,6 +11,7 @@ const Player = preload("res://src/actors/player/Player.tscn")
 const Zombie = preload("res://src/actors/enemies/zombies/Zombie.tscn")
 const ToxicBarrel = preload("res://src/World/ToxicBarrel.tscn")
 const WoodBarrel = preload("res://src/World/WoodBarrel.tscn")
+const Energy = preload("res://Energy.tscn")
 
 onready var tilemap = $TileMap
 onready var undertile = $TileMap2
@@ -81,6 +82,7 @@ func generate_level():
 	generate_zombies(individual_rooms, .08)
 	generate_entities(ToxicBarrel, individual_rooms, .10)
 	generate_entities(WoodBarrel, individual_rooms, .02)
+	generate_entities(Energy, individual_rooms, .05)
 
 	#loop for placing decoration tiles
 	for room in individual_rooms:
@@ -138,7 +140,10 @@ func generate_entities(entity, ind_rooms, porcentage):
 					break
 			if can_generate:
 				var instance = entity.instance()
-				var parent = get_node("YSort/%s" %instance.name + "s")
+				var parent = get_node_or_null("YSort/%s" %instance.name + "s")
+				if parent == null:
+					parent = $YSort
+					print("placatelas")
 				parent.call_deferred("add_child", instance)
 				instance.position = position * cell_size \
 				+ Vector2(cell_size/2.0, cell_size/2.0)

@@ -22,7 +22,7 @@ func create_matchwood(amount:int = 5, color:Color = Color.white, scale:float =3)
 	matchwood.emitting = true
 	matchwood.global_position = self.global_position + Vector2(0, -4)
 	
-func _on_HurtBox_area_entered(area):
+func _on_HurtBox_area_entered(_area):
 	create_destroyed_effect()
 	create_matchwood(3, Color(0.384314, 0.231373, 0.160784, 1), 5)
 	create_matchwood(3, Color("#533127"), 5)

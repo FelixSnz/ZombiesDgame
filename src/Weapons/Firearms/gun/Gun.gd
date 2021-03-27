@@ -12,17 +12,18 @@ func _ready():
 	
 
 func attack_state():
-	if not facing_right:
-		muzzle.position.y = init_muzzle_position.y * -1
-	else:
-		muzzle.position.y = init_muzzle_position.y
-	var bullt = create_instance(bullet)
-	bullt.connect("destroyed", self, "_on_Bullet_destroyed")
-	create_instance(fireShot)
-	Global.player.stats.energy -= energy_cost
-	animationPlayer.play("knockback_push")
-	state = POINTING
-	yield(animationPlayer, "animation_finished")
+	if Global.player.stats.energy > energy_cost:
+		if not facing_right:
+			muzzle.position.y = init_muzzle_position.y * -1
+		else:
+			muzzle.position.y = init_muzzle_position.y
+		var bullt = create_instance(bullet)
+		bullt.connect("destroyed", self, "_on_Bullet_destroyed")
+		create_instance(fireShot)
+		Global.player.stats.energy -= energy_cost
+		animationPlayer.play("knockback_push")
+		state = POINTING
+		yield(animationPlayer, "animation_finished")
 	can_attack = true
 
 func create_instance(Obj):
