@@ -1,8 +1,7 @@
 extends Node2D
 class_name Weapon
 
-signal camera_shake_requested(values)
-signal frame_freeze_requested
+
 
 export(int) var semi_major_axis
 export(int) var semi_minor_axis

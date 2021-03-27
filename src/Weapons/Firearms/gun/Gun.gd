@@ -2,6 +2,7 @@ extends FireArm
 
 onready var muzzle = $Sprite/Muzzle
 onready var animationPlayer = $AnimationPlayer
+onready var cameraShaker = $CameraShaker
 
 export(int) var energy_cost = 10
 
@@ -16,16 +17,13 @@ func attack_state():
 	else:
 		muzzle.position.y = init_muzzle_position.y
 	var bullt = create_instance(bullet)
-	bullt.connect("destroyed", self, "send_shake_request")
+	bullt.connect("destroyed", self, "_on_Bullet_destroyed")
 	create_instance(fireShot)
 	Global.player.stats.energy -= energy_cost
 	animationPlayer.play("knockback_push")
 	state = POINTING
 	yield(animationPlayer, "animation_finished")
 	can_attack = true
-
-func _on_Bullet_impacted():
-	emit_signal("camera_shake_requested")
 
 func create_instance(Obj):
 	var instance = Obj.instance()
@@ -35,9 +33,8 @@ func create_instance(Obj):
 	instance.global_position = muzzle.global_position
 	return instance
 
-func send_shake_request():
-	emit_signal("camera_shake_requested", shake_values)
-
+func _on_Bullet_destroyed():
+	cameraShaker.send_shake_request(cameraShaker.shake_types.SHORT_NARROW)
 
 func _facing_side_changued(_side):
 	pass

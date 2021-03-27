@@ -6,6 +6,7 @@ onready var strikeAxis = $StrikeAxis
 onready var hitBox = $StrikeAxis/Sprite/HitBox
 onready var sprite = $StrikeAxis/Sprite 
 onready var animationPlayer = $AnimationPlayer
+onready var cameraShaker = $CameraShaker
 
 var initial_strike_rotation
 var final_strke_rotation
@@ -136,5 +137,4 @@ func player_anim_changued(anim_name):
 
 
 func _on_HitBox_hit_something():
-	emit_signal("camera_shake_requested", shake_values)
-	emit_signal("frame_freeze_requested")
+	cameraShaker.send_shake_request(cameraShaker.shake_types.LONG_NARROW)

@@ -5,7 +5,6 @@ var energy_bar
 func _ready():
 	energy_bar = get_node_or_null("EnergyBar")
 	if energy_bar != null:
-		print("cagada")
 		$EnergyBar.initialize(Global.player.stats.max_energy)
 	
 	$HealthBar.initialize(Global.player.stats.max_health)

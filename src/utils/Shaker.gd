@@ -7,7 +7,6 @@ export var amplitude : = 6.0
 export var duration : = 0.8 setget set_duration
 export(float, EASE) var DAMP_EASING : = 1.0
 export var shake : = false setget set_shake
-var node_to_shake
 
 func _ready() -> void:
 	randomize()
@@ -15,7 +14,6 @@ func _ready() -> void:
 	self.duration = duration
 
 func _process(_delta: float) -> void:
-	print(duration)
 	var damping : = ease(timer.time_left / timer.wait_time, DAMP_EASING)
 	get_parent().set_indexed(parent_property, 
 	Vector2 (
@@ -36,7 +34,6 @@ func set_shake(value: bool) -> void:
 	set_process(shake)
 	get_parent().set_indexed(parent_property, Vector2.ZERO)
 	if shake:
-		print(get_parent().name, " is going to shake")
 		$Timer.start()
 
 func _on_shake_requested(values):

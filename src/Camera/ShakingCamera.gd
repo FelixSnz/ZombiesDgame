@@ -11,12 +11,13 @@ func connect_to_shakers() -> void:
 		if camera_shaker.get_signal_connection_list("camera_shake_requested").size() > 0:
 			already_connected = true
 		if not already_connected:
-			print(camera_shaker.get_parent().name)
+#			print(camera_shaker.get_parent().name)
 			camera_shaker.connect("camera_shake_requested", shaker, "_on_shake_requested")
+
+func _on_LevelGenerator_level_generated():
+	connect_to_shakers()
 
 func _on_Player_weapon_changued():
 	connect_to_shakers()
 
 
-func _on_LevelGenerator_level_generated():
-	connect_to_shakers()

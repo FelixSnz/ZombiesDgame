@@ -48,7 +48,6 @@ func animate_value(start, end):
 	if end < start:
 		pass
 		$AnimationPlayer.play("NumberShake")
-#		print(name, ": emmited")
 		emit_signal("health_changued", null)
 		
 		
