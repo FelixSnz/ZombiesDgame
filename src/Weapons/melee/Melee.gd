@@ -137,4 +137,4 @@ func player_anim_changued(anim_name):
 
 
 func _on_HitBox_hit_something():
-	cameraShaker.send_shake_request(cameraShaker.shake_types.LONG_NARROW)
+	cameraShaker.send_shake_request(cameraShaker.shake_types.SHORT_WIDE)

@@ -119,7 +119,8 @@ func generate_zombies(ind_rooms, porcentage):
 		for position in positions:
 			create_instance(Zombie, position * cell_size \
 			+ Vector2(cell_size/2.0, cell_size/2.0), $YSort/Zombies)
-	emit_signal("enemies_generated")
+	call_deferred("emit_signal", "enemies_generated")
+#	emit_signal("enemies_generated")
 
 func generate_entities(entity, ind_rooms, porcentage):
 	var can_generate = false

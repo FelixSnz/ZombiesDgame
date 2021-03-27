@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://src/Hacks/HitBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actors/enemies/zombies/Zombie.gd" type="Script" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://assets/sprites/enemies/zombie0.png" type="Texture" id=12]
 [ext_resource path="res://src/actors/enemies/EnemyHealthBar.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/actors/enemies/WanderController.tscn" type="PackedScene" id=14]
+[ext_resource path="res://CameraShaker.tscn" type="PackedScene" id=15]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 2.0
@@ -23,15 +24,15 @@ height = 2.0
 radius = 5.0
 height = 4.0
 
+[sub_resource type="CapsuleShape2D" id=5]
+radius = 5.0
+height = 4.0
+
 [sub_resource type="CircleShape2D" id=3]
 radius = 111.769
 
 [sub_resource type="CircleShape2D" id=4]
 radius = 3.0
-
-[sub_resource type="CapsuleShape2D" id=5]
-radius = 5.0
-height = 4.0
 
 [sub_resource type="Animation" id=6]
 resource_local_to_scene = true
@@ -172,6 +173,8 @@ styles = [ ExtResource( 12 ), ExtResource( 10 ), ExtResource( 11 ) ]
 [node name="EnemyStats" parent="." instance=ExtResource( 4 )]
 max_health = 120
 
+[node name="CameraShaker" parent="." instance=ExtResource( 15 )]
+
 [node name="Shadow" type="Sprite" parent="."]
 texture = ExtResource( 6 )
 
@@ -195,6 +198,16 @@ shape = SubResource( 1 )
 position = Vector2( 0, -7 )
 shape = SubResource( 2 )
 
+[node name="HitBox" parent="." instance=ExtResource( 1 )]
+collision_layer = 0
+collision_mask = 8
+knockback = 28.145
+damage = 7
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2( 0, -7 )
+shape = SubResource( 5 )
+
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 9 )]
 
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
@@ -207,16 +220,7 @@ collision_mask = 32
 [node name="CollisionShape2D" parent="SoftCollision" index="0"]
 position = Vector2( 0, -1 )
 shape = SubResource( 4 )
-
-[node name="HitBox" parent="." instance=ExtResource( 1 )]
-collision_layer = 0
-collision_mask = 8
-knockback = 28.145
-damage = 7
-
-[node name="CollisionShape2D" parent="HitBox" index="0"]
-position = Vector2( 0, -7 )
-shape = SubResource( 5 )
+disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Idle = SubResource( 6 )
@@ -242,14 +246,14 @@ margin_bottom = 43.9763
 [connection signal="health_changed" from="EnemyStats" to="EnemyHealthBar" method="_on_EnemyStats_health_changed"]
 [connection signal="no_health" from="EnemyStats" to="." method="_on_Stats_no_health"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
-[connection signal="body_entered" from="HurtBox" to="." method="_on_HurtBox_body_entered"]
+[connection signal="hit_something" from="HitBox" to="." method="_on_HitBox_hit_something"]
 
 [editable path="HurtBox"]
+
+[editable path="HitBox"]
 
 [editable path="PlayerDetectionZone"]
 
 [editable path="SoftCollision"]
-
-[editable path="HitBox"]
 
 [editable path="AttackRangeZone"]

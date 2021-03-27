@@ -22,6 +22,11 @@ export(Array, Dictionary) var shaker_dicts = [
 		"damp_easing" : .5
 	},
 	{
+		"amplitude" : 12,
+		"duration" : 0.18,
+		"damp_easing" : .5
+	},
+	{
 		"amplitude" : 3,
 		"duration" : 0.8,
 		"damp_easing" : .5
@@ -43,6 +48,7 @@ enum shake_types {
 	SHORT_NARROW,
 	SHORT_NORMAL,
 	SHORT_WIDE,
+	SHORT_SUPER_WIDE,
 	LONG_NARROW,
 	LONG_NORMAL,
 	LONG_WIDE

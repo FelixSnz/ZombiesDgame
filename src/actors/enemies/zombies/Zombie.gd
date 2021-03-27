@@ -14,6 +14,7 @@ onready var stats = $EnemyStats
 onready var sprite = $Sprite
 onready var hurtBox = $HurtBox
 onready var hitBox = $HitBox
+onready var cameraShaker = $CameraShaker
 onready var sofCollision = $SoftCollision
 onready var animationPlayer = $AnimationPlayer
 onready var attackRangeZone = $AttackRangeZone
@@ -41,6 +42,7 @@ func _physics_process(delta):
 
 	match state:
 		IDLE:
+			
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 			animationPlayer.play("Idle")
 			seek_player()
@@ -79,13 +81,13 @@ func accelerate_towards_point(point, delta):
 	sprite.flip_h = velocity.x < 0
 
 func jump_attack():
-#	hitBox.get_node("CollisionShape2D").disabled = false
 	animationPlayer.play("Jump")
 	velocity = move_and_slide(direction * SPRINT)
+	hitBox.damage = hitBox.default_damage * 2.5
 
 func jump_finished():
-#	hitBox.get_node("CollisionShape2D").disabled = true
 	state = IDLE
+	hitBox.damage = hitBox.default_damage
 
 func seek_player():
 	if playerDetectionZone.can_see_player():
@@ -114,5 +116,9 @@ func _on_HurtBox_area_entered(area):
 	stats.health -= area.damage
 	knockback = area.direction * area.knockback
 
-func _on_HurtBox_body_entered(_body):
-	pass
+func _on_HitBox_hit_something():
+	if animationPlayer.current_animation == "Jump":
+		cameraShaker.send_shake_request(cameraShaker.shake_types.SHORT_SUPER_WIDE)
+	else:
+		cameraShaker.send_shake_request(cameraShaker.shake_types.SHORT_NORMAL)
+	
