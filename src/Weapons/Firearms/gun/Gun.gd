@@ -24,6 +24,8 @@ func attack_state():
 		animationPlayer.play("knockback_push")
 		state = POINTING
 		yield(animationPlayer, "animation_finished")
+	else:
+		state = POINTING
 	can_attack = true
 
 func create_instance(Obj):
